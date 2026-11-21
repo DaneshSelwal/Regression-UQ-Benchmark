@@ -33,6 +33,12 @@ At the end of the job log, `RUN_STATUS: OK` or `RUN_STATUS: FAILED` tells whethe
 tools/kaggle/queue_push.sh /tmp/kd_nb3 /tmp/kd_nb4 ...
 ```
 
+**Run names.** Whatever slug `make_kernel.py` was given, `queue_push.sh` renames each job right before
+its push to `REG<DD>_<MM>_<YYYY>_<HH>_<MM>` (local push time; URL slug `reg<DD>-<MM>-<YYYY>-<HH>-<MM>`)
+and appends `code name, slug, notebook, job dir, time` to `docs/run_registry.tsv`. Use
+`kaggle kernels output <user>/<slug> -p <dir>` with the slug from the registry to fetch the outputs.
+
+
 Pushes each job folder in turn. If the account already has the maximum of 5 concurrent CPU
 sessions, it waits 2 minutes and retries. The API token is read from `~/.kaggle/access_token` and is
 never printed. `KAGGLE_BIN` overrides the path of the `kaggle` executable.

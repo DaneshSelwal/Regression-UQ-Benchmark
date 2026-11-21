@@ -1,0 +1,6 @@
+code_name	slug	notebook	job_dir	pushed_at
+(legacy name)	daneshselwal/pile-optuna-autosampler	Optuna_autosampler.ipynb	(notebook kernel)	2026-11-21
+(legacy name)	daneshselwal/pile-demo-params	demo best_params.pkl builder	k_demo_params	2026-11-21
+(legacy name)	daneshselwal/pile-demo-nb2-quantile	Quantile_Regression.ipynb (v1, failed B8)	kd_nb2	2026-11-21
+(legacy name)	daneshselwal/pile-demo-nb3-probdist	Probabilistic__Distribution.ipynb	kd_nb3	2026-11-21 22:08
+(legacy name)	daneshselwal/pile-demo-nb4-card	Probabilistic__Distribution(CARD).ipynb	kd_nb4	2026-11-21 22:14

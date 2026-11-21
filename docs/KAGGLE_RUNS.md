@@ -17,9 +17,13 @@ job's state changes.
   `drive/MyDrive/Regression/<dataset>_uncertainty_analysis/hyperparameter_tuning/best_params.pkl`.
 - **Concurrency.** At most **5 concurrent CPU sessions** per Kaggle account, shared with any other
   jobs on the account. `tools/kaggle/queue_push.sh` waits for a free slot.
-- **Naming.** `<dataset>-<demo|real>-nb<N>-<short>`, for example `pile-demo-nb5-mapie` or
-  `pile-real-nb2-quantile`. *demo* = run with demo (pre-assumed) tuned parameters to check that a
-  fixed notebook runs end to end. *real* = run with the parameters from the real tuning job.
+- **Naming (from 2026-11-21 22:20).** Every run is named **`REG<DD>_<MM>_<YYYY>_<HH>_<MM>`** = the
+  local date and time the job is pushed to Kaggle, e.g. `REG21_11_2026_22_45`. Kaggle turns the title
+  into the URL slug `reg21-11-2026-22-45`. `tools/kaggle/queue_push.sh` assigns the name at the moment
+  of the actual push (so a queued job gets the time it really started) and never reuses a minute.
+  Which notebook, dataset and parameter set a code name belongs to is recorded in
+  [`run_registry.tsv`](run_registry.tsv) (one line per push) and in the table below.
+  Runs pushed before this rule keep their earlier descriptive slugs (`pile-demo-nb3-probdist`, ...).
 - **Where results go.** Executed notebook and Excel files are committed to
   `examples/<dataset>_uncertainty_analysis/<phase>/results/<demo|real>/` on branch `version2.0`.
   Large model pickles are not committed; `best_params.pkl` / `best_params.json` are.
