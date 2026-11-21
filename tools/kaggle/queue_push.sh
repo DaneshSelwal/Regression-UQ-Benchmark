@@ -4,7 +4,7 @@
 # Naming rule: every run is named REG<DD>_<MM>_<YYYY>_<HH>_<MM> = the local time it is pushed
 # (Kaggle URL slug: reg<DD>-<MM>-<YYYY>-<HH>-<MM>). Each push is appended to the run registry.
 # The token is read from ~/.kaggle/access_token (main account) and never printed.
-export KAGGLE_API_TOKEN="$(cat ~/.kaggle/access_token)"
+export KAGGLE_API_TOKEN="$(cat "${KAGGLE_TOKEN_FILE:-$HOME/.kaggle/access_token}")"   # KAGGLE_TOKEN_FILE selects another account
 KAGGLE_BIN="${KAGGLE_BIN:-$(command -v kaggle || echo /opt/anaconda3/bin/kaggle)}"
 KUSER="${KAGGLE_USER:-daneshselwal}"
 REG="${RUN_REGISTRY:-$(dirname "$0")/../../docs/run_registry.tsv}"
