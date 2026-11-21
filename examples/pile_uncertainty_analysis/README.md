@@ -39,10 +39,8 @@ Notebooks 2–7 load the tuned parameters from step 1. Notebook 8 (HCM) trains i
 
 Executed notebooks (with all cell outputs) and Excel files are stored per phase:
 
-- `<phase>/results/demo/`: runs with demo parameters, to check that each fixed notebook runs end
-  to end.
-- `<phase>/results/real/`: runs with the parameters from the real tuning job. These are the
-  results to review.
+- `<phase>/results/`: **final** runs only (parameters from the real tuning job), after review.
+  Demo / trial runs are not committed; they are listed in [`docs/run_registry.tsv`](../../docs/run_registry.tsv).
 
 The outputs saved in the v1.2 notebooks were not produced on pile: they show the concrete and
 noise datasets' shapes. They were cleared in Version 2.0.

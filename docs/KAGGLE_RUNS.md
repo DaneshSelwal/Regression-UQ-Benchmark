@@ -24,8 +24,10 @@ job's state changes.
   Which notebook, dataset and parameter set a code name belongs to is recorded in
   [`run_registry.tsv`](run_registry.tsv) (one line per push) and in the table below.
   Runs pushed before this rule keep their earlier descriptive slugs (`pile-demo-nb3-probdist`, ...).
-- **Where results go.** Executed notebook and Excel files are committed to
-  `examples/<dataset>_uncertainty_analysis/<phase>/results/<demo|real>/` on branch `version2.0`.
+- **Where results go.** Only **final, reviewed** results are committed to GitHub:
+  `examples/<dataset>_uncertainty_analysis/<phase>/results/` on branch `version2.0`.
+  Demo / trial runs (checks that a fixed notebook runs end to end) are **not** committed; their
+  outputs stay on Kaggle (`kaggle kernels output <slug>`) and they are recorded in `run_registry.tsv`.
   Large model pickles are not committed; `best_params.pkl` / `best_params.json` are.
 
 ## Notebook numbers
@@ -47,13 +49,13 @@ job's state changes.
 |---|---|---|---|---|---|---|
 | `pile-optuna-autosampler` | NB1 `Optuna_autosampler.ipynb` | pile (d08_a / d08_b) | — (produces them) | **Real** tuning run: CV-selected parameters for all models × pruners | running | `examples/pile_uncertainty_analysis/hyperparameter_tuning/results/real/` (after completion) |
 | `pile-demo-params` | script (no notebook) | — | old hand-pasted `best_scores_autosampler` dict from the v1.2 pile notebooks | Writes a demo `best_params.pkl` so notebooks 2–8 can be test-run before the real tuning finishes | complete | Kaggle output only (input to the demo jobs) |
-| `pile-demo-nb2-quantile` | NB2 `Quantile_Regression.ipynb` | pile | `pile-demo-params` | Demo end-to-end run of the fixed notebook | queued/running | `examples/pile_uncertainty_analysis/quantile_regression/results/demo/` |
-| `pile-demo-nb3-probdist` | NB3 `Probabilistic__Distribution.ipynb` | pile | `pile-demo-params` | Demo run | queued/running | `examples/pile_uncertainty_analysis/probabilistic_distribution/results/demo/` |
-| `pile-demo-nb4-card` | NB4 `Probabilistic__Distribution(CARD).ipynb` | pile | `pile-demo-params` | Demo run | queued/running | `examples/pile_uncertainty_analysis/probabilistic_distribution_card/results/demo/` |
-| `pile-demo-nb5-mapie` | NB5 `Conformal Predictions(MAPIE,PUNCC).ipynb` | pile | `pile-demo-params` | Demo run | queued/running | `examples/pile_uncertainty_analysis/conformal_predictions_mapie_puncc/results/demo/` |
-| `pile-demo-nb6-nexcp` | NB6 `Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb` | pile | `pile-demo-params` | Demo run | queued/running | `examples/pile_uncertainty_analysis/conformal_predictions_nexcp_adaptivecp_mfcs/results/demo/` |
-| `pile-demo-nb7-acp` | NB7 `Adaptive_Coverage_Policies(ACP).ipynb` | pile | `pile-demo-params` | Demo run | queued/running | `examples/pile_uncertainty_analysis/conformal_predictions_adaptive_coverage_policies/results/demo/` |
-| `pile-demo-nb8-hcm` | NB8 `Hyperspherical_Confidence_Mapping(HCM).ipynb` | pile | — (HCM does not use tuned params) | Demo run | queued/running | `examples/pile_uncertainty_analysis/hyperspherical_confidence_mapping_hcm/results/demo/` |
+| `pile-demo-nb2-quantile` | NB2 `Quantile_Regression.ipynb` | pile | `pile-demo-params` | Demo end-to-end run of the fixed notebook | see run_registry.tsv | not on GitHub (trial run) |
+| `pile-demo-nb3-probdist` | NB3 `Probabilistic__Distribution.ipynb` | pile | `pile-demo-params` | Demo run | see run_registry.tsv | not on GitHub (trial run) |
+| `pile-demo-nb4-card` | NB4 `Probabilistic__Distribution(CARD).ipynb` | pile | `pile-demo-params` | Demo run | see run_registry.tsv | not on GitHub (trial run) |
+| `pile-demo-nb5-mapie` | NB5 `Conformal Predictions(MAPIE,PUNCC).ipynb` | pile | `pile-demo-params` | Demo run | see run_registry.tsv | not on GitHub (trial run) |
+| `pile-demo-nb6-nexcp` | NB6 `Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb` | pile | `pile-demo-params` | Demo run | see run_registry.tsv | not on GitHub (trial run) |
+| `pile-demo-nb7-acp` | NB7 `Adaptive_Coverage_Policies(ACP).ipynb` | pile | `pile-demo-params` | Demo run | see run_registry.tsv | not on GitHub (trial run) |
+| `pile-demo-nb8-hcm` | NB8 `Hyperspherical_Confidence_Mapping(HCM).ipynb` | pile | — (HCM does not use tuned params) | Demo run | see run_registry.tsv | not on GitHub (trial run) |
 | `hersbach-check` | script | synthetic | — | Validation probe for the Hersbach CRPS decomposition (fix P1) | complete | Kaggle output only |
 | `card-check` | script | synthetic | — | Validation probe for the re-implemented CARD (fix C1/C2: coverage 0.915, σ 1.055 vs true 0.955) | complete | Kaggle output only |
 | `rq-env-probe` | script | — | — | Kaggle image probe: Python 3.13, package availability with internet | complete | Kaggle output only |

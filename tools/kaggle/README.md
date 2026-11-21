@@ -50,5 +50,5 @@ kaggle kernels status daneshselwal/<slug>
 kaggle kernels output daneshselwal/<slug> -p <local_dir>
 ```
 
-Record every job in [`docs/KAGGLE_RUNS.md`](../../docs/KAGGLE_RUNS.md) and commit its outputs to
-`examples/<dataset>_uncertainty_analysis/<phase>/results/<demo|real>/`.
+Record every job in [`docs/KAGGLE_RUNS.md`](../../docs/KAGGLE_RUNS.md) and commit outputs of **final** runs only to
+`examples/<dataset>_uncertainty_analysis/<phase>/results/` (trial/demo runs stay on Kaggle).
