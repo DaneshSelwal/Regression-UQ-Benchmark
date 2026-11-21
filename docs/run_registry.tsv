@@ -11,5 +11,7 @@ REG21_11_2026_22_51	daneshselwal/reg21-11-2026-22-51	Adaptive_Coverage_Policies(
 REG21_11_2026_22_58	daneshselwal/reg21-11-2026-22-58	Hyperspherical_Confidence_Mapping(HCM).ipynb	kd_nb8	2026-11-21 22:58	demo	OK
 REG21_11_2026_22_59	daneshselwal/reg21-11-2026-22-59	Adaptive_Coverage_Policies(ACP).ipynb	kd_nb7	2026-11-21 22:59	demo	OK (duplicate push of NB7)
 REG21_11_2026_23_10	daneshselwal/reg21-11-2026-23-10	Optuna_autosampler.ipynb	kd_nb1_smoke	2026-11-21 23:10	smoke	running/queued
-REG21_11_2026_23_24	daneshselwal/reg21-11-2026-23-24	Quantile_Regression.ipynb	kr_nb2	2026-11-21 23:24	real	running/queued
-REG21_11_2026_23_29	daneshselwal/reg21-11-2026-23-29	Probabilistic__Distribution.ipynb	kr_nb3	2026-11-21 23:29	real	running/queued
+REG21_11_2026_23_24	daneshselwal/reg21-11-2026-23-24	Quantile_Regression.ipynb	kr_nb2	2026-11-21 23:24	real	FAILED: tuned params did not mount (kernel source had ERROR status) - re-queued with dataset pile-tuned-params-v4
+REG21_11_2026_23_29	daneshselwal/reg21-11-2026-23-29	Probabilistic__Distribution.ipynb	kr_nb3	2026-11-21 23:29	real	FAILED: tuned params did not mount (kernel source had ERROR status) - re-queued with dataset pile-tuned-params-v4
+REG21_11_2026_23_36	daneshselwal/reg21-11-2026-23-36	Probabilistic__Distribution(CARD).ipynb	kr_nb4	2026-11-21 23:36	real	FAILED: tuned params did not mount (kernel source had ERROR status) - re-queued with dataset pile-tuned-params-v4
+REG21_11_2026_23_41	daneshselwal/reg21-11-2026-23-41	Hyperspherical_Confidence_Mapping(HCM).ipynb	kr_nb8	2026-11-21 23:41	real	running/queued
