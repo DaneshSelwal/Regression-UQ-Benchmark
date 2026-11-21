@@ -6,7 +6,7 @@ code_name	slug	notebook	job_dir	pushed_at	kind	status
 (legacy name)	daneshselwal/pile-demo-nb4-card	Probabilistic__Distribution(CARD).ipynb	kd_nb4	2026-11-21 22:14	demo	OK
 REG21_11_2026_22_44	daneshselwal/reg21-11-2026-22-44	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_nb5	2026-11-21 22:44	demo	FAILED first MAPIE call (B9, fixed)
 REG21_11_2026_22_45	daneshselwal/reg21-11-2026-22-45	Quantile_Regression.ipynb	kd_nb2	2026-11-21 22:45	demo	OK
-REG21_11_2026_22_48	daneshselwal/reg21-11-2026-22-48	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kd_nb6	2026-11-21 22:48	demo	running/queued
+REG21_11_2026_22_48	daneshselwal/reg21-11-2026-22-48	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kd_nb6	2026-11-21 22:48	demo	OK (demo, ~3 h)
 REG21_11_2026_22_51	daneshselwal/reg21-11-2026-22-51	Adaptive_Coverage_Policies(ACP).ipynb	kd_nb7	2026-11-21 22:51	demo	OK (ACP alpha question for user)
 REG21_11_2026_22_58	daneshselwal/reg21-11-2026-22-58	Hyperspherical_Confidence_Mapping(HCM).ipynb	kd_nb8	2026-11-21 22:58	demo	OK
 REG21_11_2026_22_59	daneshselwal/reg21-11-2026-22-59	Adaptive_Coverage_Policies(ACP).ipynb	kd_nb7	2026-11-21 22:59	demo	OK (duplicate push of NB7)
@@ -20,5 +20,5 @@ REG21_11_2026_23_51	daneshselwal/reg21-11-2026-23-51	Probabilistic__Distribution
 REG21_11_2026_23_58	daneshselwal/reg21-11-2026-23-58	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_nb5	2026-11-21 23:58	demo	OK (demo)
 REG22_11_2026_00_06	daneshselwal/reg22-11-2026-00-06	Probabilistic__Distribution(CARD).ipynb	kr_nb4	2026-11-22 00:06	real	OK (real params) - held until full tuning check
 REG22_11_2026_00_15	daneshselwal/reg22-11-2026-00-15	Adaptive_Coverage_Policies(ACP).ipynb	kr_nb7	2026-11-22 00:15	real	OK (real params) - held until full tuning check
-REG22_11_2026_00_33	daneshselwal/reg22-11-2026-00-33	Conformal Predictions(MAPIE,PUNCC).ipynb	kr_nb5	2026-11-22 00:33	real	running/queued
+REG22_11_2026_00_33	daneshselwal/reg22-11-2026-00-33	Conformal Predictions(MAPIE,PUNCC).ipynb	kr_nb5	2026-11-22 00:33	real	OK (real params) - held until full tuning check
 REG22_11_2026_00_38	daneshselwal/reg22-11-2026-00-38	Optuna_autosampler.ipynb	kd_nb1_smoke	2026-11-22 00:38	smoke	running/queued
