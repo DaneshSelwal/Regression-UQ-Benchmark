@@ -72,6 +72,15 @@ notebooks and replaced by the Kaggle runs. Git history keeps the old outputs.
   `hyperparameter_tuning/best_params.pkl`, plus a readable `best_params.json`. The other
   notebooks will load this file instead of using a pasted copy (applied notebook by notebook).
 
+### B1: missing helper made the notebook crash (approved 2026-11-21)
+- **Before:** `_ensure_excel_file(...)` was called while writing the Excel results but never
+  defined in this notebook, so the first Kaggle run stopped with `NameError` after Random Forest.
+  The other 7 notebooks define it.
+- **After:** the same helper (copied unchanged) is defined in the helper cell. Results are not
+  affected.
+- First Kaggle run, before this fix: the Random Forest tuning finished with the new CV scoring,
+  and **47 trials were pruned**. Pruning works now, where before 0 trials were ever pruned.
+
 ### Found, not yet discussed (no change made)
 - The interpretability cell uses `model_classes`, which is never defined, so it fails with
   `NameError`.
