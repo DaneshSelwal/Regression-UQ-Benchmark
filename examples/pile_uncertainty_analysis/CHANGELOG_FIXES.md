@@ -197,3 +197,43 @@ Same as Notebook 2.
 - **Before:** `generate_and_save_plots(predictions_LGBM_df, ..., "XGB_Prob.xlsx")`, while the
   other three reports in that file used `predictions_XGB_df`.
 - **After:** `predictions_XGB_df`.
+
+---
+
+## Notebook 4: `probabilistic_distribution_card/Probabilistic__Distribution(CARD).ipynb`
+
+### K1 / K2: Kaggle setup and loading the tuned settings
+Same as Notebook 3.
+
+### C1: CARD rewritten to follow the official code (approved 2026-11-21)
+- **Before:** the network got only `[X, t]` and was trained to predict pure noise. It never saw
+  the noisy target or the guide model's prediction (`residuals` was computed but unused). There
+  was no noise schedule, and prediction did a single step at t = 0. So every output was
+  `base_pred + N(0, 1)` noise, whatever the data.
+- **After:** `CARDRegressor` follows the official CARD code, **github.com/XzwHan/CARD**
+  (`regression/diffusion_utils.py`, `model.py`, `card_regression.py`, `configs/uci_*.yml`):
+  - linear β schedule from 1e-4 to 0.02 over T steps
+  - `q_sample`: y_t = √ᾱ_t·y₀ + (1 − √ᾱ_t)·ŷ₀ + √(1 − ᾱ_t)·ε
+  - `ConditionalGuidedModel`: ε_θ(x, y_t, ŷ₀, t), 3 × 128 time-conditioned layers with softplus
+  - noise-estimation loss with antithetic timestep sampling
+  - the `p_sample_loop` reverse process (γ₀, γ₁, γ₂ posterior and the final t = 1→0 step)
+  - the target standardised as `normalize_y: True`, and converted back afterwards
+- **Official settings** (on your instruction): T = 1000, epochs = 5000, batch size 32,
+  1000 samples per test point, lr = 1e-3.
+- The class name and API are unchanged: `CARDRegressor(base_model=..., ...)`, `.fit`, and
+  `.predict` → (mean, std). All 9 guide models and all outputs are unchanged.
+
+### C2: EMA warm-up (approved 2026-11-21)
+- The official code samples with an EMA of the weights (rate 0.9999). That needs 100k+ updates
+  before the average stops being dominated by the random initial weights.
+- **Kaggle test** (kernel `card-check`, synthetic heteroscedastic data with known std, n = 300):
+  the official EMA without warm-up gave a mean predicted std of 26.4 (true 0.955) and coverage
+  1.00. With warm-up it gave std 1.055, 90% coverage 0.915, and RMSE 1.173 (guide alone: 1.159).
+- **After:** EMA decay = min(0.9999, (1 + k)/(10 + k)) at update k. This is the standard
+  warm-up, and identical to the official EMA once training is long.
+
+### P1: CRPS decomposition
+Same function as Notebook 3, so the same approved Hersbach (2000) fix.
+
+### B2: TabNet calibration curve was written into `CatBoost.xlsx` (file-path bug)
+It now goes to `TabNet.xlsx`.
