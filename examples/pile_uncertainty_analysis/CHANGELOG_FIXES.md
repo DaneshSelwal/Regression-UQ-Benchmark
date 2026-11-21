@@ -237,3 +237,74 @@ Same function as Notebook 3, so the same approved Hersbach (2000) fix.
 
 ### B2: TabNet calibration curve was written into `CatBoost.xlsx` (file-path bug)
 It now goes to `TabNet.xlsx`.
+
+---
+
+## Notebook 7 — Adaptive Coverage Policies: `conformal_predictions_adaptive_coverage_policies/Adaptive_Coverage_Policies(ACP).ipynb`
+
+Checked against Gauthier, Bach & Jordan (AISTATS 2026), "Adaptive Coverage Policies in Conformal
+Prediction", and the official code **github.com/GauthierE/adaptive-coverage-policies**
+(`regression/regression.ipynb`). The following match and are unchanged: the width formula
+2·Σscores / (α̃(n+1) − 1), the leave-one-out sums as input, the frozen base model, the 32-unit ReLU +
+sigmoid network, and Adam with lr 1e-3 and batch size 32. The notebook defines the pipeline twice
+(`conformal_predictions_ACP` and `run_full_acp_pipeline`); every fix is applied to both copies.
+
+### K1 / K2: Kaggle setup and loading the tuned settings
+Same as Notebook 2: the Kaggle env/data cell, a Kaggle-only pinned install (the Colab block is kept),
+and the tuning results loaded from `best_params.pkl` instead of the pasted dict.
+
+### A1: λ chosen by comparing losses across λ (approved 2026-11-21)
+- **Before:** `_select_best_alpha_net` compared the final training loss *across* λ = 10, 20, 50.
+  The loss is width + λ·α̃, so the best achievable loss always grows with λ. That means λ = 10, the
+  narrowest and lowest-coverage setting, was always picked. The λ = 20/50 runs were trained and never used.
+- **Why:** λ is the user's size/coverage trade-off. The paper reports each λ separately, and the
+  official `selection-lambda.ipynb` picks λ to hit a target mean size, never by comparing losses across λ.
+- **After:** new parameter `lambda_main=50` (the λ the paper reports numbers for). The best run is
+  chosen **within** λ_main by its final training loss, and the main plots, `conformal_predictions_ACP_values`
+  and the printout use it. New sheet `acp_lambda_comparison` evaluates every λ (its best run) on the test set:
+  λ, α̃, target coverage 1 − α̃, test coverage, width, and miss / α̃.
+- **Reporting:** the guarantee (eq. 3) is E[miss / α̃] ≤ 1, so `Target_coverage = 1 − α̃` and
+  `Miss_over_alpha` are added to the values sheet, `acp_final_metrics` and the printout.
+
+### A2: AlphaNet input not scaled, random initial output (approved 2026-11-21)
+- **Before:** the network input (the sum of leave-one-out errors) was raw. On datasets with large errors or
+  many calibration points it is in the thousands, where the sigmoid is flat, so α̃ stays stuck at its
+  starting value. The output started at a random α̃.
+- **After:** the training inputs are divided by their mean (≈ 1 on every dataset). The test input (the sum
+  over all n) is divided by the same number, stored on the network as `feature_scale_`. The width formula
+  still uses the raw errors. The output starts near α̃ ≈ 1 (final bias 5, weights N(0, 0.01)), as in the
+  official `initialize_to_one`. Input scaling is our addition for generality; the official code feeds the raw sum.
+
+### M4: one ALPHA
+`ALPHA = 0.1` is defined once. AlphaNet learns its own α̃, so ALPHA is only the nominal reference.
+
+### B5 (non-math): tuned parameters silently replaced by defaults
+`_resolve_model_params` returned `{}` without any message when a model rejected its tuned parameters. It
+now prints a warning naming the model and the error before it falls back.
+
+### Note (no change)
+Both cells define `_select_best_alpha_net` / `evaluate_acp`. The second definition overrides the first,
+so `conformal_predictions_ACP` (never called; all runs use `run_full_acp_pipeline`) would get the
+dict-returning version if it were called after the second cell. This was already the case before.
+
+---
+
+## Notebook 8 — HCM: `hyperspherical_confidence_mapping_hcm/Hyperspherical_Confidence_Mapping(HCM).ipynb`
+
+Checked against Choi et al. (ICLR 2026), "Uncertainty Estimation via Hyperspherical Confidence
+Mapping", and the official code **github.com/Abandoned-Puppy/HCM** (`Toy_example.py`). The network, the
+loss, the prediction (R·d)[0], σ = |R|·√|‖d‖²−1|, the validation temperature scaling to 68/95/99.7%,
+Cov@kσ and ECE_reg all match, so **no math changes**. The fixes below are all non-math.
+
+### K1 (non-math): run on Kaggle
+The Kaggle env/data cell is the same as in the other notebooks. HCM does not use treeffuser, and its
+fork's pins cannot be installed on Python 3.13, so the treeffuser install is skipped on Kaggle. On Kaggle
+only `properscoring` and `XlsxWriter` are installed. The Colab blocks are unchanged.
+
+### B6 (non-math): silent switch to made-up data
+- **Before:** if the train or test CSV was missing or empty, a warning was printed and the whole notebook ran
+  on a generated demo dataset. The results could then look like real results for this dataset.
+- **After:** it stops with `FileNotFoundError` and lists where it looked.
+
+### B7 (non-math): output folder on Kaggle
+On Kaggle, outputs now go to the same `./drive/MyDrive/Regression/<dataset>/...` tree as the other notebooks.
