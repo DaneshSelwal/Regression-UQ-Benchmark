@@ -85,3 +85,50 @@ notebooks and replaced by the Kaggle runs. Git history keeps the old outputs.
 - The interpretability cell uses `model_classes`, which is never defined, so it fails with
   `NameError`.
 - The interpretability cell passes the **unscaled** `x_test` to models trained on scaled data.
+
+---
+
+## Notebook 2: `quantile_regression/Quantile_Regression.ipynb`
+
+### K1: run on Kaggle (setup only; same as Notebook 1)
+On Colab the notebook runs exactly as before. On Kaggle the pile data is copied into the
+original paths, and the missing packages are installed at the Colab versions.
+
+### K2: load the tuned settings instead of a pasted copy (approved 2026-11-21)
+- **Before:** a hand-pasted `best_scores_autosampler = {...}` from an older tuning run, which had
+  been selected on the test set.
+- **After:** loads `hyperparameter_tuning/best_params.pkl`, written by Notebook 1. On Kaggle it
+  is read from the Notebook 1 run's output.
+
+### Q1: XGBoost was trained with LightGBM's settings (approved 2026-11-21)
+- **Before:** the XGBoost cell stored its settings in `best_paramst`, but the training loop used
+  `best_params`, which still held LightGBM's settings from the cell above. XGBoost silently
+  ignored the LightGBM-only settings and used the ones whose names matched.
+- **After:** the loop uses `best_paramst`, the tuned XGBoost settings.
+
+### Q2: quantile crossing (approved 2026-11-21)
+- **Before:** each quantile level is a separate model, so for some rows the 13 predictions were
+  out of order (old output for LightGBM, row 2: q0.05 = 34.48 > q0.10 = 33.39 > ... > q0.40 = 32.45).
+  This gives negative interval widths, which make the average width look smaller, and flips the
+  sign in the calibration step. Only the CRPS step sorted the values.
+- **After:** a new helper `rearrange_quantiles` sorts each row's quantiles (monotone
+  rearrangement, Chernozhukov et al. 2010) at the start of all 5 reporting functions. It never
+  makes the quantile predictions worse. The values are reordered, not changed.
+  **New in Excel:** the `Values` sheet of each model has a row "Rows with quantile crossing
+  (before sorting)", giving the count and %. The same is printed in the notebook.
+
+### Q3: TabNet early stopping checked the wrong thing (approved 2026-11-21)
+- **Before:** `eval_set=[(X_train, y_train)]` scored with MSE. Checking on the training data
+  itself means the score always improves, so early stopping never triggered (old log: "reached
+  max_epochs = 200 with best_epoch = 199"). MSE also pulls every quantile model toward the middle.
+- **After:** 20% of the **training** rows are held out as validation (`random_state=42`, same
+  split for all quantiles). Each quantile's model is checked with its own pinball loss. Max
+  epochs, patience and batch sizes are unchanged. The test set is not touched.
+
+### Q4: CRPS from quantiles (approved 2026-11-21)
+- **Before:** `ps.crps_ensemble(y, 13 quantiles)` treats the 13 levels as 13 equally likely
+  random samples. The levels are unevenly spaced (5% apart at the edges, 10% in the middle), so
+  the edges got too much weight. The result was biased differently for each model.
+- **After:** CRPS = 2 · Σ wᵢ · pinballᵢ(y, qᵢ), the quantile form of CRPS (Gneiting & Raftery
+  2007). wᵢ is the share of [0, 1] that level i represents, so the weights sum to 1. The new
+  values are not directly comparable with the old CRPS numbers.
