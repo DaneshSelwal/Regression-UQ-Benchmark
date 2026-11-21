@@ -132,3 +132,68 @@ original paths, and the missing packages are installed at the Colab versions.
 - **After:** CRPS = 2 · Σ wᵢ · pinballᵢ(y, qᵢ), the quantile form of CRPS (Gneiting & Raftery
   2007). wᵢ is the share of [0, 1] that level i represents, so the weights sum to 1. The new
   values are not directly comparable with the old CRPS numbers.
+
+---
+
+## Notebook 3: `probabilistic_distribution/Probabilistic__Distribution.ipynb`
+
+### K1: run on Kaggle (setup only)
+- The same environment cell as Notebooks 1–2.
+- The Treeffuser fork pins numpy<2, scikit-learn==1.5.0 and lightgbm==4.3.0, which can't be
+  installed on Kaggle's Python 3.13. On Kaggle the same fork is installed with `--no-deps`, plus
+  its three small helpers (jaxtyping, einops, ml-collections). On Colab the install is unchanged.
+- The IBUG cells run `%cd ibug`, `%cd ..`, `%cd ..` and then write to `./content/drive/...` and
+  `/content/drive/...` (the Colab layout). On Kaggle, `/content` and `/kaggle/content` are linked
+  to `/kaggle/working`, so all Excel files go to the same output folder. No path in the notebook
+  was changed.
+
+### K2: load the tuned settings instead of a pasted copy (approved 2026-11-21)
+Same as Notebook 2.
+
+### P2: IBUG uncertainty was square-rooted again (approved 2026-11-21)
+- **Before:** `dev = scale**0.5` (LightGBM-IBUG) and `std_dev = scale ** 0.5` (XGBoost-IBUG),
+  treating IBUG's `scale` as a variance.
+- **Verified in IBUG's source** (github.com/jjbrophy47/ibug, `ibug/classes.py`): the value is
+  computed as `scale = max(np.std(train_vals), min_scale)`, a **standard deviation**, and IBUG's
+  own scoring uses it as "std. dev. values". Some of IBUG's comments loosely call it "variance",
+  which is the likely source of the mix-up. IBUG's math itself is correct.
+- **After:** `dev = scale` / `std_dev = scale`. The 30% validation split for IBUG now has
+  `random_state=42`, so results can be repeated.
+
+### P1: the CRPS decomposition carried no information (approved 2026-11-21)
+- **Before:** "Reliability" = the model's own CRPS averaged over 10 groups of test rows, which is
+  the total CRPS again. So Resolution = Uncertainty always (old outputs: Reliability ≈ total
+  CRPS, Resolution ≈ Uncertainty, for every model).
+- **Checked:** the total CRPS uses `properscoring.crps_gaussian`, which is correct and unchanged.
+  `properscoring` has no decomposition function, and the repo docs cite no source for this split.
+- **After:** Reliability, Resolution and Uncertainty from **Hersbach (2000)**, *Weather and
+  Forecasting* 15: each predicted Gaussian is represented by 100 members at its quantile levels,
+  then Reliability = Σ gᵢ(oᵢ − pᵢ)², CRPS_pot = Σ gᵢoᵢ(1 − oᵢ), Uncertainty = CRPS of the
+  observations' own spread, and Resolution = Uncertainty − CRPS_pot.
+  Reliability − Resolution + Uncertainty equals the 100-member CRPS, which is very close to
+  Total_CRPS.
+- **Verified on Kaggle** (kernel `hersbach-check`, synthetic data, n = 24 and 365):
+  Reliability + CRPS_pot equals `properscoring.crps_ensemble` to within about 1e-15, and is within
+  0.0004 of Total_CRPS. A calibrated forecast gets Reliability ≈ 0.0003; biased, overconfident
+  or underconfident forecasts get 0.13–0.36.
+- **Output format unchanged:** the same function and arguments, the same sheets
+  (`CRPS_Summary_<model>`, `CRPS_Bins_<model>`), the same columns, the same per-bin table and the
+  same prints.
+
+### T1: Treeffuser's Gradient Boosting score model must use squared error (approved 2026-11-21)
+- **Checked against the original repo** (github.com/blei-lab/treeffuser): the fork's diffusion
+  math (noise, training targets, score) is identical to the original. The original documents the
+  score model's objective as a least-squares (denoising) loss.
+- **Before:** the GBR score model got the tuned GBR settings, which can include
+  `loss='absolute_error'` or `'huber'`, so it learned the wrong target.
+- **After:** `model_params={**best_params, 'loss': 'squared_error'}`, for the Treeffuser GBR
+  score model only.
+- **Not changed (to look at after the run):** the original sets up the score model with 3,000
+  trees, early stopping and 30 noise repeats. Here it gets the tuned point-model settings and
+  10 repeats, with no early stopping. If the Treeffuser results look broken after this run, a
+  proposal will be made before anything changes.
+
+### P3: XGBoost-IBUG's plots used LightGBM's predictions (approved 2026-11-21)
+- **Before:** `generate_and_save_plots(predictions_LGBM_df, ..., "XGB_Prob.xlsx")`, while the
+  other three reports in that file used `predictions_XGB_df`.
+- **After:** `predictions_XGB_df`.
