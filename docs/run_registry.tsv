@@ -21,4 +21,6 @@ REG21_11_2026_23_58	daneshselwal/reg21-11-2026-23-58	Conformal Predictions(MAPIE
 REG22_11_2026_00_06	daneshselwal/reg22-11-2026-00-06	Probabilistic__Distribution(CARD).ipynb	kr_nb4	2026-11-22 00:06	real	OK (real params) - held until full tuning check
 REG22_11_2026_00_15	daneshselwal/reg22-11-2026-00-15	Adaptive_Coverage_Policies(ACP).ipynb	kr_nb7	2026-11-22 00:15	real	OK (real params) - held until full tuning check
 REG22_11_2026_00_33	daneshselwal/reg22-11-2026-00-33	Conformal Predictions(MAPIE,PUNCC).ipynb	kr_nb5	2026-11-22 00:33	real	OK (real params) - held until full tuning check
-REG22_11_2026_00_38	daneshselwal/reg22-11-2026-00-38	Optuna_autosampler.ipynb	kd_nb1_smoke	2026-11-22 00:38	smoke	running/queued
+REG22_11_2026_00_38	daneshselwal/reg22-11-2026-00-38	Optuna_autosampler.ipynb	kd_nb1_smoke	2026-11-22 00:38	smoke	OK (smoke, 5 trials, 60 min) - full run queued
+REG22_11_2026_01_11	daneshselwal/reg22-11-2026-01-11	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kr_nb6	2026-11-22 01:11	real	running/queued
+REG22_11_2026_01_58	daneshselwal/reg22-11-2026-01-58	Optuna_autosampler.ipynb	kd_nb1_full	2026-11-22 01:58	tuning	running/queued
