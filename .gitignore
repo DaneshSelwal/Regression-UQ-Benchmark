@@ -37,3 +37,11 @@ Thumbs.db:encryptable
 *.jpeg
 # *.xlsx
 mail/
+
+# Version 2.0: model artefacts and run caches
+# (best_params.pkl / best_params.json from the tuning notebook ARE committed)
+*.pkl
+!best_params.pkl
+catboost_info/
+lightning_logs/
+*.zip

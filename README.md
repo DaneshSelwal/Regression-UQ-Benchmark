@@ -1,208 +1,199 @@
-# 🚀 Comprehensive Regression Analysis Pipeline: Advanced Uncertainty Quantification
+# Regression Uncertainty Quantification Analysis — Version 2.0
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)
-![Machine Learning](https://img.shields.io/badge/Machine%20Learning-XGBoost%20%7C%20LightGBM%20%7C%20CatBoost-orange?style=for-the-badge)
-![Uncertainty Quantification](https://img.shields.io/badge/Uncertainty-Adaptive%20CP%20%7C%20HCM%20%7C%20Quantile-green?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-1.2-blueviolet?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+An end-to-end, notebook-based pipeline for regression with **uncertainty quantification (UQ)**:
+every point prediction comes with a prediction interval or a full predictive distribution, and the
+quality of that uncertainty (coverage, width, calibration, CRPS) is measured and exported to Excel.
+The pipeline tunes ten gradient-boosting / neural regressors, then runs them through quantile
+regression, probabilistic (distributional and diffusion) models, standard and adaptive conformal
+prediction, learned coverage policies and hyperspherical confidence mapping. It is domain-agnostic
+and is applied here to nine civil- and environmental-engineering datasets.
 
-Welcome to the **End-to-End Regression Analysis Pipeline**. This repository is engineered as a modular, "plug-and-play" framework for robust regression tasks. It goes beyond simple point predictions by integrating a suite of **Uncertainty Quantification (UQ)** methods, ensuring that every prediction is accompanied by a reliable confidence interval.
-
-Whether you are analyzing environmental data, financial time-series, or industrial sensor readings, this pipeline allows you to swap in your Dataset and immediately leverage state-of-the-art Hyperparameter Tuning, Quantile Regression, Probabilistic Modeling, Hyperspherical Confidence Mapping, and Adaptive Conformal Prediction.
-
-> **Branch Info:** You are viewing the `version1.2` branch. See [`version-1.1`](https://github.com/DaneshSelwal/Regression_Uncertainty_Quantification_Analysis/tree/version-1.1) for the previous release without ACP.
-
----
-
-## 📑 Table of Contents (Navigation)
-
-1. [🆕 What's New in v1.2](#-whats-new-in-v12)
-2. [📌 Project Overview](#-project-overview)
-3. [📂 Repository Structure](#-repository-structure)
-4. [📊 Dataset & Usage](#-dataset--usage)
-5. [🛠️ Workflow & Methodology](#-workflow--methodology)
-    - [Phase 1: Hyperparameter Tuning](#phase-1-hyperparameter-tuning)
-    - [Phase 2: Quantile Regression](#phase-2-quantile-regression)
-    - [Phase 3: Probabilistic Distribution](#phase-3-probabilistic-distribution)
-    - [Phase 3b: Probabilistic Distribution (CARD)](#phase-3b-probabilistic-distribution-card)
-    - [Phase 3c: Hyperspherical Confidence Mapping (HCM)](#phase-3c-hyperspherical-confidence-mapping-hcm)
-    - [Phase 4: Standard Conformal Predictions](#phase-4-standard-conformal-predictions)
-    - [Phase 5: Adaptive & Non-Exchangeable CP](#phase-5-adaptive--non-exchangeable-cp)
-    - [Phase 5b: Adaptive Coverage Policies (ACP)](#phase-5b-adaptive-coverage-policies-acp)
-6. [🚀 Getting Started](#-getting-started)
+> **Branch:** `version2.0` (default). The previous release is preserved unchanged on
+> [`version1.2`](https://github.com/DaneshSelwal/Regression_Uncertainty_Quantification_Analysis/tree/version1.2)
+> (and `version-1.1`, `version-1.0`).
 
 ---
 
-## 🆕 What's New in v1.2
+## Contents
 
-This release adds **Phase 5b — Adaptive Coverage Policies (ACP)**, extending the pipeline with a learned, data-dependent approach to conformal coverage:
-
-*   🧠 **AlphaNet Policy Model** — A neural network that learns per-sample miscoverage rates ($\alpha$) from leave-one-out calibration features, replacing static significance levels.
-*   📊 **Multi-Model Result Exports** — ACP results exported as `.xlsx` files for 9 regressors (XGBoost, LightGBM, CatBoost, NGBoost, PGBM, GPBoost, Gradient Boosting, HGBM, TabNet).
-*   📉 **Training Dynamics Plotting** — Visualisation of loss curves and coverage evolution across training epochs.
-*   🔄 **Multi-Lambda Training** — Sweep over regularisation strengths to find the best width-coverage trade-off.
-
----
-
-## 📌 Project Overview
-
-This framework provides a rigorous path from raw data to confident predictions. It is designed to be **domain-agnostic**: while the inspiration comes from hydrological sediment load analysis, the methods are applicable to any regression problem, especially those involving time-series or non-exchangeable data.
-
-**Key Features:**
-*   **Automated Optimization**: Harnessing **Optuna** for Bayesian optimization of complex regressors.
-*   **Interval Estimation**: **Quantile Regression** for estimating conditional bounds (e.g., 5th and 95th percentiles).
-*   **Full Distribution Modeling**: Using **NGBoost** and **PGBM** to predict the full probability distribution parameters ($\mu, \sigma$).
-*   **Generative Modeling**: Leveraging **CARD (Classification and Regression Diffusion)** models to generate conditional distributions using diffusion processes.
-*   **Geometric Uncertainty**: **Hyperspherical Confidence Mapping (HCM)** for sampling-free, distribution-free uncertainty estimation in regression.
-*   **Robust Uncertainty**: Implementation of **NEXCP (Non-Exchangeable Conformal Prediction)** and **Adaptive CP**, crucial for handling data drift and temporal dependencies where standard methods fail.
-*   **Policy-Learned Coverage**: Integration of **Adaptive Coverage Policies (ACP)** to learn data-dependent coverage levels via calibration-aware neural policies.
+1. [What's new in 2.0](#whats-new-in-20)
+2. [Repository layout](#repository-layout)
+3. [Pipeline (run order)](#pipeline-run-order)
+4. [Datasets](#datasets)
+5. [Running on Kaggle](#running-on-kaggle)
+6. [Running on Google Colab](#running-on-google-colab)
+7. [Using your own dataset](#using-your-own-dataset)
+8. [Validation status](#validation-status)
+9. [References and citation](#references-and-citation)
+10. [License and authors](#license-and-authors)
 
 ---
 
-## 📂 Repository Structure
+## What's new in 2.0
 
-The project is organized into a clean, professional architecture optimized for Google Colab:
+Version 2.0 is a **correctness release**. Every notebook was reviewed method by method against the
+original paper and, where one exists, the authors' official code. Each confirmed problem was fixed
+with the smallest possible change, approved individually, and marked in the code with a
+`# FIX <id>` comment (`grep -n "FIX" *.ipynb` lists them all). The structure, model list, variable
+names and Excel output formats of the notebooks are kept.
+
+Main changes (full before/after/why for each fix in
+[`examples/pile_uncertainty_analysis/CHANGELOG_FIXES.md`](examples/pile_uncertainty_analysis/CHANGELOG_FIXES.md)):
+
+| Area | Change |
+|---|---|
+| Hyperparameter tuning | Model selection by 5-fold cross-validation on the training set only (the test set was previously used to pick the best model); pruners now receive per-fold reports; tuned settings are saved to `best_params.pkl` and **loaded** by every downstream notebook instead of being copy-pasted. |
+| Quantile regression | Quantile crossing removed by monotone rearrangement (counts reported); CRPS computed from quantiles with the correct level weights; XGBoost uses its own tuned settings; TabNet early stopping on a validation split with the pinball loss. |
+| Probabilistic distribution | Hersbach (2000) CRPS decomposition (reliability / resolution / uncertainty); IBUG scale no longer square-rooted twice; Treeffuser's score model uses squared error; plot/data mix-ups fixed. |
+| CARD | Re-implemented to follow the official CARD code (noise schedule, conditional guided model, full reverse diffusion, EMA with warm-up). |
+| MAPIE / PUNCC | Correct MAPIE interval shapes; true split conformal and J+aB; CQR with real quantile models; one miscoverage level (`ALPHA = 0.1`) for all methods; tuned settings reach CatBoost and PGBM. |
+| NEXCP / online CP | Out-of-fold calibration residuals; NexCP weighted quantile per eq. (10)–(11); real weighted full conformal, CV+ and J+aB; SF-OGD, SAOCP and FACI ported from the authors' reference code; ACI added; COP step size per the official code; Extreme CP per the official `ExtremeConformal` package. |
+| ACP (AlphaNet) | λ no longer chosen by comparing losses across λ values; input scaling and near-1 initialisation; coverage reported against the learned level 1 − α̃. |
+| HCM | Verified against the paper and official code; the silent fallback to synthetic data was removed. |
+| Infrastructure | Notebooks run unchanged on Kaggle or Colab; Kaggle jobs execute notebooks with papermill so the executed notebook (all cell outputs) is stored with the results; job registry in [`docs/KAGGLE_RUNS.md`](docs/KAGGLE_RUNS.md). |
+
+All sources used to verify the fixes are listed in
+[`examples/pile_uncertainty_analysis/REFERENCES.md`](examples/pile_uncertainty_analysis/REFERENCES.md)
+(entries marked **[fix]**).
+
+---
+
+## Repository layout
 
 ```
 .
-├── Regression/             # 📂 Main Project Folder (Upload this to MyDrive/)
-│   ├── data/               # 📊 Raw Datasets (train.csv, test.csv)
-│   ├── hyperparameter_tuning/
-│   ├── ... (other phases)
-├── resources/              # 📚 Research Paper PDFs
-└── examples/               # 📁 Example Datasets
+├── README.md
+├── LICENSE
+├── Regression/                         # template pipeline (copy to Google Drive / use as a starting point)
+│   ├── data/                           # train.csv, test.csv (last column = target)
+│   ├── hyperparameter_tuning/          # Optuna_autosampler.ipynb (+ .md theory notes)
+│   ├── quantile_regression/
+│   ├── probabilistic_distribution/
+│   ├── probabilistic_distribution_card/
+│   ├── conformal_predictions_mapie_puncc/
+│   ├── conformal_predictions_nexcp_adaptivecp_mfcs/
+│   ├── conformal_predictions_adaptive_coverage_policies/
+│   └── hyperspherical_confidence_mapping_hcm/
+├── examples/
+│   ├── <dataset>_uncertainty_analysis/ # one folder per dataset: data/ + the same 8 phase sub-folders
+│   └── pile_uncertainty_analysis/      # pilot dataset for v2.0: also CHANGELOG_FIXES.md, REFERENCES.md, README.md
+├── resources/                          # PDFs: NexCP, ACI, Gentle Introduction to Conformal Prediction
+├── docs/
+│   ├── KAGGLE_RUNS.md                  # registry of Kaggle jobs: which notebook runs where, status, outputs
+│   └── DATASET_PARAMETERS.md           # settings that depend on the dataset (names, sizes, splits)
+└── tools/
+    └── kaggle/                         # make_kernel.py (papermill job builder), queue_push.sh, README.md
 ```
 
 ---
 
-## 📊 Dataset & Usage
+## Pipeline (run order)
 
-**This is a Template Pipeline.**
+Run the notebooks of a dataset in this order. Notebook 1 must run first: it writes
+`hyperparameter_tuning/best_params.pkl`, which all other notebooks load.
 
-To use this repository with your own data:
+| # | Folder / notebook | Methods | Main outputs |
+|---|---|---|---|
+| 1 | `hyperparameter_tuning/Optuna_autosampler.ipynb` | Optuna AutoSampler × 8 pruners, 5-fold CV on train; Random Forest, Gradient Boosting, XGBoost, LightGBM, GPBoost, CatBoost, HistGradientBoosting (PGBM), NGBoost, PGBM, TabNet; SHAP / LIME / EBM interpretability | `test_results.xlsx`, `best_params.pkl` / `.json` |
+| 2 | `quantile_regression/Quantile_Regression.ipynb` | One model per quantile level (13 levels, 0.05–0.95) for each regressor | one Excel per model: quantiles, coverage, width, pinball loss, CRPS, crossing counts, plots |
+| 3 | `probabilistic_distribution/Probabilistic__Distribution.ipynb` | NGBoost, PGBM, IBUG, Treeffuser | one Excel per model: μ/σ, NLL, CRPS + Hersbach decomposition, PIT, calibration |
+| 4 | `probabilistic_distribution_card/Probabilistic__Distribution(CARD).ipynb` | CARD diffusion regression guided by each tuned regressor | one Excel per model: predictive samples, CRPS decomposition, calibration |
+| 5 | `conformal_predictions_mapie_puncc/Conformal Predictions(MAPIE,PUNCC).ipynb` | MAPIE: split CP, CV+, J+aB; PUNCC: SplitCP, CV+, CQR | one Excel per model: intervals, coverage, width, CWC, conditional coverage |
+| 6 | `conformal_predictions_nexcp_adaptivecp_mfcs/Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb` | NexCP (split, full, CV+, J+aB), online split / CV+ / J+aB, SF-OGD, SAOCP, FACI, ACI, MFCS, COP, Extreme CP, AlphaNet | one Excel per model with one sheet group per method |
+| 7 | `conformal_predictions_adaptive_coverage_policies/Adaptive_Coverage_Policies(ACP).ipynb` | Adaptive Coverage Policies (AlphaNet, e-value conformal) | one Excel per model: intervals, learned α̃, λ comparison, training curves |
+| 8 | `hyperspherical_confidence_mapping_hcm/Hyperspherical_Confidence_Mapping(HCM).ipynb` | Hyperspherical Confidence Mapping | `HCM.xlsx`, `Matrix Evaluation.xlsx`: Cov@1/2/3σ, ECE_reg, Pearson/Spearman |
 
-1.  **Prepare your data**: You need a training set and a testing set.
-2.  **Format**: Ensure your files are in `.csv` format.
-3.  **Replace**:
-    *   Place your data in the `Regression/data/` directory.
-4.  **Configure**:
-    *   **Column Names**: Open the notebooks in the respective folders and ensure the column names match your Dataset's target variable and features.
-    *   **File Paths**: When running in Google Colab, paths are automatically handled relative to the root directory.
-
----
-
-## 🛠️ Workflow & Methodology
-
----
-
-### Phase 1: Hyperparameter Tuning
-**Location**: `hyperparameter_tuning`
-Before any uncertainty quantification, we must ensure our base estimators are accurate.
-*   **Tool**: **Optuna**.
-*   **Process**: We search over hyperparameter spaces for XGBoost, CatBoost, LightGBM, etc., using efficient pruners (Hyperband) to find the best configuration.
-*   **Output**: Optimized model parameters saved for subsequent steps.
-
-### Phase 2: Quantile Regression
-**Location**: `quantile_regression`
-We move beyond the mean.
-*   **Goal**: Predict conditional quantiles (e.g., $Q_{0.05}$ and $Q_{0.95}$) to bracket the target value.
-*   **Loss Function**: Pinball Loss.
-*   **Result**: A prediction interval that captures a specified percentage of the data (e.g., 90%).
-
-### Phase 3: Probabilistic Distribution
-**Location**: `probabilistic_distribution`
-Treating the target as a random variable $Y|X \sim \mathcal{D}(\theta)$.
-*   **Models**: **NGBoost** (Natural Gradient Boosting) and **PGBM** (Probabilistic Gradient Boosting Machines).
-*   **Metrics**: Negative Log-Likelihood (NLL) and Continuous Ranked Probability Score (CRPS).
-*   **Visualization**: Probability Integral Transform (PIT) histograms to verify calibration.
-
-### Phase 3b: Probabilistic Distribution (CARD)
-**Location**: `probabilistic_distribution_card`
-Using generative diffusion models to capture complex conditional distributions.
-*   **Models**: **CARD** (Classification and Regression Diffusion).
-*   **Method**: Converts the regression target into a noise distribution and learns to reverse the diffusion process conditioned on features.
-*   **Advantage**: Capable of modeling multi-modal distributions and complex dependencies.
-
-### Phase 3c: Hyperspherical Confidence Mapping (HCM)
-**Location**: `hyperspherical_confidence_mapping_hcm`
-Using a geometric decomposition to estimate regression uncertainty without sampling or a fixed predictive distribution.
-*   **Model**: **HCM** (Hyperspherical Confidence Mapping).
-*   **Method**: Decomposes the regression output into a scalar magnitude $R$ and a direction vector $d$, then measures uncertainty through the violation of the unit-norm hyperspherical constraint.
-*   **Advantage**: Lightweight, deterministic, and designed to stay compatible with the same Google Colab workflow and Excel-style result exports used across the repository.
-
-### Phase 4: Standard Conformal Predictions
-**Location**: `conformal_predictions_mapie_puncc`
-For data that satisfies the **exchangeability** assumption (i.e., order doesn't matter).
-*   **Libraries**: `MAPIE`, `PUNCC`.
-*   **Methods**: Split Conformal, CV+, Jackknife+.
-*   **Guarantee**: Provides marginal coverage guarantees with finite-sample validity.
-
-### Phase 5: Adaptive & Non-Exchangeable CP
-**Location**: `conformal_predictions_nexcp_adaptivecp_mfcs`
-**Crucial for Time-Series**.
-Real-world data often drifts or has temporal dependencies.
-*   **NEXCP**: Non-Exchangeable Conformal Prediction. Weights recent observations more heavily to adapt to distribution shifts.
-*   **Adaptive CP**: Dynamically updates the interval width $C_t$ based on recent coverage errors.
-*   **Result**: Valid coverage even during volatile periods (e.g., market crashes, floods).
-
-### Phase 5b: Adaptive Coverage Policies (ACP)
-**Location**: `conformal_predictions_adaptive_coverage_policies`
-Learns data-dependent conformal coverage through a neural policy over calibration statistics.
-*   **Base Model**: Linear regression backbone for point prediction.
-*   **Policy Model**: `AlphaNet` predicts adaptive miscoverage ($\alpha$) from leave-one-out calibration features.
-*   **Objective**: Minimize interval width while regularizing the learned coverage policy.
-*   **Outputs**: Excel-first reports with training curves, calibration diagnostics, prediction bands, and matrix evaluation.
+Each folder also contains a `.md` theory note for its method.
 
 ---
 
-## 🚀 Getting Started (Colab-First)
+## Datasets
 
-1.  **Clone/Download the Repository**:
-    Download the project and identify the `Regression/` folder.
+Each dataset lives in `examples/<name>_uncertainty_analysis/data/` as `train.csv` / `test.csv`;
+the last column is the target.
 
-2.  **Upload to Google Drive**:
-    Upload the entire `Regression/` folder directly to your Google Drive root (`MyDrive/`).
-
-3.  **Open a notebook in Colab**:
-    Navigate to any `.ipynb` file within your Drive's `Regression/` folder and open it with Google Colab.
-
-4.  **Run the Notebooks**:
-    *   The notebooks are pre-configured to mount your drive and look for data in `/content/drive/MyDrive/Regression/data/`.
-    *   Execute notebooks in phase order: **Hyperparameter Tuning** $\rightarrow$ **Quantile/Probabilistic** $\rightarrow$ **Conformal Predictions**.
-
----
-
-## 📚 Resources & References
-
-This project leverages state-of-the-art research in Uncertainty Quantification. Below are the key resources and research papers utilized in this pipeline:
-
-### 📖 Research Papers (PDFs available in `resources/`)
-*   **NEXCP (Non-Exchangeable Conformal Prediction)**: Barber, R. F., Candes, E. J., Ramdas, A., & Tibshirani, R. J. (2023). *Conformal prediction beyond exchangeability*. [Local PDF](resources/NEXCP_beyond_exchangeability.pdf) | [ArXiv](https://arxiv.org/abs/2202.13415)
-*   **Adaptive Conformal Prediction**: Gibbs, I., & Candes, E. (2021). *Adaptive conformal inference under distribution shift*. [Local PDF](resources/Adaptive_Conformal_Inference.pdf) | [ArXiv](https://arxiv.org/abs/2106.01682)
-*   **Conformal Prediction Tutorial**: Angelopoulos, A. N., & Bates, S. (2021). *A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification*. [Local PDF](resources/Gentle_Intro_to_Conformal_Prediction.pdf) | [ArXiv](https://arxiv.org/abs/2107.07511)
-*   **Adaptive Coverage Policies (ACP)**: *Adaptive Coverage Policies in Conformal Prediction*. [ArXiv](https://arxiv.org/pdf/2510.04318)
-*   **Extreme Conformal Prediction**: [ArXiv](https://arxiv.org/pdf/2505.08578)
-*   **IBUG (Instant Bootstrapping for Uncertainty Guidelines)**: [NeurIPS 2022 Paper](https://papers.nips.cc/paper_files/paper/2022/file/48088756ec0ce6ba362bddc7ebeb3915-Paper-Conference.pdf)
-*   **HCM (Hyperspherical Confidence Mapping)**: [OpenReview](https://openreview.net/attachment?id=G4JYxxI23T&name=pdf)
-
-### 🛠️ Libraries & Frameworks
-*   **MAPIE**: Model Agnostic Prediction Interval Estimator. [GitHub](https://github.com/scikit-learn-contrib/MAPIE)
-*   **PUNCC**: Predictive UNCertainty Calibration and Conformalization. [GitHub](https://github.com/deel-ai/puncc) | [Classification Docs](https://deel-ai.github.io/puncc/classification.html)
-*   **Adaptive Coverage Policies (ACP)**: [GitHub](https://github.com/GauthierE/adaptive-coverage-policies)
-*   **HCM (Hyperspherical Confidence Mapping)**: [GitHub](https://github.com/Abandoned-Puppy/HCM)
-*   **COP (Conformal Optimistic Prediction)**: [GitHub](https://github.com/creator-xi/Conformal-Optimistic-Prediction)
-*   **Optuna**: Bayesian Hyperparameter Optimization. [Website](https://optuna.org/)
-    *   **AutoSampler**: Automatic Selection of Optimization Algorithms. [Medium Article](https://medium.com/optuna/autosampler-automatic-selection-of-optimization-algorithms-in-optuna-1443875fd8f9) | [Docs](https://optuna.readthedocs.io/en/stable/index.html)
-*   **NGBoost**: Natural Gradient Boosting for Probabilistic Prediction. [Project Page](https://stanfordmlgroup.github.io/projects/ngboost/)
-*   **PGBM**: Probabilistic Gradient Boosting Machines. [GitHub](https://github.com/elephaint/pgbm)
-*   **Treeffuser / CARD**: Generative Diffusion for Regression. [GitHub](https://github.com/blei-lab/treeffuser/blob/main/src/treeffuser/treeffuser.py)
-*   **IBUG**: Instant Bootstrapping for Uncertainty Guidelines. [GitHub](https://github.com/jjbrophy47/ibug)
-*   **Uncertainty Toolbox**: [GitHub](https://github.com/uncertainty-toolbox/uncertainty-toolbox) | [Alternative Repo](https://github.com/sandordaroczi/uncertainty-estimation)
-*   **LIME**: Local Interpretable Model-agnostic Explanations. [GitHub](https://github.com/marcotcr/lime)
-*   **SHAP**: SHapley Additive exPlanations. [GitHub](https://github.com/shap/shap)
-*   **Conformal Prediction Codebases**: [Angelopoulos](https://github.com/aangelopoulos/conformal-prediction) | [GCastro](https://github.com/gcastro-98/conformal-prediction/tree/main)
-
+| Dataset | Train rows | Test rows | Target column |
+|---|---:|---:|---|
+| concrete | 189 | 95 | `str` |
+| noise | 168 | 60 | `Leq` |
+| pile (pilot for v2.0) | 81 | 24 | `Total` |
+| pile_settlement | 371 | 186 | `S_exp` |
+| scour | 154 | 78 | `Scour` |
+| sediment_load | 1095 | 365 | `St` |
+| streamflow | 192 | 96 | `TDS` |
+| water_quality_ewqi | 47 | 47 | `Pre monsoon EWQI` |
+| water_quality_wqi | 190 | 82 | `WQI` |
 
 ---
 
-<sub>This repository is a collaborative project developed under the guidance of Dr. Mahesh Pal by Prakriti Bisht and Danesh Selwal.</sub>
+## Running on Kaggle
+
+All computation for v2.0 runs on Kaggle (CPU, **internet on** — required for `pip install`).
+
+1. Attach the dataset `daneshselwal/reguq-uq-data` (the train/test CSV files).
+2. Open notebook 1 (tuning) with internet enabled and run it. The first cell (`FIX K1`) detects
+   Kaggle, copies the CSV files into the folder layout the notebooks expect
+   (`./drive/MyDrive/Regression/<dataset>_uncertainty_analysis/data/`), and the install cell
+   installs only the missing packages at pinned versions.
+3. For notebooks 2–8, add the output of the tuning job as an input (`kernel_sources`); the `FIX K2`
+   cell finds `hyperparameter_tuning/best_params.pkl` there automatically.
+4. To get the executed notebook (with every cell output) back through the CLI, run notebooks as
+   papermill jobs with `tools/kaggle/make_kernel.py`; see [`tools/kaggle/README.md`](tools/kaggle/README.md).
+   Every job, its inputs and where its results are stored are recorded in
+   [`docs/KAGGLE_RUNS.md`](docs/KAGGLE_RUNS.md).
+
+Kaggle allows 5 concurrent CPU sessions per account; `tools/kaggle/queue_push.sh` waits for a free
+slot before pushing.
+
+## Running on Google Colab
+
+The same notebooks still run on Colab (the original Colab install blocks are kept under
+`else:` in the `FIX K1` cells).
+
+1. Upload the dataset folder (e.g. `examples/pile_uncertainty_analysis/`, renamed or placed as
+   `MyDrive/Regression/pile_uncertainty_analysis/`) to Google Drive.
+2. Open a notebook in Colab; the first cell mounts Drive.
+3. Run notebook 1 first, then the others in the order above.
+
+## Using your own dataset
+
+1. Create `train.csv` and `test.csv` with the target as the last column.
+2. Copy `Regression/` (or an `examples/` folder) and replace the data files.
+3. Update the dataset folder name, `feature_names` and the plot target label as described in
+   [`docs/DATASET_PARAMETERS.md`](docs/DATASET_PARAMETERS.md), which also lists the settings whose
+   effect depends on dataset size.
+
+---
+
+## Validation status
+
+| Dataset | Status |
+|---|---|
+| pile | Pilot dataset. All 8 notebooks fixed; demo runs and the full tuning run on Kaggle in progress; results under review by the authors. |
+| all others | Pending. Will be run with the v2.0 notebooks once the pile results are confirmed. |
+
+The saved outputs in the v1.2 example notebooks were not produced on their own datasets (see the
+change log), so v1.2 numbers should not be compared directly with v2.0 results.
+
+---
+
+## References and citation
+
+The complete reference list — base models, tuning, interpretability, quantile regression,
+probabilistic models, conformal prediction (standard, non-exchangeable, online, extreme, learned
+coverage), HCM and software — is in
+[`examples/pile_uncertainty_analysis/REFERENCES.md`](examples/pile_uncertainty_analysis/REFERENCES.md).
+Local copies of three key papers are in `resources/`:
+
+- Barber, Candès, Ramdas & Tibshirani (2023). *Conformal prediction beyond exchangeability.* [PDF](resources/NEXCP_beyond_exchangeability.pdf)
+- Gibbs & Candès (2021). *Adaptive conformal inference under distribution shift.* [PDF](resources/Adaptive_Conformal_Inference.pdf)
+- Angelopoulos & Bates (2023). *A gentle introduction to conformal prediction.* [PDF](resources/Gentle_Intro_to_Conformal_Prediction.pdf)
+
+If you use this pipeline, please cite this repository together with the original papers of the
+methods you use.
+
+## License and authors
+
+Released under the [MIT License](LICENSE).
+
+Developed under the guidance of Dr. Mahesh Pal by Prakriti Bisht and Danesh Selwal.
