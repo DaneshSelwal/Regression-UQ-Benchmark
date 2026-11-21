@@ -135,6 +135,10 @@ original paths, and the missing packages are installed at the Colab versions.
 
 ---
 
+### B8 (non-math): TabNet metric crashed on Kaggle
+`pytorch-tabnet2` passes sample weights to custom metrics as a third argument; the pinball metric added
+in Q3 now accepts `weights=None`. Found in the first demo run (cell 61).
+
 ## Notebook 3: `probabilistic_distribution/Probabilistic__Distribution.ipynb`
 
 ### K1: run on Kaggle (setup only)
@@ -239,6 +243,99 @@ Same function as Notebook 3, so the same approved Hersbach (2000) fix.
 It now goes to `TabNet.xlsx`.
 
 ---
+
+## Notebook 5: `conformal_predictions_mapie_puncc/Conformal Predictions(MAPIE,PUNCC).ipynb`
+
+### K1 / K2: Kaggle setup and loading the tuned settings
+Same as Notebook 2. On Kaggle only the missing packages are installed (adds `mapie==0.6.0`,
+`puncc==0.8.0`); the Colab install block is kept unchanged under `else:`.
+
+### M1: CQR used ordinary (mean) models (approved 2026-11-21)
+- **Before:** the CQR strategy received the same mean-regression model for the lower, middle and upper
+  estimators, so it was not quantile regression at all.
+- **After:** new `QuantileModel(model_class, params, q)` wrapper. Native quantile loss where the library
+  has one (LightGBM / GPBoost `objective="quantile"`, XGBoost `reg:quantileerror`, Gradient Boosting
+  `loss="quantile"`, CatBoost `Quantile:alpha=q`, TabNet with a pinball `loss_fn`); distribution-based
+  quantiles for NGBoost (`pred_dist.ppf`) and PGBM (`predict_dist`). CQR now uses q = α/2 and 1 − α/2.
+
+### M2: MAPIE interval array had an extra axis (approved 2026-11-21)
+MAPIE 0.6 returns intervals of shape (n, 2, n_alpha). The notebook compared (n, 2, 1) arrays with
+(n,) targets, which broadcast to an n × n coverage matrix. **After:** `[:, :, 0]` after each predict.
+
+### M3: Split and J+aB strategies were not what their names say (approved 2026-11-21)
+- Split: `cv=ShuffleSplit(n_splits=1, test_size=0.5, random_state=SEED)` — one fit / calibration split
+  (was `method="base", cv=KFold(n_splits=5)`, i.e. a 5-fold jackknife, not split conformal).
+- J+aB: `method="plus"` with `Subsample(n_resamplings=50, random_state=SEED)` (was `method="minmax"`,
+  which is the J+aB *minmax* variant, not J+aB).
+
+### M4: one ALPHA
+`ALPHA = 0.1` for MAPIE and PUNCC (was 0.05 for MAPIE and 0.1 for PUNCC, so results were not comparable).
+
+### M5 / M6: tuned settings were not always used
+- M5: the CatBoost PUNCC call now passes `best_params` (was defaults).
+- M6: `PGBMWrapper` gets `get_params` / `set_params`, so MAPIE's `clone` keeps the tuned settings.
+
+### B3 / B4 (non-math)
+- B3: the Gradient Boosting MAPIE run was labelled "GPBoost".
+- B4: `KFold(..., shuffle=True)` without a seed → `random_state=42`.
+
+## Notebook 6: `conformal_predictions_nexcp_adaptivecp_mfcs/Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb`
+
+All changes are in one helper cell (inserted before `conformal_predictions_NEXCP`) plus the method
+sections of every copy (generic, `_PGBM`, `_tabnet`). Metrics, plots and Excel layout are unchanged
+except for the added columns/sheets named below. Sources: see REFERENCES.md (NEXCP section).
+
+### K1 / K2: Kaggle setup and loading the tuned settings
+Same as Notebook 5.
+
+### N1: calibration residuals came from the training fit (approved 2026-11-21)
+- **Before:** every method measured errors on the same rows the model was trained on; such errors are
+  much smaller than errors on new data, so intervals were too narrow.
+- **After:** out-of-fold residuals (5-fold, seed 123): each training row is scored by a model that never
+  saw it. Used by NexCP Split / CV+, all online methods, COP's starting value and MFCS-Full.
+
+### N2: weighted quantile (approved 2026-11-21)
+- **Before:** `np.interp` between residuals, no mass for the test point.
+- **After:** NexCP eq. (10–11): step quantile of Σ w̃ᵢ δ_Rᵢ + w̃ₙ₊₁ δ₊∞ with w̃ = w / (Σw + 1). If the
+  quantile is +∞ the interval is capped at the largest residual and the **Note** column says so.
+  The old function is kept, renamed `_old_weighted_quantile_interp`.
+
+### N3: NexCP Full / J+aB / CV+ were not the NexCP methods (approved 2026-11-21, option A)
+- Full: was identical to an unweighted split. Now eq. (12): for each test point, refit on train + (x, y)
+  for `full_grid_size=50` candidate y values in ŷ ± 2·q_split and keep the y values that conform.
+- J+aB: out-of-bag predictions (rows not in a bootstrap sample) + eq. (33) weighted jackknife+ bounds
+  (was min/max of in-bag intervals).
+- CV+: eq. (33) with K folds (was averaged bounds).
+
+### N4–N6: online methods (approved 2026-11-21)
+Ported from the authors' code (salesforce/online_conformal) and the papers:
+- SF-OGD (gradient sign and look-ahead fixed), SAOCP (coin-betting experts), FACI (expert weights,
+  I = 100), **ACI added** (γ = 0.005, N5).
+- Every interval is output **before** that test point's error is used (no look-ahead).
+- Online CV+ / J+aB: jackknife+ with past test errors added to the calibration set as they arrive.
+- The sliding-window variants were removed (N6). MFCS Split / Full kept as written (no published source);
+  MFCS-Full now uses out-of-fold residuals of each refit.
+
+### N8: COP step size (approved 2026-11-21)
+`lr_t = lr × (max − min)` of the last `T_burnin` scores (training OOF errors followed by past test
+errors), as in the official COP code. Was a fixed 0.05 in target units. Start value from OOF residuals.
+
+### N9: Extreme CP (approved 2026-11-21)
+As in the official `ExtremeConformal` package (`conformalize_GPD_max`): signed scores y − ŷ on all
+calibration points; thresholds 0.80–0.99 (capped so ≥ 10 scores exceed them); official GPD quantile
+formula; maximum over thresholds. One-sided: coverage = P(y ≤ ŷ + q), width = q, `ymin` empty,
+plot shows the upper bound. New sheet `EXTREMECP_GPD_Thresholds` with the fit at every threshold.
+
+### N10: notes
+New **Note** column in the NEXCP / ONLINECP / EXTREMECP summaries (caps at +∞, grid-edge hits, fallbacks).
+
+### A1 / A2: AlphaNet (approved 2026-11-21, same as Notebook 7)
+- Input = sum of LOO scores divided by its mean (was the raw sum).
+- Summary: `Alpha_nominal (not used for the interval)`, `Target_coverage = 1 − α_learned`,
+  `Miss_over_alpha = (1 − coverage) / α_learned`.
+
+### M4: one ALPHA
+`ALPHA = 0.1` in the helper cell; all 45 method calls use it (were 0.05 / 0.1 mixed).
 
 ## Notebook 7 — Adaptive Coverage Policies: `conformal_predictions_adaptive_coverage_policies/Adaptive_Coverage_Policies(ACP).ipynb`
 
