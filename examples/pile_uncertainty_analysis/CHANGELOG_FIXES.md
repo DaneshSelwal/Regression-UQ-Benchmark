@@ -65,6 +65,13 @@ notebooks and replaced by the Kaggle runs. Git history keeps the old outputs.
   account, internet on) only the missing packages are installed, and the kernel is not
   restarted with `os._exit(0)`.
 
+### K2: tuning results saved to a file (approved 2026-11-21)
+- **Before:** the chosen settings were copied by hand into 6 other notebooks
+  (a pasted `best_scores_autosampler = {...}` block).
+- **After:** a new cell right after tuning saves them to
+  `hyperparameter_tuning/best_params.pkl`, plus a readable `best_params.json`. The other
+  notebooks will load this file instead of using a pasted copy (applied notebook by notebook).
+
 ### Found, not yet discussed (no change made)
 - The interpretability cell uses `model_classes`, which is never defined, so it fails with
   `NameError`.
