@@ -12,6 +12,8 @@ REG="${RUN_REGISTRY:-$(dirname "$0")/../../docs/run_registry.tsv}"
 for d in "$@"; do
   nb=$(grep -m1 '^NAME = ' "$d/run.py" | sed "s/^NAME = '//; s/'$//")
   while true; do
+    # lock: several queues may run at once; name choice + push + registry line happen under one lock
+    until mkdir "$REG.lock" 2>/dev/null; do sleep 5; done
     code="REG$(date +%d_%m_%Y_%H_%M)"
     # one name per minute: if this minute's name is taken, wait for the next minute
     while grep -q "^$code	" "$REG"; do sleep 15; code="REG$(date +%d_%m_%Y_%H_%M)"; done
@@ -25,8 +27,10 @@ PY
     out=$("$KAGGLE_BIN" kernels push -p "$d" 2>&1 | grep -v outdated)
     if echo "$out" | grep -q "successfully pushed"; then
       printf "%s\t%s\t%s\t%s\t%s\n" "$code" "$KUSER/$slug" "$nb" "$(basename "$d")" "$(date '+%Y-%m-%d %H:%M')" >> "$REG"
+      rmdir "$REG.lock"
       echo "$(date +%H:%M) $code ($nb) pushed: https://www.kaggle.com/code/$KUSER/$slug"; break
     fi
+    rmdir "$REG.lock"
     if ! echo "$out" | grep -q "Maximum batch CPU session"; then echo "$(date +%H:%M) ERROR $d: $out"; break; fi
     sleep 120
   done
