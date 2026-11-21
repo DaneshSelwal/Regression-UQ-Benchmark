@@ -279,6 +279,11 @@ MAPIE 0.6 returns intervals of shape (n, 2, n_alpha). The notebook compared (n, 
 - B3: the Gradient Boosting MAPIE run was labelled "GPBoost".
 - B4: `KFold(..., shuffle=True)` without a seed → `random_state=42`.
 
+### B9 (non-math): MAPIE 0.6 rejected the split from M3
+The first demo run stopped at the first MAPIE call: MAPIE 0.6 accepts only `BaseCrossValidator`
+objects, and `ShuffleSplit` is not one. The same split (a seeded random half of the training rows for
+calibration, the other half to fit) is now passed as a `PredefinedSplit` via `_split_cv(n, SEED)`.
+
 ## Notebook 6: `conformal_predictions_nexcp_adaptivecp_mfcs/Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb`
 
 All changes are in one helper cell (inserted before `conformal_predictions_NEXCP`) plus the method
