@@ -77,12 +77,12 @@ Entries marked **[fix]** are the sources the changes in `CHANGELOG_FIXES.md` wer
 - MFCS: no source found in the repo; kept as written at the user's request.
 
 ## 8. Adaptive Coverage Policies (AlphaNet) notebook and AlphaNet in the NEXCP notebook
-- Gauthier, E., Bach, F. & Jordan, M. I. (2026). *Adaptive Coverage Policies in Conformal Prediction.* AISTATS, PMLR 300:3196–3204. https://arxiv.org/abs/2510.04318. Code link in the paper: https://github.com/GauthierE/adaptive-coverage-policies (eq. 2–9; fix N10). **[fix]**
+- Gauthier, E., Bach, F. & Jordan, M. I. (2026). *Adaptive Coverage Policies in Conformal Prediction.* AISTATS, PMLR 300:3196–3204. https://arxiv.org/abs/2510.04318. Official code (verified): https://github.com/GauthierE/adaptive-coverage-policies (`regression/regression.ipynb`; `classification/selection-lambda.ipynb` picks λ by bisection to a target mean size, never by comparing losses across λ). Eq. 2–9; fixes N10, A1, A2. **[fix]**
 - Gauthier, E., Bach, F. & Jordan, M. I. (2025). *E-Values Expand the Scope of Conformal Prediction.* https://arxiv.org/abs/2503.13050. Code: https://github.com/GauthierE/evalues-expand-cp
 - Vovk, V. & Wang, R. (2021). *E-values: Calibration, Combination and Applications.* Annals of Statistics 49(3).
 
 ## 9. Hyperspherical Confidence Mapping (HCM) notebook
-- Choi, E., Kim, H.-Y., Lee, J. et al. (2026). *Uncertainty Estimation via Hyperspherical Confidence Mapping.* ICLR. https://arxiv.org/abs/2605.05964. Code (listed by third-party summaries, not yet verified): https://github.com/Abandoned-Puppy/HCM
+- Choi, E., Kim, H.-Y., Lee, J. et al. (2026). *Uncertainty Estimation via Hyperspherical Confidence Mapping.* ICLR. https://arxiv.org/abs/2605.05964. Official code (verified): https://github.com/Abandoned-Puppy/HCM (`Toy_example.py`: 1D regression, σ = |R|·sqrt(|‖d‖²−1|); paper Appendix A.2 defines Cov@kσ and ECE_reg, A.4 the σ formula, Sec. 3.3 validation temperature scaling).
 - Guo, C., Pleiss, G., Sun, Y. & Weinberger, K. Q. (2017). *On Calibration of Modern Neural Networks.* ICML. (temperature scaling, ECE)
 - Amini, A., Schwarting, W., Soleimany, A. & Rus, D. (2020). *Deep Evidential Regression.* NeurIPS. (baseline the HCM paper compares against)
 
