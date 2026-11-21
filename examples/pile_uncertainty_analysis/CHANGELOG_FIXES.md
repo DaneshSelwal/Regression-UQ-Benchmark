@@ -81,6 +81,12 @@ notebooks and replaced by the Kaggle runs. Git history keeps the old outputs.
 - First Kaggle run, before this fix: the Random Forest tuning finished with the new CV scoring,
   and **47 trials were pruned**. Pruning works now, where before 0 trials were ever pruned.
 
+### B10 (non-math): last cell crashed with NameError
+`generate_interpretml_explanations_summary_pruners` looks models up in `model_classes`, which this
+notebook never defined (also true in v1.2), so the interpretability summary (last cell) always failed.
+The same 9-model mapping the other notebooks use is now defined in that cell. Found in the 5-trial
+test run. The tuning results themselves were not affected (they are saved two cells earlier).
+
 ### Found, not yet discussed (no change made)
 - The interpretability cell uses `model_classes`, which is never defined, so it fails with
   `NameError`.
