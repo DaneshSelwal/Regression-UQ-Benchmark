@@ -17,6 +17,6 @@ REG21_11_2026_23_36	daneshselwal/reg21-11-2026-23-36	Probabilistic__Distribution
 REG21_11_2026_23_41	daneshselwal/reg21-11-2026-23-41	Hyperspherical_Confidence_Mapping(HCM).ipynb	kr_nb8	2026-11-21 23:41	real	OK (real params) - held until full tuning check
 REG21_11_2026_23_44	daneshselwal/reg21-11-2026-23-44	Quantile_Regression.ipynb	kr_nb2	2026-11-21 23:44	real	OK (real params) - held until full tuning check
 REG21_11_2026_23_51	daneshselwal/reg21-11-2026-23-51	Probabilistic__Distribution.ipynb	kr_nb3	2026-11-21 23:51	real	OK (real params) - held until full tuning check
-REG21_11_2026_23_58	daneshselwal/reg21-11-2026-23-58	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_nb5	2026-11-21 23:58	demo	running/queued
+REG21_11_2026_23_58	daneshselwal/reg21-11-2026-23-58	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_nb5	2026-11-21 23:58	demo	OK (demo)
 REG22_11_2026_00_06	daneshselwal/reg22-11-2026-00-06	Probabilistic__Distribution(CARD).ipynb	kr_nb4	2026-11-22 00:06	real	running/queued
 REG22_11_2026_00_15	daneshselwal/reg22-11-2026-00-15	Adaptive_Coverage_Policies(ACP).ipynb	kr_nb7	2026-11-22 00:15	real	running/queued
