@@ -25,6 +25,11 @@ Writes `<job_dir>/run.py` (the notebook embedded, plus the papermill call) and
 the given `kernel_sources`, e.g. the tuning job whose output contains `best_params.pkl`).
 Environment overrides: `KAGGLE_USER`, `KAGGLE_DATASET`.
 
+Accounts without internet: add `--user ACCOUNT --datasets ACCOUNT/uq-offline-kit,ACCOUNT/uq-pile-demo
+--no-internet`. If the job finds a `wheels/` folder of `.whl` files under `/kaggle/input`, it installs
+papermill with `pip --no-index --find-links <wheels>`. The notebooks' install cells (FIX K1, offline)
+do the same. Without these options the job is built as before.
+
 At the end of the job log, `RUN_STATUS: OK` or `RUN_STATUS: FAILED` tells whether every cell ran.
 
 ## `queue_push.sh`
