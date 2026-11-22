@@ -100,14 +100,14 @@ REG23_11_2026_01_15	daneshjangra/reg23-11-2026-01-15	Probabilistic__Distribution
 REG23_11_2026_01_16	daneshjangra/reg23-11-2026-01-16	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_streamflow_5	2026-11-23 01:16	demo	OK kd_streamflow_5 (28.1 min, 54/54)
 REG23_11_2026_01_17	daneshjangra/reg23-11-2026-01-17	Adaptive_Coverage_Policies(ACP).ipynb	kd_streamflow_6	2026-11-23 01:17	demo	OK kd_streamflow_6 (19.1 min, 35/35)
 REG23_11_2026_01_18	daneshselwal/reg23-11-2026-01-18	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kd_water_quality_ewqi_1	2026-11-23 01:18	demo	running/queued
-REG23_11_2026_01_19	daneshselwal/reg23-11-2026-01-19	Probabilistic__Distribution(CARD).ipynb	kd_noise_4	2026-11-23 01:19	demo	running/queued
+REG23_11_2026_01_19	daneshselwal/reg23-11-2026-01-19	Probabilistic__Distribution(CARD).ipynb	kd_noise_4	2026-11-23 01:19	demo	OK kd_noise_4 (53.8 min, 65/65)
 REG23_11_2026_01_20	daneshselwal/reg23-11-2026-01-20	Probabilistic__Distribution(CARD).ipynb	kd_water_quality_ewqi_4	2026-11-23 01:20	demo	OK kd_water_quality_ewqi_4 (32.1 min, 65/65)
 REG23_11_2026_01_23	daneshjangra/reg23-11-2026-01-23	Hyperspherical_Confidence_Mapping(HCM).ipynb	kd_streamflow_7	2026-11-23 01:23	demo	running/queued
 REG23_11_2026_01_24	daneshjangra/reg23-11-2026-01-24	Quantile_Regression.ipynb	kd_sediment_load_2	2026-11-23 01:24	demo	OK kd_sediment_load_2 (13.1 min, 74/74)
 REG23_11_2026_01_25	daneshjangra/reg23-11-2026-01-25	Probabilistic__Distribution.ipynb	kd_sediment_load_3	2026-11-23 01:25	demo	running/queued
 REG23_11_2026_01_34	daneshjangra/reg23-11-2026-01-34	Probabilistic__Distribution(CARD).ipynb	kd_sediment_load_4	2026-11-23 01:34	demo	running/queued
 REG23_11_2026_01_37	daneshjangra/reg23-11-2026-01-37	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_sediment_load_5	2026-11-23 01:37	demo	running/queued
-REG23_11_2026_01_38	daneshjangra/reg23-11-2026-01-38	Adaptive_Coverage_Policies(ACP).ipynb	kd_sediment_load_6	2026-11-23 01:38	demo	running/queued
+REG23_11_2026_01_38	daneshjangra/reg23-11-2026-01-38	Adaptive_Coverage_Policies(ACP).ipynb	kd_sediment_load_6	2026-11-23 01:38	demo	OK kd_sediment_load_6 (? min, 35/35)
 REG23_11_2026_01_45	daneshjangra/reg23-11-2026-01-45	Hyperspherical_Confidence_Mapping(HCM).ipynb	kd_sediment_load_7	2026-11-23 01:45	demo	OK kd_sediment_load_7 (0.8 min, 25/25)
 REG23_11_2026_01_48	daneshjangra/reg23-11-2026-01-48	Probabilistic__Distribution.ipynb	kd_scour_3	2026-11-23 01:48	demo	OK kd_scour_3 (5.8 min, 71/71)
-REG23_11_2026_01_54	daneshselwal/reg23-11-2026-01-54	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_water_quality_ewqi_5	2026-11-23 01:54	demo	running/queued
+REG23_11_2026_01_54	daneshselwal/reg23-11-2026-01-54	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_water_quality_ewqi_5	2026-11-23 01:54	demo	OK kd_water_quality_ewqi_5 (27.7 min, 54/54)
