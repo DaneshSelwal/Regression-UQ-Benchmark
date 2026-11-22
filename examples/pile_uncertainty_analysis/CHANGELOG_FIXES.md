@@ -437,3 +437,14 @@ only `properscoring` and `XlsxWriter` are installed. The Colab blocks are unchan
 
 ### B7 (non-math): output folder on Kaggle
 On Kaggle, outputs now go to the same `./drive/MyDrive/Regression/<dataset>/...` tree as the other notebooks.
+
+---
+
+## All notebooks
+
+### B12 (non-math): plot labels named the concrete dataset's target on every dataset
+Your template says "Replace (str) with actual data label name", but every dataset still used `'str'`
+(concrete's target, compressive strength) in about 70 plot labels across the 8 notebooks, e.g.
+`set_ylabel('str')` or `'Actual str'`. Each notebook now has `TARGET_LABEL = '...'` next to
+`feature_names`, and every plot label uses it (`f'Actual {TARGET_LABEL}'`). Pile: `'Total'`. The value is
+the only per-dataset edit, together with the folder name, the data file names and `feature_names`.
