@@ -14,7 +14,7 @@ REG21_11_2026_23_10	daneshselwal/reg21-11-2026-23-10	Optuna_autosampler.ipynb	kd
 REG21_11_2026_23_24	daneshselwal/reg21-11-2026-23-24	Quantile_Regression.ipynb	kr_nb2	2026-11-21 23:24	real	FAILED: tuned params did not mount (kernel source had ERROR status) - re-queued with dataset pile-tuned-params-v4
 REG21_11_2026_23_29	daneshselwal/reg21-11-2026-23-29	Probabilistic__Distribution.ipynb	kr_nb3	2026-11-21 23:29	real	FAILED: tuned params did not mount (kernel source had ERROR status) - re-queued with dataset pile-tuned-params-v4
 REG21_11_2026_23_36	daneshselwal/reg21-11-2026-23-36	Probabilistic__Distribution(CARD).ipynb	kr_nb4	2026-11-21 23:36	real	FAILED: tuned params did not mount (kernel source had ERROR status) - re-queued with dataset pile-tuned-params-v4
-REG21_11_2026_23_41	daneshselwal/reg21-11-2026-23-41	Hyperspherical_Confidence_Mapping(HCM).ipynb	kr_nb8	2026-11-21 23:41	real	OK (real params) - held until full tuning check
+REG21_11_2026_23_41	daneshselwal/reg21-11-2026-23-41	Hyperspherical_Confidence_Mapping(HCM).ipynb	kr_nb8	2026-11-21 23:41	real	OK (real params) - ON GITHUB (results/)
 REG21_11_2026_23_44	daneshselwal/reg21-11-2026-23-44	Quantile_Regression.ipynb	kr_nb2	2026-11-21 23:44	real	OK but superseded (used tuning v1 params; 22/80 differ) - not on GitHub
 REG21_11_2026_23_51	daneshselwal/reg21-11-2026-23-51	Probabilistic__Distribution.ipynb	kr_nb3	2026-11-21 23:51	real	OK but superseded (used tuning v1 params; 22/80 differ) - not on GitHub
 REG21_11_2026_23_58	daneshselwal/reg21-11-2026-23-58	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_nb5	2026-11-21 23:58	demo	OK (demo)
@@ -23,13 +23,13 @@ REG22_11_2026_00_15	daneshselwal/reg22-11-2026-00-15	Adaptive_Coverage_Policies(
 REG22_11_2026_00_33	daneshselwal/reg22-11-2026-00-33	Conformal Predictions(MAPIE,PUNCC).ipynb	kr_nb5	2026-11-22 00:33	real	OK but superseded (used tuning v1 params; 22/80 differ) - not on GitHub
 REG22_11_2026_00_38	daneshselwal/reg22-11-2026-00-38	Optuna_autosampler.ipynb	kd_nb1_smoke	2026-11-22 00:38	smoke	OK (smoke, 5 trials, 60 min) - full run queued
 REG22_11_2026_01_11	daneshselwal/reg22-11-2026-01-11	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kr_nb6	2026-11-22 01:11	real	OK but superseded (used tuning v1 params; 22/80 differ) - not on GitHub
-REG22_11_2026_01_58	daneshselwal/reg22-11-2026-01-58	Optuna_autosampler.ipynb	kd_nb1_full	2026-11-22 01:58	tuning	OK (full 50-trial tuning, 297 min) - FINAL params (dataset pile-tuned-params-v4 version 2)
+REG22_11_2026_01_58	daneshselwal/reg22-11-2026-01-58	Optuna_autosampler.ipynb	kd_nb1_full	2026-11-22 01:58	tuning	OK (full 50-trial tuning, 297 min) - FINAL params (dataset pile-tuned-params-v4 version 2) - ON GITHUB (results/)
 REG22_11_2026_07_12	daneshselwal/reg22-11-2026-07-12	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kr_nb6	2026-11-22 07:12	real	superseded (NB6 before FIX A3) - not on GitHub
-REG22_11_2026_07_13	daneshselwal/reg22-11-2026-07-13	Quantile_Regression.ipynb	kr_nb2	2026-11-22 07:13	real	OK FINAL (NB2, final params, 74/74 cells)
-REG22_11_2026_07_14	daneshselwal/reg22-11-2026-07-14	Probabilistic__Distribution.ipynb	kr_nb3	2026-11-22 07:14	real	OK FINAL (NB3, final params, 71/71 cells)
-REG22_11_2026_07_15	daneshselwal/reg22-11-2026-07-15	Probabilistic__Distribution(CARD).ipynb	kr_nb4	2026-11-22 07:15	real	OK FINAL (NB4, final params, 65/65 cells)
-REG22_11_2026_07_16	daneshselwal/reg22-11-2026-07-16	Conformal Predictions(MAPIE,PUNCC).ipynb	kr_nb5	2026-11-22 07:16	real	OK FINAL (NB5, final params, 54/54 cells)
+REG22_11_2026_07_13	daneshselwal/reg22-11-2026-07-13	Quantile_Regression.ipynb	kr_nb2	2026-11-22 07:13	real	OK FINAL (NB2, final params, 74/74 cells) - ON GITHUB (results/)
+REG22_11_2026_07_14	daneshselwal/reg22-11-2026-07-14	Probabilistic__Distribution.ipynb	kr_nb3	2026-11-22 07:14	real	OK FINAL (NB3, final params, 71/71 cells) - ON GITHUB (results/)
+REG22_11_2026_07_15	daneshselwal/reg22-11-2026-07-15	Probabilistic__Distribution(CARD).ipynb	kr_nb4	2026-11-22 07:15	real	OK FINAL (NB4, final params, 65/65 cells) - ON GITHUB (results/)
+REG22_11_2026_07_16	daneshselwal/reg22-11-2026-07-16	Conformal Predictions(MAPIE,PUNCC).ipynb	kr_nb5	2026-11-22 07:16	real	OK FINAL (NB5, final params, 54/54 cells) - ON GITHUB (results/)
 REG22_11_2026_07_21	daneshselwal/reg22-11-2026-07-21	Adaptive_Coverage_Policies(ACP).ipynb	kr_nb7	2026-11-22 07:21	real	superseded (NB7 before FIX A3) - not on GitHub
 REG22_11_2026_08_09	daneshselwal/reg22-11-2026-08-09		kx_acp_test	2026-11-22 08:09	demo	OK test only (AlphaNet training-budget check for FIX A3) - not on GitHub
-REG22_11_2026_08_13	daneshselwal/reg22-11-2026-08-13	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kr_nb6	2026-11-22 08:13	real	RUNNING (NB6 final, with FIX A3)
-REG22_11_2026_08_14	daneshselwal/reg22-11-2026-08-14	Adaptive_Coverage_Policies(ACP).ipynb	kr_nb7	2026-11-22 08:14	real	OK FINAL (NB7 with FIX A3, 35/35 cells; lambda now changes alpha~)
+REG22_11_2026_08_13	daneshselwal/reg22-11-2026-08-13	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kr_nb6	2026-11-22 08:13	real	OK FINAL (NB6 with FIX A3, 78/78 cells, 231 min) - ON GITHUB (results/)
+REG22_11_2026_08_14	daneshselwal/reg22-11-2026-08-14	Adaptive_Coverage_Policies(ACP).ipynb	kr_nb7	2026-11-22 08:14	real	OK FINAL (NB7 with FIX A3, 35/35 cells; lambda now changes alpha~) - ON GITHUB (results/)
