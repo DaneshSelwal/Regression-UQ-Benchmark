@@ -32,4 +32,4 @@ REG22_11_2026_07_16	daneshselwal/reg22-11-2026-07-16	Conformal Predictions(MAPIE
 REG22_11_2026_07_21	daneshselwal/reg22-11-2026-07-21	Adaptive_Coverage_Policies(ACP).ipynb	kr_nb7	2026-11-22 07:21	real	superseded (NB7 before FIX A3) - not on GitHub
 REG22_11_2026_08_09	daneshselwal/reg22-11-2026-08-09		kx_acp_test	2026-11-22 08:09	demo	OK test only (AlphaNet training-budget check for FIX A3) - not on GitHub
 REG22_11_2026_08_13	daneshselwal/reg22-11-2026-08-13	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kr_nb6	2026-11-22 08:13	real	RUNNING (NB6 final, with FIX A3)
-REG22_11_2026_08_14	daneshselwal/reg22-11-2026-08-14	Adaptive_Coverage_Policies(ACP).ipynb	kr_nb7	2026-11-22 08:14	real	RUNNING (NB7 final, with FIX A3)
+REG22_11_2026_08_14	daneshselwal/reg22-11-2026-08-14	Adaptive_Coverage_Policies(ACP).ipynb	kr_nb7	2026-11-22 08:14	real	OK FINAL (NB7 with FIX A3, 35/35 cells; lambda now changes alpha~)
