@@ -55,7 +55,7 @@ REG22_11_2026_14_03	daneshjangra/reg22-11-2026-14-03	Hyperspherical_Confidence_M
 REG22_11_2026_14_09	daneshjangra/reg22-11-2026-14-09	Optuna_autosampler.ipynb	ks2_concrete	2026-11-22 14:09	demo	OK smoke concrete (17/17, 73.2 min; full est 10.2 h) - not on GitHub
 REG22_11_2026_14_10	daneshjangra/reg22-11-2026-14-10	Optuna_autosampler.ipynb	ks2_streamflow	2026-11-22 14:10	demo	OK smoke streamflow (17/17, 53.5 min; full est 7.8 h) - not on GitHub
 REG22_11_2026_14_34	daneshselwal/reg22-11-2026-14-34	Optuna_autosampler.ipynb	ks2_water_quality_wqi	2026-11-22 14:34	demo	RUNNING smoke re-run (B13) water_quality_wqi - not on GitHub
-REG22_11_2026_14_35	daneshjangra/reg22-11-2026-14-35	Optuna_autosampler.ipynb	kf_scour	2026-11-22 14:35	demo	RUNNING FULL tuning scour (50 trials, est. ~9.5 h)
+REG22_11_2026_14_35	daneshjangra/reg22-11-2026-14-35	Optuna_autosampler.ipynb	kf_scour	2026-11-22 14:35	demo	OK FULL tuning scour (old code = same search, 338.6 min, 17/17) - FINAL, on GitHub (no B14 re-run needed)
 REG22_11_2026_14_57	daneshselwal/reg22-11-2026-14-57	Optuna_autosampler.ipynb	kf_water_quality_ewqi	2026-11-22 14:57	demo	RUNNING FULL tuning water_quality_ewqi (50 trials, est. 5.5 h)
 REG22_11_2026_15_16	daneshjangra/reg22-11-2026-15-16	Optuna_autosampler.ipynb	kf_streamflow	2026-11-22 15:16	demo	RUNNING FULL tuning streamflow (50 trials, est. 7.8 h)
 REG22_11_2026_15_17	daneshselwal/reg22-11-2026-15-17	Optuna_autosampler.ipynb	kf_noise	2026-11-22 15:17	demo	SUPERSEDED by REG22_11_2026_17_59 (B14) - old-code noise tuning, to be stopped
@@ -71,3 +71,4 @@ REG22_11_2026_19_52	daneshjangra/reg22-11-2026-19-52	Quantile_Regression.ipynb	k
 REG22_11_2026_19_53	daneshselwal/reg22-11-2026-19-53	Optuna_autosampler.ipynb	kf14_water_quality_wqi	2026-11-22 19:53	demo	RUNNING FULL tuning water_quality_wqi (B14)
 REG22_11_2026_19_59	daneshjangra/reg22-11-2026-19-59	Probabilistic__Distribution.ipynb	kd_concrete_3	2026-11-22 19:59	demo	OK concrete NB3 probabilistic (7.2 min, 71/71)
 REG22_11_2026_20_08	daneshjangra/reg22-11-2026-20-08	Probabilistic__Distribution(CARD).ipynb	kd_concrete_4	2026-11-22 20:08	demo	RUNNING concrete NB4 CARD
+REG22_11_2026_20_15	daneshjangra/reg22-11-2026-20-15	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_concrete_5	2026-11-22 20:15	demo	RUNNING concrete NB5 MAPIE/PUNCC
