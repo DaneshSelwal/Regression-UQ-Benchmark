@@ -345,6 +345,14 @@ New **Note** column in the NEXCP / ONLINECP / EXTREMECP summaries (caps at +∞,
 - Summary: `Alpha_nominal (not used for the interval)`, `Target_coverage = 1 − α_learned`,
   `Miss_over_alpha = (1 − coverage) / α_learned`.
 
+### A3: AlphaNet training budget (2026-11-22, same as Notebook 7)
+`lr_alpha` 1e-3 → 1e-2, and `num_epochs` raised so training has at least 2000 optimizer steps. The
+leave-one-out scores were already precomputed here. The progress print is now about 10 lines per run.
+
+### B11 (non-math): `.to(device)` inside a comment
+An earlier A2 edit left `.to(device)` inside the `# FIX A2` comment on the test-feature line, so the test
+input was not moved to the GPU. That's harmless on CPU and would crash on a GPU. It's now code again.
+
 ### M4: one ALPHA
 `ALPHA = 0.1` in the helper cell; all 45 method calls use it (were 0.05 / 0.1 mixed).
 
@@ -382,6 +390,19 @@ and the tuning results loaded from `best_params.pkl` instead of the pasted dict.
   over all n) is divided by the same number, stored on the network as `feature_scale_`. The width formula
   still uses the raw errors. The output starts near α̃ ≈ 1 (final bias 5, weights N(0, 0.01)), as in the
   official `initialize_to_one`. Input scaling is our addition for generality; the official code feeds the raw sum.
+
+### A3: AlphaNet hardly trained, so λ had no effect (decided 2026-11-22 under the user's "change it only if the impact is big" rule)
+- **Before:** 50 epochs at lr 1e-3. On pile the calibration set is 29 points with batch size 32, so one
+  epoch is one optimizer step: 50 steps in total. Starting from α̃ ≈ 0.99 (bias 5), α̃ ended at about 0.98
+  for λ = 10, 20 and 50 alike, so the λ comparison showed nothing. (The official code gets away with 50
+  epochs because it feeds the raw sum, about 80 there, which makes each step large. After A2's scaling the
+  input is about 1, so the steps are small.)
+- **After:** at least 2000 optimizer steps (`epochs = max(epochs, ceil(2000 / batches per epoch))`) at lr 1e-2.
+  The leave-one-out score vectors are computed once and reused, giving the same numbers as before; it was
+  one `predict()` per row per step, which would be far too slow with 2000 steps.
+- **Check (Kaggle run REG22_11_2026_08_09, LightGBM and XGBoost, pile):** the trained α̃ matches the exact
+  minimiser of the same loss for every λ (0.347 / 0.256 / 0.174 for λ = 10 / 20 / 50, against 0.347 /
+  0.256 / 0.174). Target coverage is now 65% / 74% / 83% (was 1.8% for every λ).
 
 ### M4: one ALPHA
 `ALPHA = 0.1` is defined once. AlphaNet learns its own α̃, so ALPHA is only the nominal reference.
