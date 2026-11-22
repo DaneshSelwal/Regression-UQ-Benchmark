@@ -67,5 +67,7 @@ REG22_11_2026_17_56	daneshjangra/reg22-11-2026-17-56	Optuna_autosampler.ipynb	kf
 REG22_11_2026_17_57	daneshjangra/reg22-11-2026-17-57	Optuna_autosampler.ipynb	kf14_concrete	2026-11-22 17:57	demo	OK FULL tuning concrete (B14, 17/17, tuning 85.9 min) - FINAL, on GitHub
 REG22_11_2026_17_58	daneshselwal/reg22-11-2026-17-58	Optuna_autosampler.ipynb	kf14_sediment_load	2026-11-22 17:58	demo	RUNNING FULL tuning sediment_load (B14)
 REG22_11_2026_17_59	daneshselwal/reg22-11-2026-17-59	Optuna_autosampler.ipynb	kf14_noise	2026-11-22 17:59	demo	OK FULL tuning noise (B14, 17/17, tuning 96.8 min) - FINAL, on GitHub
-REG22_11_2026_19_52	daneshjangra/reg22-11-2026-19-52	Quantile_Regression.ipynb	kd_concrete_2	2026-11-22 19:52	demo	running/queued
+REG22_11_2026_19_52	daneshjangra/reg22-11-2026-19-52	Quantile_Regression.ipynb	kd_concrete_2	2026-11-22 19:52	demo	OK concrete NB2 quantile regression (5.6 min, 74/74)
 REG22_11_2026_19_53	daneshselwal/reg22-11-2026-19-53	Optuna_autosampler.ipynb	kf14_water_quality_wqi	2026-11-22 19:53	demo	RUNNING FULL tuning water_quality_wqi (B14)
+REG22_11_2026_19_59	daneshjangra/reg22-11-2026-19-59	Probabilistic__Distribution.ipynb	kd_concrete_3	2026-11-22 19:59	demo	OK concrete NB3 probabilistic (7.2 min, 71/71)
+REG22_11_2026_20_08	daneshjangra/reg22-11-2026-20-08	Probabilistic__Distribution(CARD).ipynb	kd_concrete_4	2026-11-22 20:08	demo	RUNNING concrete NB4 CARD
