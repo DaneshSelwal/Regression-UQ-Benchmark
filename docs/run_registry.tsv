@@ -50,9 +50,10 @@ REG22_11_2026_13_34	daneshjangra/reg22-11-2026-13-34	Adaptive_Coverage_Policies(
 REG22_11_2026_13_51	daneshselwal/reg22-11-2026-13-51	Optuna_autosampler.ipynb	ks2_sediment_load	2026-11-22 13:51	demo	RUNNING smoke re-run (B13) sediment_load - not on GitHub
 REG22_11_2026_13_52	daneshselwal/reg22-11-2026-13-52	Optuna_autosampler.ipynb	ks2_pile_settlement	2026-11-22 13:52	demo	RUNNING smoke re-run (B13) pile_settlement - not on GitHub
 REG22_11_2026_13_53	daneshselwal/reg22-11-2026-13-53	Optuna_autosampler.ipynb	ks2_noise	2026-11-22 13:53	demo	RUNNING smoke re-run (B13) noise - not on GitHub
-REG22_11_2026_13_54	daneshselwal/reg22-11-2026-13-54	Optuna_autosampler.ipynb	ks2_water_quality_ewqi	2026-11-22 13:54	demo	RUNNING smoke re-run (B13) water_quality_ewqi - not on GitHub
+REG22_11_2026_13_54	daneshselwal/reg22-11-2026-13-54	Optuna_autosampler.ipynb	ks2_water_quality_ewqi	2026-11-22 13:54	demo	OK smoke water_quality_ewqi (17/17, 48 min; full est 5.5 h) - not on GitHub
 REG22_11_2026_14_03	daneshjangra/reg22-11-2026-14-03	Hyperspherical_Confidence_Mapping(HCM).ipynb	kp2_7	2026-11-22 14:03	demo	OK pile NB8 re-run (0.6 min, 25/25)
 REG22_11_2026_14_09	daneshjangra/reg22-11-2026-14-09	Optuna_autosampler.ipynb	ks2_concrete	2026-11-22 14:09	demo	RUNNING smoke re-run (B13) concrete - not on GitHub
 REG22_11_2026_14_10	daneshjangra/reg22-11-2026-14-10	Optuna_autosampler.ipynb	ks2_streamflow	2026-11-22 14:10	demo	RUNNING smoke re-run (B13) streamflow - not on GitHub
 REG22_11_2026_14_34	daneshselwal/reg22-11-2026-14-34	Optuna_autosampler.ipynb	ks2_water_quality_wqi	2026-11-22 14:34	demo	RUNNING smoke re-run (B13) water_quality_wqi - not on GitHub
 REG22_11_2026_14_35	daneshjangra/reg22-11-2026-14-35	Optuna_autosampler.ipynb	kf_scour	2026-11-22 14:35	demo	RUNNING FULL tuning scour (50 trials, est. ~9.5 h)
+REG22_11_2026_14_57	daneshselwal/reg22-11-2026-14-57	Optuna_autosampler.ipynb	kf_water_quality_ewqi	2026-11-22 14:57	demo	RUNNING FULL tuning water_quality_ewqi (50 trials, est. 5.5 h)
