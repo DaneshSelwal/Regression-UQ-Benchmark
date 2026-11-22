@@ -90,7 +90,7 @@ n < 9, the conformal quantile is +∞; v2.0 caps such intervals and flags them (
 | Optuna trials | NB1 `n_trials=50` per model × pruner | 50 | Independent of size; cost per trial grows with n. |
 | Quantile levels | NB2 / NB3 | 13 levels 0.05–0.95 | Fixed. The extreme levels (0.05, 0.95) rest on very few points when n is small. |
 
-## 4. Proposals (not applied; pending author approval)
+## 4. Proposals (decided 2026-11-22: 1–3 done by the notebook generator and FIX B12; 4 → FIX D4, 5 → FIX D5 applied; 6 rejected, decay stays 0.99)
 
 Changes to bookkeeping only, with no effect on any method's mathematics:
 

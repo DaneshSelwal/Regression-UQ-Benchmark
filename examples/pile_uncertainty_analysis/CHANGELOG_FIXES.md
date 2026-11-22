@@ -448,3 +448,20 @@ Your template says "Replace (str) with actual data label name", but every datase
 `set_ylabel('str')` or `'Actual str'`. Each notebook now has `TARGET_LABEL = '...'` next to
 `feature_names`, and every plot label uses it (`f'Actual {TARGET_LABEL}'`). Pile: `'Total'`. The value is
 the only per-dataset edit, together with the folder name, the data file names and `feature_names`.
+Pile's target column is just `Total` and its meaning isn't recorded, so the label is `'Pile response (Total)'`.
+
+### D4: number of bins follows the test-set size (approved 2026-11-22)
+- **Before:** every binned metric used 10 bins on every dataset (CRPS decomposition table, PIT histogram,
+  conditional coverage, coverage-by-width, regression ECE). With pile's 24 test points that is 2–3 points per bin.
+- **After:** `N_BINS = max(2, min(10, n_test // 10))`, defined once after the test data is loaded and used by all
+  of them (`n_bins=N_BINS`, `num_bins=N_BINS`). Pile 2, ewqi 4, noise 6, scour 7, wqi 8, concrete / streamflow 9,
+  pile_settlement / sediment 10. Display-only histograms (20 or 30 bins) are unchanged.
+
+### D5: COP burn-in follows the test-set size (approved 2026-11-22, Notebook 6)
+- **Before:** `T_burnin=50`. COP's distribution-informed correction (and the window for its step size) starts
+  after 50 test points, so on pile (24) and water_quality_ewqi (47) COP was plain online gradient descent.
+- **After:** `T_burnin=COP_T_BURNIN`, with `COP_T_BURNIN = min(50, n_test // 2)`. Pile: 12; the 7 datasets with
+  at least 100 test points keep 50.
+
+NexCP `decay = 0.99` (Barber et al. 2023) is kept on every dataset (decided 2026-11-22).
+
