@@ -64,6 +64,8 @@ REG22_11_2026_16_29	daneshselwal/reg22-11-2026-16-29		kprobe	2026-11-22 16:29	de
 REG22_11_2026_16_59	daneshselwal/reg22-11-2026-16-59	Optuna_autosampler.ipynb	kb14_scour	2026-11-22 16:59	demo	FAILED B14 check: PGBM model pickling in worker (fixed) - not on GitHub
 REG22_11_2026_17_30	daneshselwal/reg22-11-2026-17-30	Optuna_autosampler.ipynb	kb14_scour	2026-11-22 17:31	demo	OK B14 check: scour 5 trials, tuning 5.8 min (old 57.2); same overall best params for all 10 models - not on GitHub
 REG22_11_2026_17_56	daneshjangra/reg22-11-2026-17-56	Optuna_autosampler.ipynb	kf14_pile_settlement	2026-11-22 17:56	demo	RUNNING FULL tuning pile_settlement (B14)
-REG22_11_2026_17_57	daneshjangra/reg22-11-2026-17-57	Optuna_autosampler.ipynb	kf14_concrete	2026-11-22 17:57	demo	RUNNING FULL tuning concrete (B14)
+REG22_11_2026_17_57	daneshjangra/reg22-11-2026-17-57	Optuna_autosampler.ipynb	kf14_concrete	2026-11-22 17:57	demo	OK FULL tuning concrete (B14, 17/17, tuning 85.9 min) - FINAL, on GitHub
 REG22_11_2026_17_58	daneshselwal/reg22-11-2026-17-58	Optuna_autosampler.ipynb	kf14_sediment_load	2026-11-22 17:58	demo	RUNNING FULL tuning sediment_load (B14)
-REG22_11_2026_17_59	daneshselwal/reg22-11-2026-17-59	Optuna_autosampler.ipynb	kf14_noise	2026-11-22 17:59	demo	RUNNING FULL tuning noise (B14)
+REG22_11_2026_17_59	daneshselwal/reg22-11-2026-17-59	Optuna_autosampler.ipynb	kf14_noise	2026-11-22 17:59	demo	OK FULL tuning noise (B14, 17/17, tuning 96.8 min) - FINAL, on GitHub
+REG22_11_2026_19_52	daneshjangra/reg22-11-2026-19-52	Quantile_Regression.ipynb	kd_concrete_2	2026-11-22 19:52	demo	running/queued
+REG22_11_2026_19_53	daneshselwal/reg22-11-2026-19-53	Optuna_autosampler.ipynb	kf14_water_quality_wqi	2026-11-22 19:53	demo	RUNNING FULL tuning water_quality_wqi (B14)
