@@ -41,17 +41,17 @@ REG22_11_2026_13_01	daneshselwal/reg22-11-2026-13-01	Optuna_autosampler.ipynb	ks
 REG22_11_2026_13_02	daneshjangra/reg22-11-2026-13-02	Optuna_autosampler.ipynb	ks_pile_settlement	2026-11-22 13:02	demo	FAILED smoke pile_settlement: all NGBoost/ThresholdPruner trials pruned -> FileNotFoundError; fixed by B13, re-run - not on GitHub
 REG22_11_2026_13_03	daneshjangra/reg22-11-2026-13-03	Optuna_autosampler.ipynb	ks_streamflow	2026-11-22 13:03	demo	FAILED smoke streamflow: all NGBoost/ThresholdPruner trials pruned -> FileNotFoundError; fixed by B13, re-run - not on GitHub
 REG22_11_2026_13_04	daneshjangra/reg22-11-2026-13-04	Optuna_autosampler.ipynb	ks_scour	2026-11-22 13:04	demo	OK smoke scour (17/17, tuning 57 min for 5 trials -> full ~9.5 h) - not on GitHub
-REG22_11_2026_13_17	daneshjangra/reg22-11-2026-13-17	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kp2_1	2026-11-22 13:17	demo	RUNNING pile NB6 re-run (B12 labels, D4, D5)
-REG22_11_2026_13_18	daneshjangra/reg22-11-2026-13-18	Quantile_Regression.ipynb	kp2_2	2026-11-22 13:18	demo	OK pile NB2 re-run (6.6 min, 74/74 cells)
-REG22_11_2026_13_25	daneshjangra/reg22-11-2026-13-25	Probabilistic__Distribution.ipynb	kp2_3	2026-11-22 13:25	demo	OK pile NB3 re-run (71/71 cells)
-REG22_11_2026_13_26	daneshjangra/reg22-11-2026-13-26	Probabilistic__Distribution(CARD).ipynb	kp2_4	2026-11-22 13:26	demo	OK pile NB4 re-run (27.7 min, 65/65)
-REG22_11_2026_13_33	daneshjangra/reg22-11-2026-13-33	Conformal Predictions(MAPIE,PUNCC).ipynb	kp2_5	2026-11-22 13:33	demo	OK pile NB5 re-run (18.1 min, 54/54)
-REG22_11_2026_13_34	daneshjangra/reg22-11-2026-13-34	Adaptive_Coverage_Policies(ACP).ipynb	kp2_6	2026-11-22 13:34	demo	OK pile NB7 re-run (20.1 min, 35/35)
+REG22_11_2026_13_17	daneshjangra/reg22-11-2026-13-17	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kp2_1	2026-11-22 13:17	demo	OK pile NB6 re-run (207 min, 78/78) - FINAL, on GitHub
+REG22_11_2026_13_18	daneshjangra/reg22-11-2026-13-18	Quantile_Regression.ipynb	kp2_2	2026-11-22 13:18	demo	OK pile NB2 re-run (6.6 min, 74/74 cells) - FINAL, on GitHub
+REG22_11_2026_13_25	daneshjangra/reg22-11-2026-13-25	Probabilistic__Distribution.ipynb	kp2_3	2026-11-22 13:25	demo	OK pile NB3 re-run (71/71 cells) - FINAL, on GitHub
+REG22_11_2026_13_26	daneshjangra/reg22-11-2026-13-26	Probabilistic__Distribution(CARD).ipynb	kp2_4	2026-11-22 13:26	demo	OK pile NB4 re-run (27.7 min, 65/65) - FINAL, on GitHub
+REG22_11_2026_13_33	daneshjangra/reg22-11-2026-13-33	Conformal Predictions(MAPIE,PUNCC).ipynb	kp2_5	2026-11-22 13:33	demo	OK pile NB5 re-run (18.1 min, 54/54) - FINAL, on GitHub
+REG22_11_2026_13_34	daneshjangra/reg22-11-2026-13-34	Adaptive_Coverage_Policies(ACP).ipynb	kp2_6	2026-11-22 13:34	demo	OK pile NB7 re-run (20.1 min, 35/35) - FINAL, on GitHub
 REG22_11_2026_13_51	daneshselwal/reg22-11-2026-13-51	Optuna_autosampler.ipynb	ks2_sediment_load	2026-11-22 13:51	demo	OK smoke sediment_load (17/17; full est 14.9 h > 12 h limit - needs split) - not on GitHub
 REG22_11_2026_13_52	daneshselwal/reg22-11-2026-13-52	Optuna_autosampler.ipynb	ks2_pile_settlement	2026-11-22 13:52	demo	OK smoke pile_settlement (17/17; full est 12.7 h > 12 h limit - needs split) - not on GitHub
 REG22_11_2026_13_53	daneshselwal/reg22-11-2026-13-53	Optuna_autosampler.ipynb	ks2_noise	2026-11-22 13:53	demo	OK smoke noise (17/17, 65.6 min; full est 10.0 h) - not on GitHub
 REG22_11_2026_13_54	daneshselwal/reg22-11-2026-13-54	Optuna_autosampler.ipynb	ks2_water_quality_ewqi	2026-11-22 13:54	demo	OK smoke water_quality_ewqi (17/17, 48 min; full est 5.5 h) - not on GitHub
-REG22_11_2026_14_03	daneshjangra/reg22-11-2026-14-03	Hyperspherical_Confidence_Mapping(HCM).ipynb	kp2_7	2026-11-22 14:03	demo	OK pile NB8 re-run (0.6 min, 25/25)
+REG22_11_2026_14_03	daneshjangra/reg22-11-2026-14-03	Hyperspherical_Confidence_Mapping(HCM).ipynb	kp2_7	2026-11-22 14:03	demo	OK pile NB8 re-run (0.6 min, 25/25) - FINAL, on GitHub
 REG22_11_2026_14_09	daneshjangra/reg22-11-2026-14-09	Optuna_autosampler.ipynb	ks2_concrete	2026-11-22 14:09	demo	OK smoke concrete (17/17, 73.2 min; full est 10.2 h) - not on GitHub
 REG22_11_2026_14_10	daneshjangra/reg22-11-2026-14-10	Optuna_autosampler.ipynb	ks2_streamflow	2026-11-22 14:10	demo	OK smoke streamflow (17/17, 53.5 min; full est 7.8 h) - not on GitHub
 REG22_11_2026_14_34	daneshselwal/reg22-11-2026-14-34	Optuna_autosampler.ipynb	ks2_water_quality_wqi	2026-11-22 14:34	demo	RUNNING smoke re-run (B13) water_quality_wqi - not on GitHub
