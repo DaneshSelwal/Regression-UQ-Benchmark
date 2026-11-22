@@ -94,6 +94,14 @@ test run. The tuning results themselves were not affected (they are saved two ce
 
 ---
 
+### B13: all trials pruned → crash (found by the 5-trial smoke runs, 2026-11-22)
+- **Problem:** `ThresholdPruner(upper=var(y_train))` stops a trial whose running CV error is worse than predicting
+  the mean. On sediment_load, noise, water_quality_ewqi and pile_settlement it stopped all 5 NGBoost trials, so
+  no `NGBoost_ThresholdPruner_BEST.pkl` was saved and loading it raised `FileNotFoundError`.
+- **Fix (non-math):** a pair with no completed trial is recorded in `Pruning_Summary` (Completed 0, RMSE NaN)
+  and skipped. Every model keeps its `NopPruner` entry, which never prunes, so the later notebooks always find
+  params. Pile is unaffected (no pile pair had every trial pruned).
+
 ## Notebook 2: `quantile_regression/Quantile_Regression.ipynb`
 
 ### K1: run on Kaggle (setup only; same as Notebook 1)
