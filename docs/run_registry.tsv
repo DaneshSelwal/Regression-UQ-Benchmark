@@ -35,7 +35,7 @@ REG22_11_2026_08_13	daneshselwal/reg22-11-2026-08-13	Conformal_Predictions(NEXCP
 REG22_11_2026_08_14	daneshselwal/reg22-11-2026-08-14	Adaptive_Coverage_Policies(ACP).ipynb	kr_nb7	2026-11-22 08:14	real	OK FINAL (NB7 with FIX A3, 35/35 cells; lambda now changes alpha~) - ON GITHUB (results/)
 REG22_11_2026_12_57	daneshselwal/reg22-11-2026-12-57	Optuna_autosampler.ipynb	ks_sediment_load	2026-11-22 12:57	demo	FAILED smoke sediment_load: all NGBoost/ThresholdPruner trials pruned -> FileNotFoundError; fixed by B13, re-run - not on GitHub
 REG22_11_2026_12_58	daneshselwal/reg22-11-2026-12-58	Optuna_autosampler.ipynb	ks_water_quality_wqi	2026-11-22 12:58	demo	RUNNING smoke NB1 (5 trials) water_quality_wqi - not on GitHub
-REG22_11_2026_12_59	daneshselwal/reg22-11-2026-12-59	Optuna_autosampler.ipynb	ks_concrete	2026-11-22 12:59	demo	RUNNING smoke NB1 (5 trials) concrete - not on GitHub
+REG22_11_2026_12_59	daneshselwal/reg22-11-2026-12-59	Optuna_autosampler.ipynb	ks_concrete	2026-11-22 12:59	demo	FAILED smoke concrete: all TabNet/ThresholdPruner trials pruned (B13 case); re-run queued - not on GitHub
 REG22_11_2026_13_00	daneshselwal/reg22-11-2026-13-00	Optuna_autosampler.ipynb	ks_noise	2026-11-22 13:00	demo	FAILED smoke noise: all NGBoost/ThresholdPruner trials pruned -> FileNotFoundError; fixed by B13, re-run - not on GitHub
 REG22_11_2026_13_01	daneshselwal/reg22-11-2026-13-01	Optuna_autosampler.ipynb	ks_water_quality_ewqi	2026-11-22 13:01	demo	FAILED smoke water_quality_ewqi: all NGBoost/ThresholdPruner trials pruned -> FileNotFoundError; fixed by B13, re-run - not on GitHub
 REG22_11_2026_13_02	daneshjangra/reg22-11-2026-13-02	Optuna_autosampler.ipynb	ks_pile_settlement	2026-11-22 13:02	demo	FAILED smoke pile_settlement: all NGBoost/ThresholdPruner trials pruned -> FileNotFoundError; fixed by B13, re-run - not on GitHub
@@ -43,10 +43,12 @@ REG22_11_2026_13_03	daneshjangra/reg22-11-2026-13-03	Optuna_autosampler.ipynb	ks
 REG22_11_2026_13_04	daneshjangra/reg22-11-2026-13-04	Optuna_autosampler.ipynb	ks_scour	2026-11-22 13:04	demo	RUNNING smoke NB1 (5 trials) scour - not on GitHub
 REG22_11_2026_13_17	daneshjangra/reg22-11-2026-13-17	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kp2_1	2026-11-22 13:17	demo	RUNNING pile NB6 re-run (B12 labels, D4, D5)
 REG22_11_2026_13_18	daneshjangra/reg22-11-2026-13-18	Quantile_Regression.ipynb	kp2_2	2026-11-22 13:18	demo	OK pile NB2 re-run (6.6 min, 74/74 cells)
-REG22_11_2026_13_25	daneshjangra/reg22-11-2026-13-25	Probabilistic__Distribution.ipynb	kp2_3	2026-11-22 13:25	demo	RUNNING pile NB3 re-run (B12 labels, D4, D5)
-REG22_11_2026_13_26	daneshjangra/reg22-11-2026-13-26	Probabilistic__Distribution(CARD).ipynb	kp2_4	2026-11-22 13:26	demo	RUNNING pile NB4 re-run (B12 labels, D4, D5)
-REG22_11_2026_13_33	daneshjangra/reg22-11-2026-13-33	Conformal Predictions(MAPIE,PUNCC).ipynb	kp2_5	2026-11-22 13:33	demo	RUNNING pile NB5 re-run (B12 labels, D4, D5)
-REG22_11_2026_13_34	daneshjangra/reg22-11-2026-13-34	Adaptive_Coverage_Policies(ACP).ipynb	kp2_6	2026-11-22 13:34	demo	RUNNING pile NB7 re-run (B12 labels, D4, D5)
+REG22_11_2026_13_25	daneshjangra/reg22-11-2026-13-25	Probabilistic__Distribution.ipynb	kp2_3	2026-11-22 13:25	demo	OK pile NB3 re-run (71/71 cells)
+REG22_11_2026_13_26	daneshjangra/reg22-11-2026-13-26	Probabilistic__Distribution(CARD).ipynb	kp2_4	2026-11-22 13:26	demo	OK pile NB4 re-run (27.7 min, 65/65)
+REG22_11_2026_13_33	daneshjangra/reg22-11-2026-13-33	Conformal Predictions(MAPIE,PUNCC).ipynb	kp2_5	2026-11-22 13:33	demo	OK pile NB5 re-run (18.1 min, 54/54)
+REG22_11_2026_13_34	daneshjangra/reg22-11-2026-13-34	Adaptive_Coverage_Policies(ACP).ipynb	kp2_6	2026-11-22 13:34	demo	OK pile NB7 re-run (20.1 min, 35/35)
 REG22_11_2026_13_51	daneshselwal/reg22-11-2026-13-51	Optuna_autosampler.ipynb	ks2_sediment_load	2026-11-22 13:51	demo	RUNNING smoke re-run (B13) sediment_load - not on GitHub
 REG22_11_2026_13_52	daneshselwal/reg22-11-2026-13-52	Optuna_autosampler.ipynb	ks2_pile_settlement	2026-11-22 13:52	demo	RUNNING smoke re-run (B13) pile_settlement - not on GitHub
 REG22_11_2026_13_53	daneshselwal/reg22-11-2026-13-53	Optuna_autosampler.ipynb	ks2_noise	2026-11-22 13:53	demo	RUNNING smoke re-run (B13) noise - not on GitHub
+REG22_11_2026_13_54	daneshselwal/reg22-11-2026-13-54	Optuna_autosampler.ipynb	ks2_water_quality_ewqi	2026-11-22 13:54	demo	RUNNING smoke re-run (B13) water_quality_ewqi - not on GitHub
+REG22_11_2026_14_03	daneshjangra/reg22-11-2026-14-03	Hyperspherical_Confidence_Mapping(HCM).ipynb	kp2_7	2026-11-22 14:03	demo	RUNNING pile NB8 re-run (B12 labels, D4)
