@@ -57,22 +57,42 @@ REG22_11_2026_14_10	daneshjangra/reg22-11-2026-14-10	Optuna_autosampler.ipynb	ks
 REG22_11_2026_14_34	daneshselwal/reg22-11-2026-14-34	Optuna_autosampler.ipynb	ks2_water_quality_wqi	2026-11-22 14:34	demo	RUNNING smoke re-run (B13) water_quality_wqi - not on GitHub
 REG22_11_2026_14_35	daneshjangra/reg22-11-2026-14-35	Optuna_autosampler.ipynb	kf_scour	2026-11-22 14:35	demo	OK FULL tuning scour (old code = same search, 338.6 min, 17/17) - FINAL, on GitHub (no B14 re-run needed)
 REG22_11_2026_14_57	daneshselwal/reg22-11-2026-14-57	Optuna_autosampler.ipynb	kf_water_quality_ewqi	2026-11-22 14:57	demo	OK FULL tuning water_quality_ewqi (old code = same search, 353.1 min, 17/17) - FINAL, on GitHub
-REG22_11_2026_15_16	daneshjangra/reg22-11-2026-15-16	Optuna_autosampler.ipynb	kf_streamflow	2026-11-22 15:16	demo	RUNNING FULL tuning streamflow (50 trials, est. 7.8 h)
-REG22_11_2026_15_17	daneshselwal/reg22-11-2026-15-17	Optuna_autosampler.ipynb	kf_noise	2026-11-22 15:17	demo	SUPERSEDED by REG22_11_2026_17_59 (B14) - old-code noise tuning, to be stopped
-REG22_11_2026_15_28	daneshjangra/reg22-11-2026-15-28	Optuna_autosampler.ipynb	kf_concrete	2026-11-22 15:28	demo	SUPERSEDED by REG22_11_2026_17_57 (B14) - old-code concrete tuning, to be stopped
+REG22_11_2026_15_16	daneshjangra/reg22-11-2026-15-16	Optuna_autosampler.ipynb	kf_streamflow	2026-11-22 15:16	demo	OK FULL tuning streamflow (old code = same search, 422.5 min, 17/17) - FINAL, on GitHub
+REG22_11_2026_15_17	daneshselwal/reg22-11-2026-15-17	Optuna_autosampler.ipynb	kf_noise	2026-11-22 15:17	demo	SUPERSEDED old-code tuning (kf_noise, OK 17/17, 384.5 min) - a B14 run is final
+REG22_11_2026_15_28	daneshjangra/reg22-11-2026-15-28	Optuna_autosampler.ipynb	kf_concrete	2026-11-22 15:28	demo	SUPERSEDED old-code tuning (kf_concrete, OK 17/17, 443.9 min) - a B14 run is final
 REG22_11_2026_16_29	daneshselwal/reg22-11-2026-16-29		kprobe	2026-11-22 16:29	demo	OK probe: Kaggle CPU = 4 vCPU (2 cores x 2 threads), 31 GB; NGBoost x2.0 with 2 workers, x2.3 with 4 - not on GitHub
 REG22_11_2026_16_59	daneshselwal/reg22-11-2026-16-59	Optuna_autosampler.ipynb	kb14_scour	2026-11-22 16:59	demo	FAILED B14 check: PGBM model pickling in worker (fixed) - not on GitHub
 REG22_11_2026_17_30	daneshselwal/reg22-11-2026-17-30	Optuna_autosampler.ipynb	kb14_scour	2026-11-22 17:31	demo	OK B14 check: scour 5 trials, tuning 5.8 min (old 57.2); same overall best params for all 10 models - not on GitHub
 REG22_11_2026_17_56	daneshjangra/reg22-11-2026-17-56	Optuna_autosampler.ipynb	kf14_pile_settlement	2026-11-22 17:56	demo	OK FULL tuning pile_settlement (B14, 184.9 min, 17/17) - FINAL, on GitHub
 REG22_11_2026_17_57	daneshjangra/reg22-11-2026-17-57	Optuna_autosampler.ipynb	kf14_concrete	2026-11-22 17:57	demo	OK FULL tuning concrete (B14, 17/17, tuning 85.9 min) - FINAL, on GitHub
-REG22_11_2026_17_58	daneshselwal/reg22-11-2026-17-58	Optuna_autosampler.ipynb	kf14_sediment_load	2026-11-22 17:58	demo	RUNNING FULL tuning sediment_load (B14)
+REG22_11_2026_17_58	daneshselwal/reg22-11-2026-17-58	Optuna_autosampler.ipynb	kf14_sediment_load	2026-11-22 17:58	demo	OK FULL tuning sediment_load (B14, 252.1 min, 17/17) - FINAL, on GitHub
 REG22_11_2026_17_59	daneshselwal/reg22-11-2026-17-59	Optuna_autosampler.ipynb	kf14_noise	2026-11-22 17:59	demo	OK FULL tuning noise (B14, 17/17, tuning 96.8 min) - FINAL, on GitHub
 REG22_11_2026_19_52	daneshjangra/reg22-11-2026-19-52	Quantile_Regression.ipynb	kd_concrete_2	2026-11-22 19:52	demo	OK concrete NB2 quantile regression (5.6 min, 74/74)
 REG22_11_2026_19_53	daneshselwal/reg22-11-2026-19-53	Optuna_autosampler.ipynb	kf14_water_quality_wqi	2026-11-22 19:53	demo	RUNNING FULL tuning water_quality_wqi (B14)
 REG22_11_2026_19_59	daneshjangra/reg22-11-2026-19-59	Probabilistic__Distribution.ipynb	kd_concrete_3	2026-11-22 19:59	demo	OK concrete NB3 probabilistic (7.2 min, 71/71)
-REG22_11_2026_20_08	daneshjangra/reg22-11-2026-20-08	Probabilistic__Distribution(CARD).ipynb	kd_concrete_4	2026-11-22 20:08	demo	RUNNING concrete NB4 CARD
+REG22_11_2026_20_08	daneshjangra/reg22-11-2026-20-08	Probabilistic__Distribution(CARD).ipynb	kd_concrete_4	2026-11-22 20:08	demo	OK kd_concrete_4 (95.0 min, 65/65)
 REG22_11_2026_20_15	daneshjangra/reg22-11-2026-20-15	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_concrete_5	2026-11-22 20:15	demo	OK concrete NB5 MAPIE/PUNCC (36.8 min, 54/54)
 REG22_11_2026_20_52	daneshjangra/reg22-11-2026-20-52	Adaptive_Coverage_Policies(ACP).ipynb	kd_concrete_6	2026-11-22 20:52	demo	RUNNING concrete NB7 ACP
 REG22_11_2026_20_53	daneshselwal/reg22-11-2026-20-53	Quantile_Regression.ipynb	kd_noise_2	2026-11-22 20:53	demo	OK noise NB2 quantile regression (7.2 min, 74/74)
 REG22_11_2026_21_02	daneshselwal/reg22-11-2026-21-02	Probabilistic__Distribution.ipynb	kd_noise_3	2026-11-22 21:02	demo	RUNNING noise NB3
 REG22_11_2026_21_03	daneshjangra/reg22-11-2026-21-03	Quantile_Regression.ipynb	kd_scour_2	2026-11-22 21:03	demo	RUNNING scour NB2
+REG22_11_2026_21_09	daneshjangra/reg22-11-2026-21-09	Quantile_Regression.ipynb	kd_pile_settlement_2	2026-11-22 21:09	demo	running/queued
+REG22_11_2026_21_11	daneshjangra/reg22-11-2026-21-11	Probabilistic__Distribution(CARD).ipynb	kd_scour_4	2026-11-22 21:11	demo	OK kd_scour_4 (70.8 min, 65/65)
+REG22_11_2026_21_12	daneshselwal/reg22-11-2026-21-12	Quantile_Regression.ipynb	kd_water_quality_ewqi_2	2026-11-22 21:12	demo	running/queued
+REG22_11_2026_21_19	daneshselwal/reg22-11-2026-21-19	Probabilistic__Distribution.ipynb	kd_water_quality_ewqi_3	2026-11-22 21:19	demo	running/queued
+REG22_11_2026_21_20	daneshjangra/reg22-11-2026-21-20	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_scour_5	2026-11-22 21:20	demo	OK kd_scour_5 (18.2 min, 54/54)
+REG22_11_2026_21_25	daneshselwal/reg22-11-2026-21-25	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_noise_5	2026-11-22 21:26	demo	OK kd_noise_5 (16.3 min, 54/54)
+REG22_11_2026_21_39	daneshjangra/reg22-11-2026-21-39	Probabilistic__Distribution.ipynb	kd_pile_settlement_3	2026-11-22 21:39	demo	OK kd_pile_settlement_3 (8.4 min, 71/71)
+REG22_11_2026_21_42	daneshselwal/reg22-11-2026-21-42	Adaptive_Coverage_Policies(ACP).ipynb	kd_water_quality_ewqi_6	2026-11-22 21:42	demo	OK kd_water_quality_ewqi_6 (16.0 min, 35/35)
+REG22_11_2026_21_43	daneshselwal/reg22-11-2026-21-43	Hyperspherical_Confidence_Mapping(HCM).ipynb	kd_water_quality_ewqi_7	2026-11-22 21:43	demo	OK kd_water_quality_ewqi_7 (0.7 min, 25/25)
+REG22_11_2026_21_44	daneshjangra/reg22-11-2026-21-44	Hyperspherical_Confidence_Mapping(HCM).ipynb	kd_concrete_7	2026-11-22 21:44	demo	OK kd_concrete_7 (0.5 min, 25/25)
+REG22_11_2026_21_45	daneshjangra/reg22-11-2026-21-45	Adaptive_Coverage_Policies(ACP).ipynb	kd_scour_6	2026-11-22 21:45	demo	OK kd_scour_6 (16.7 min, 35/35)
+REG22_11_2026_21_46	daneshselwal/reg22-11-2026-21-46	Adaptive_Coverage_Policies(ACP).ipynb	kd_noise_6	2026-11-22 21:46	demo	OK kd_noise_6 (20.7 min, 35/35)
+REG22_11_2026_21_48	daneshjangra/reg22-11-2026-21-48	Hyperspherical_Confidence_Mapping(HCM).ipynb	kd_scour_7	2026-11-22 21:48	demo	OK kd_scour_7 (0.7 min, 25/25)
+REG22_11_2026_21_49	daneshjangra/reg22-11-2026-21-49	Probabilistic__Distribution(CARD).ipynb	kd_pile_settlement_4	2026-11-22 21:49	demo	OK kd_pile_settlement_4 (192.6 min, 65/65)
+REG22_11_2026_21_59	daneshselwal/reg22-11-2026-21-59	Hyperspherical_Confidence_Mapping(HCM).ipynb	kd_noise_7	2026-11-22 21:59	demo	OK kd_noise_7 (0.6 min, 25/25)
+REG22_11_2026_22_02	daneshjangra/reg22-11-2026-22-02	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_pile_settlement_5	2026-11-22 22:02	demo	OK kd_pile_settlement_5 (88.9 min, 54/54)
+REG22_11_2026_22_21	daneshjangra/reg22-11-2026-22-21	Adaptive_Coverage_Policies(ACP).ipynb	kd_pile_settlement_6	2026-11-22 22:21	demo	OK kd_pile_settlement_6 (25.1 min, 35/35)
+REG22_11_2026_22_24	daneshjangra/reg22-11-2026-22-24	Hyperspherical_Confidence_Mapping(HCM).ipynb	kd_pile_settlement_7	2026-11-22 22:24	demo	OK kd_pile_settlement_7 (0.7 min, 25/25)
+REG23_11_2026_01_13	daneshjangra/reg23-11-2026-01-13	Quantile_Regression.ipynb	kd_streamflow_2	2026-11-23 01:13	demo	running/queued
+REG23_11_2026_01_14	daneshjangra/reg23-11-2026-01-14	Probabilistic__Distribution.ipynb	kd_streamflow_3	2026-11-23 01:14	demo	running/queued
