@@ -1,5 +1,6 @@
 # Final results — pile
 
-- Kaggle run: `REG21_11_2026_23_41` (`daneshselwal/reg21-11-2026-23-41`), see `docs/run_registry.tsv`.
-- Parameters: real tuning (`hyperparameter_tuning/results/best_params.json`).
+- Kaggle run: `REG22_11_2026_14_03` (`daneshjangra/reg22-11-2026-14-03`), see `docs/run_registry.tsv`.
+- Parameters: real tuning (`hyperparameter_tuning/results/best_params.json`, run REG22_11_2026_01_58).
+- Notebook version: FIX B12 (dataset plot labels), D4 (bins follow test size), D5 (COP burn-in follows test size).
 - `EXECUTED_*.ipynb` holds every cell output; the `.xlsx` files are the notebook's own outputs.
