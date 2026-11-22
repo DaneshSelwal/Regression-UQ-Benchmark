@@ -102,6 +102,21 @@ test run. The tuning results themselves were not affected (they are saved two ce
   and skipped. Every model keeps its `NopPruner` entry, which never prunes, so the later notebooks always find
   params. Pile is unaffected (no pile pair had every trial pruned).
 
+### B14: faster tuning, same search (approved 2026-11-22)
+- **Problem:** the 80 studies (10 models × 8 pruners) ran one after another on one core, and every repeated
+  parameter set was trained again: on pile 66% of completed trials repeated an already-scored set. Big
+  datasets needed 13–15 h (Kaggle stops a run at 12 h).
+- **Fix (speed only):** (1) each model keeps a table parameter set → its 5 fold MSEs and its full-training-set
+  refit; a repeated set takes the stored values instead of being trained again. The study receives the same
+  fold values, so the pruners, Optuna's next suggestions and the selected best model are unchanged.
+  (2) models are tuned 2 at a time in separate processes (Kaggle CPU = 2 cores × 2 threads), longest first;
+  logs, Excel sheets, plots, `best_params` and saved models are gathered in the original order.
+- **Check (scour, 5 trials, REG22_11_2026_17_30 vs the old code REG22_11_2026_13_04):** tuning 57.2 → 5.8 min.
+  For all 10 models the overall best parameters (lowest CV RMSE over the 8 pruners) are identical; test RMSE
+  identical for 9. The differences come from models whose own training is slightly random (NGBoost, GPBoost,
+  CatBoost): the old code re-trained the same set several times and kept the luckiest score (NGBoost: one set
+  scored 0.599–0.622 across pruners); now each set is trained once (NGBoost 0.630 in every study).
+
 ## Notebook 2: `quantile_regression/Quantile_Regression.ipynb`
 
 ### K1: run on Kaggle (setup only; same as Notebook 1)
