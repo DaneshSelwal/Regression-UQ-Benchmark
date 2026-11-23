@@ -1,0 +1,219 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}\usepackage{amsmath,amssymb,booktabs,graphicx,xcolor}\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}\usepackage{url}
+\usepackage{caption}\captionsetup{font=small,labelfont=bf}\usepackage{placeins}
+\title{Uncertainty Quantification for Tabular Regression:\\ a Benchmark on the Streamflow Dataset}
+\author{Prakriti Bisht \and Danesh Selwal}
+\date{Regression UQ Analysis v2.0 --- November 2026}
+\begin{document}\maketitle
+\begin{abstract}We benchmark uncertainty quantification (UQ) methods for tabular regression on the streamflow dataset (192 training and 96 test samples, 4 features). Ten gradient-boosted, probabilistic and neural regressors are tuned with Optuna and then wrapped by quantile regression, distributional methods (NGBoost, PGBM, IBUG, Treeffuser, CARD), split, cross and bootstrap conformal prediction (MAPIE, PUNCC), weighted and online conformal methods (NexCP, ACI, FACI, SF-OGD, SAOCP, MFCS, COP, Extreme CP), adaptive coverage policies (ACP) and hyperspherical confidence mapping (HCM). At a nominal 90\% level, raw quantile regression reaches a median coverage of only 86.5\%, while conformal methods restore validity; the narrowest method that is valid on most models is J+aB (MAPIE) (median coverage 88.5\%, median width 1.3 target standard deviations). All experiments ran on Kaggle; the executed notebooks and raw outputs are linked from this report.\end{abstract}
+
+\section{Introduction}
+A point prediction says nothing about how far the truth may be from it. Uncertainty quantification attaches to each prediction either a predictive distribution or a prediction interval $[\ell(x),u(x)]$ that should contain the true response with a chosen probability $1-\alpha$. Methods differ in their guarantees: quantile regression and parametric distributional models are only asymptotically or approximately calibrated, while conformal prediction gives finite-sample, distribution-free marginal coverage under exchangeability \citep{vovk2005alrw,lei2018distribution,angelopoulos2023gentle}. This report applies one common, fixed pipeline of eight notebooks to the streamflow dataset and compares the methods on coverage, interval width and proper scoring rules. Companion reports with the same structure cover the other eight datasets of the project.
+
+\section{Data}
+The training set has 192 rows and the test set 96 rows. The 4 input features are \texttt{pH}, \texttt{Salinity}, \texttt{Turbidity }, \texttt{Water Temperature}; the target is \texttt{TDS}. On the test set the target has mean 233.1, standard deviation 197.1, median 180.0 and range 54.00--1,500. The train/test split is the one supplied with the data; the test set is used only for the final evaluation (never for tuning or calibration).
+
+\section{Methods}
+\subsection{Point predictors and tuning}
+Ten regressors are used as base models: random forest \citep{breiman2001rf}, gradient boosting \citep{friedman2001gbm}, histogram gradient boosting \citep{pedregosa2011sklearn}, XGBoost \citep{chen2016xgboost}, LightGBM \citep{ke2017lightgbm}, CatBoost \citep{prokhorenkova2018catboost}, GPBoost \citep{sigrist2022gpboost}, NGBoost \citep{duan2020ngboost}, PGBM \citep{sprangers2021pgbm} and TabNet \citep{arik2021tabnet}. Hyperparameters are tuned with Optuna \citep{akiba2019optuna} by minimising 5-fold cross-validated RMSE on the training set; for each model the best of several pruners (median, Hyperband \citep{li2018hyperband}, Wilcoxon, none) is kept. Random forest is used only in tuning.
+
+\subsection{Quantile regression}
+Each boosted model is fitted to the pinball loss $\rho_\tau(r)=r\,(\tau-\mathbb{1}\{r<0\})$ \citep{koenker1978quantile} for $\tau\in\{0.05,\dots,0.95\}$; the 90\% interval is $[\hat q_{0.05}(x),\hat q_{0.95}(x)]$. Separately fitted quantiles can cross \citep{chernozhukov2010rearrangement}; we report the crossing rate.
+
+\subsection{Distributional methods}
+NGBoost and PGBM output a Gaussian $\mathcal N(\hat\mu(x),\hat\sigma^2(x))$. IBUG \citep{brophy2022ibug} estimates $\hat\sigma(x)$ from the training targets of the $k$ most affine training points of a boosted ensemble. Treeffuser \citep{beltranvelez2024treeffuser} learns a conditional diffusion with boosted trees and CARD \citep{han2022card} a conditional denoising diffusion model \citep{ho2020ddpm}; samples are summarised by their mean and standard deviation. Every predictive distribution is scored with the continuous ranked probability score \citep{gneiting2007scoring,hersbach2000crps}, which for a Gaussian is
+\begin{equation}
+\mathrm{CRPS}(\mathcal N(\mu,\sigma^2),y)=\sigma\Big[z\,(2\Phi(z)-1)+2\varphi(z)-\tfrac{1}{\sqrt\pi}\Big],\quad z=\tfrac{y-\mu}{\sigma},
+\end{equation}
+and the 90\% interval is $\hat\mu\pm1.645\hat\sigma$. PIT histograms and calibration curves \citep{gneiting2007sharpness,kuleshov2018calibrated} are in the notebooks.
+
+\subsection{Conformal prediction}
+\emph{Split conformal} \citep{vovk2005alrw,lei2018distribution} holds out a calibration set $\mathcal C$, computes scores $s_i=|y_i-\hat f(x_i)|$ and returns $\hat f(x)\pm\hat q$, with $\hat q$ the $\lceil(1-\alpha)(|\mathcal C|+1)\rceil$-th smallest score; then $P(Y\in\hat C(X))\ge1-\alpha$ for exchangeable data. \emph{CV+} and \emph{jackknife+-after-bootstrap} (J+aB) reuse all data through out-of-fold residuals \citep{barber2021jackknife,kim2020jab}, with guarantee $1-2\alpha$. \emph{CQR} conformalises quantile regression with score $\max\{\hat q_{\alpha/2}(x)-y,\,y-\hat q_{1-\alpha/2}(x)\}$ \citep{romano2019cqr}. We use MAPIE \citep{taquet2022mapie} and PUNCC \citep{mendil2023puncc}.
+
+\emph{NexCP} \citep{barber2023beyond} replaces the empirical quantile by a weighted one, $\hat q=Q_{1-\alpha}\big(\sum_i\tilde w_i\delta_{s_i}+\tilde w_{n+1}\delta_{+\infty}\big)$ with weights decaying in time, and keeps a coverage guarantee degraded by the total-variation drift; it is applied in split, full, CV+ and J+aB form. The \emph{online} methods process the test points sequentially and update the miscoverage level after each observation: ACI \citep{gibbs2021aci} uses
+\begin{equation}
+\alpha_{t+1}=\alpha_t+\gamma\,(\alpha-\mathrm{err}_t),\qquad \mathrm{err}_t=\mathbb 1\{y_t\notin\hat C_t(x_t)\},
+\end{equation}
+FACI \citep{gibbs2024faci} aggregates a grid of step sizes $\gamma$, SF-OGD and SAOCP \citep{bhatnagar2023saocp,orabona2018scalefree} run scale-free and strongly adaptive online gradient descent on the quantile directly, MFCS is a split/full online variant, and COP \citep{hu2026cop} uses the predicted distribution to inform the online update. Extreme CP \citep{pasche2025extreme} fits a generalised Pareto tail \citep{pickands1975gpd} to the scores and returns a one-sided upper bound. AlphaNet results are kept in the notebooks only.
+
+\subsection{Adaptive coverage policies and HCM}
+ACP \citep{gauthier2026acp} lets a policy choose a per-point level $\tilde\alpha(x)$ and builds the set from conformal e-values \citep{vovk2021evalues,gauthier2025evalues}, so the guarantee holds for the data-dependent level; the realised coverage must be compared with the learned target, not with 90\%. HCM \citep{choi2026hcm} trains a single network whose output direction on a hypersphere encodes the prediction and whose norm encodes confidence; we report its 95\% interval.
+
+\subsection{Evaluation}
+With $n=96$ test points the empirical coverage of a correct 90\% method has standard error $\sqrt{0.09/n}=0.031$, so we call an interval \emph{valid} if its coverage is at least $0.9-1.645\sqrt{0.09/n}=0.850$. Among valid methods, narrower is better. Widths are also given relative to the test-target standard deviation so that datasets can be compared. All runs use $\alpha=0.1$ unless stated.
+
+\section{Experimental setup}
+All notebooks ran on Kaggle CPU machines with the generalised v2.0 code (every change is listed in \texttt{docs/CHANGELOG\_FIXES.md}). Downstream notebooks load the parameters of the tuning run. Optuna search is not bit-reproducible between runs; the stored tuning run is the one used by every other phase.  The executed notebooks are linked in Table~\ref{tab:runs}.
+
+\section{Results}
+\begin{table}[t]\centering\small
+\caption{Tuned point predictors, sorted by 5-fold cross-validated RMSE on the training set. $r$: Pearson correlation on the test set.}\label{tab:tuning}
+\begin{tabular}{llrrr}\toprule Model & Pruner & CV RMSE & Test RMSE & Test $r$\\\midrule
+GradientBoosting & HyperbandPruner & 102.4 & 115.4 & 0.820 \\
+NGBoost & HyperbandPruner & 104.6 & 112.9 & 0.819 \\
+RandomForest & SuccessiveHalvingPruner & 105.9 & 118.6 & 0.799 \\
+TabNet & NopPruner & 106.9 & 116.8 & 0.867 \\
+CatBoost & WilcoxonPruner & 109.1 & 114.2 & 0.815 \\
+PGBM & SuccessiveHalvingPruner & 109.5 & 112.9 & 0.823 \\
+GPBoost & ThresholdPruner & 110.0 & 109.2 & 0.833 \\
+LightGBM & SuccessiveHalvingPruner & 110.1 & 125.3 & 0.781 \\
+HistGB & HyperbandPruner & 115.2 & 117.8 & 0.802 \\
+XGBoost & ThresholdPruner & 120.7 & 118.0 & 0.802 \\
+\bottomrule\end{tabular}\end{table}
+\begin{table}[t]\centering\small
+\caption{Quantile regression and distributional methods at the 90\% level. For distributional methods the interval is $\hat\mu\pm1.645\hat\sigma$ and the CRPS is the closed-form Gaussian CRPS of $(\hat\mu,\hat\sigma)$; for quantile regression the CRPS is the pinball-loss approximation over the predicted quantiles. Crossing: share of test points whose predicted quantiles are not monotone.}\label{tab:dist}
+\begin{tabular}{llrrrr}\toprule Method & Model & Coverage & Width & CRPS & Crossing\\\midrule
+QR & CatBoost & 83.3\% & 233.4 & 48.76 & 52.1\%\\
+QR & TabNet & 86.5\% & 218.4 & 50.01 & 100.0\%\\
+QR & GPBoost & 91.7\% & 298.7 & 50.27 & 49.0\%\\
+QR & HistGB & 92.7\% & 323.7 & 51.61 & 57.3\%\\
+QR & NGBoost & 91.7\% & 255.0 & 52.14 & 0.0\%\\
+QR & LightGBM & 74.0\% & 180.3 & 52.17 & 100.0\%\\
+QR & XGBoost & 83.3\% & 243.5 & 53.18 & 90.6\%\\
+QR & GradientBoosting & 94.8\% & 406.6 & 54.79 & 82.3\%\\
+QR & PGBM & 13.5\% & 21.44 & 71.15 & 0.0\%\\
+Native & NGBoost & 89.6\% & 251.8 & 51.20 & --\\
+IBUG & LightGBM & 89.6\% & 334.4 & 57.87 & --\\
+IBUG & XGBoost & 91.7\% & 413.6 & 60.06 & --\\
+Native & PGBM & 16.7\% & 25.51 & 70.09 & --\\
+Treeffuser & LightGBM & 100.0\% & 1,147 & 96.99 & --\\
+Treeffuser & XGBoost & 99.0\% & 1,439 & 119.4 & --\\
+Treeffuser & CatBoost & 100.0\% & 2,872 & 217.9 & --\\
+Treeffuser & GPBoost & 100.0\% & 3,918 & 294.1 & --\\
+Treeffuser & GradientBoosting & 100.0\% & 6,458 & 482.9 & --\\
+CARD & GPBoost & 86.5\% & 228.5 & 49.73 & --\\
+CARD & HistGB & 86.5\% & 240.9 & 51.79 & --\\
+CARD & CatBoost & 83.3\% & 209.4 & 53.72 & --\\
+CARD & TabNet & 80.2\% & 218.7 & 53.80 & --\\
+CARD & NGBoost & 78.1\% & 194.4 & 55.60 & --\\
+CARD & GradientBoosting & 75.0\% & 178.1 & 55.87 & --\\
+CARD & PGBM & 52.1\% & 114.6 & 67.27 & --\\
+CARD & XGBoost & 58.3\% & 133.0 & 67.28 & --\\
+CARD & LightGBM & 55.2\% & 120.2 & 70.10 & --\\
+\bottomrule\end{tabular}\end{table}
+\begin{figure}[t]\centering\includegraphics[width=\linewidth]{figures/fig_accuracy.pdf}\caption{Cross-validated and test RMSE of the tuned models. Dark bar: best CV model (GradientBoosting).}\label{fig:acc}\end{figure}
+\begin{figure}[t]\centering\includegraphics[width=0.9\linewidth]{figures/fig_crps.pdf}\caption{CRPS of every predictive distribution (log scale).}\label{fig:crps}\end{figure}
+\paragraph{Point accuracy (Table~\ref{tab:tuning}, Fig.~\ref{fig:acc}).} Point accuracy: GradientBoosting has the lowest 5-fold CV RMSE (102.4); on the test set the lowest RMSE is GPBoost (109.2, target std 197.1).
+\paragraph{Quantile and distributional methods (Table~\ref{tab:dist}, Fig.~\ref{fig:crps}).} Raw quantile regression undercovers: median 90\%-interval coverage 86.5\% (range 13.5\%--94.8\%); 5 of 9 models reach the target. Quantile crossing occurs on a median 57.3\% of test points. Best probabilistic score: CatBoost (Quantile regression) with CRPS 48.76. PGBM (native) predictive distributions are over-confident here: the Gaussian 90\% interval covers only 16.7\%. CARD (diffusion) intervals: median coverage 78.1\% at 0.99$\times$ the target std.
+
+\begin{table}[p]\centering\small
+\caption{All interval methods at the 90\% target, aggregated over the base models they wrap ($n$). Width: median over models of the mean test-interval width; rel.: divided by the standard deviation of the test target. $^\dagger$: some intervals reach the edge of the label grid, so the reported width is a lower bound; the method is not ranked. Valid: share of models whose coverage is at least $0.9-1.645\sqrt{0.09/n_{\text{test}}}=0.850$.}\label{tab:league}
+\resizebox{\textwidth}{!}{\begin{tabular}{llrrcrrr}\toprule Family & Method & $n$ & Coverage (median) & Range & Width & Rel. & Valid\\\midrule
+Quantile regression & Quantile regression (raw) & 9 & 86.5\% & 13.5\%--94.8\% & 243.5 & 1.24 & 56\% \\
+Distributional & PGBM (native) & 1 & 16.7\% & 16.7\%--16.7\% & 25.51 & 0.13 & 0\% \\
+Distributional & NGBoost (native) & 1 & 89.6\% & 89.6\%--89.6\% & 251.8 & 1.28 & 100\% \\
+Distributional & IBUG & 2 & 90.6\% & 89.6\%--91.7\% & 374.0 & 1.90 & 100\% \\
+Distributional & Treeffuser & 5 & 100.0\% & 99.0\%--100.0\% & 2,872 & 14.57 & 100\% \\
+CARD & CARD & 9 & 78.1\% & 52.1\%--86.5\% & 194.4 & 0.99 & 22\% \\
+Conformal (MAPIE/PUNCC) & J+aB (MAPIE) & 9 & 88.5\% & 87.5\%--89.6\% & 260.4 & 1.32 & 100\% \\
+Conformal (MAPIE/PUNCC) & CV+ (MAPIE) & 9 & 89.6\% & 86.5\%--95.8\% & 291.4 & 1.48 & 100\% \\
+Conformal (MAPIE/PUNCC) & CV+ (PUNCC) & 9 & 91.7\% & 88.5\%--96.9\% & 302.1 & 1.53 & 100\% \\
+Conformal (MAPIE/PUNCC) & CQR (PUNCC) & 9 & 91.7\% & 87.5\%--96.9\% & 322.6 & 1.64 & 100\% \\
+Conformal (MAPIE/PUNCC) & Split CP (PUNCC) & 9 & 94.8\% & 91.7\%--96.9\% & 389.8 & 1.98 & 100\% \\
+Conformal (MAPIE/PUNCC) & Split CP (MAPIE) & 9 & 96.9\% & 89.6\%--96.9\% & 483.5 & 2.45 & 100\% \\
+Weighted conformal (NexCP) & NexCP Full$^\dagger$ & 9 & 87.5\% & 83.3\%--96.9\% & 269.2 & 1.37 & 89\% \\
+Weighted conformal (NexCP) & NexCP J+aB & 9 & 92.7\% & 91.7\%--95.8\% & 317.5 & 1.61 & 100\% \\
+Weighted conformal (NexCP) & NexCP CV+ & 9 & 94.8\% & 91.7\%--97.9\% & 371.0 & 1.88 & 100\% \\
+Weighted conformal (NexCP) & NexCP Split & 9 & 94.8\% & 86.5\%--96.9\% & 373.3 & 1.89 & 100\% \\
+Online conformal & Online J+aB & 9 & 89.6\% & 87.5\%--91.7\% & 274.6 & 1.39 & 100\% \\
+Online conformal & MFCS Split & 9 & 89.6\% & 85.4\%--96.9\% & 288.6 & 1.46 & 100\% \\
+Online conformal & Online Split & 9 & 89.6\% & 85.4\%--96.9\% & 288.6 & 1.46 & 100\% \\
+Online conformal & MFCS Full & 9 & 89.6\% & 88.5\%--92.7\% & 290.5 & 1.47 & 100\% \\
+Online conformal & ACI & 9 & 89.6\% & 87.5\%--90.6\% & 309.9 & 1.57 & 100\% \\
+Online conformal & FACI & 9 & 89.6\% & 86.5\%--90.6\% & 317.4 & 1.61 & 100\% \\
+Online conformal & Online CV+ & 9 & 91.7\% & 90.6\%--97.9\% & 318.6 & 1.62 & 100\% \\
+Online conformal & SF-OGD & 9 & 89.6\% & 89.6\%--90.6\% & 342.4 & 1.74 & 100\% \\
+Online conformal & SAOCP & 9 & 90.6\% & 90.6\%--92.7\% & 390.3 & 1.98 & 100\% \\
+COP & COP & 9 & 89.6\% & 88.5\%--89.6\% & 315.2 & 1.60 & 100\% \\
+\bottomrule\end{tabular}}\end{table}
+\begin{figure}[t]\centering\includegraphics[width=0.95\linewidth]{figures/fig_method_league.pdf}\caption{Coverage (left; band: valid region) and relative width (right) of every interval method, aggregated over base models.}\label{fig:league}\end{figure}
+\begin{figure}[t]\centering\includegraphics[width=0.9\linewidth]{figures/fig_coverage_width.pdf}\caption{Coverage against relative width for every base model $\times$ method pair. Good methods sit in the shaded band at the far left.}\label{fig:cw}\end{figure}
+\begin{figure}[t]\centering\includegraphics[width=0.9\linewidth]{figures/fig_intervals.pdf}\caption{MAPIE CV+ 90\% intervals of GradientBoosting on the test set, sorted by observed value; red crosses are misses.}\label{fig:int}\end{figure}
+\paragraph{Interval methods (Table~\ref{tab:league}, Figs.~\ref{fig:league}--\ref{fig:int}).} Recommended interval method: J+aB (MAPIE) -- the narrowest method that reaches the 90\% target (within sampling tolerance, n=96) on $\geq$75\% of models: median coverage 88.5\%, median width 260.4 (1.3$\times$ target std). Narrowest single valid interval (coverage within tolerance of 90\%): Quantile regression (raw) on TabNet, coverage 86.5\%, mean width 218.4. Among valid intervals, median width / target std by family: CARD 1.19; Quantile regression 1.52; Online conformal 1.57; COP 1.60; Conformal (MAPIE/PUNCC) 1.62; Weighted conformal (NexCP) 1.72; Distributional 6.56.
+
+\begin{table}[t]\centering\small
+\caption{Extreme conformal prediction: one-sided upper bound $\hat y+q$ (no lower bound). Coverage is $P(y\le \hat y+q)$; the last column is $q$.}\label{tab:extreme}
+\begin{tabular}{lrr}\toprule Model & Coverage & $q$\\\midrule
+CatBoost & 91.7\% & 126.9\\
+GPBoost & 89.6\% & 120.3\\
+GradientBoosting & 89.6\% & 166.9\\
+HistGB & 92.7\% & 146.7\\
+LightGBM & 89.6\% & 117.9\\
+NGBoost & 91.7\% & 124.2\\
+PGBM & 91.7\% & 134.7\\
+TabNet & 97.9\% & 161.6\\
+XGBoost & 96.9\% & 234.1\\
+\bottomrule\end{tabular}\end{table}
+\begin{table}[t]\centering\small
+\caption{Adaptive coverage policies: mean learned target coverage $1-\tilde\alpha$, realised coverage and width of the e-value prediction sets.}\label{tab:acp}
+\begin{tabular}{lrrrrr}\toprule Model & Target & Coverage & Width & RMSE & $\lambda$\\\midrule
+CatBoost & 0.1\% & 60.4\% & 119.4 & 116.4 & 50.00\\
+GPBoost & 0.1\% & 64.6\% & 126.3 & 116.4 & 50.00\\
+GradientBoosting & 0.1\% & 62.5\% & 109.9 & 118.0 & 50.00\\
+HistGB & 0.1\% & 65.6\% & 124.9 & 123.2 & 50.00\\
+LightGBM & 0.1\% & 66.7\% & 162.1 & 126.6 & 50.00\\
+NGBoost & 0.1\% & 61.5\% & 122.9 & 120.3 & 50.00\\
+PGBM & 0.1\% & 60.4\% & 137.9 & 109.0 & 50.00\\
+TabNet & 0.1\% & 59.4\% & 160.3 & 132.7 & 50.00\\
+XGBoost & 0.1\% & 62.5\% & 160.8 & 121.0 & 50.00\\
+\bottomrule\end{tabular}\end{table}
+\begin{table}[t]\centering\small
+\caption{Hyperspherical confidence mapping (one network).}\label{tab:hcm}
+\begin{tabular}{lr}\toprule Metric & Value\\\midrule
+Coverage of 95\% interval & 95.8\%\\
+Mean 95\% width & 513.8\\
+Coverage at $1\sigma$ & 62.5\%\\
+Coverage at $2\sigma$ & 95.8\%\\
+Coverage at $3\sigma$ & 96.9\%\\
+RMSE & 192.4\\
+MAE & 125.2\\
+CRPS & 90.44\\
+NLL & 6.71\\
+Spearman (|error|, $\sigma$) & -0.147\\
+Regression ECE & 28.07\\
+\bottomrule\end{tabular}\end{table}
+\paragraph{Extreme CP, ACP and HCM.} ACP policy saturated at the boundary $\tilde\alpha$ = 0.999 for 9 of 9 models (CatBoost, GPBoost, GradientBoosting, HistGB, LightGBM, NGBoost, PGBM, TabNet, XGBoost): the sets have constant width and the learned level carries no information; realised coverage 59.4\%--66.7\%. HCM (single network, 95\% interval): coverage 95.8\%, RMSE 192.4, error--uncertainty Spearman correlation -0.15. Extreme CP returns only an upper bound (Table~\ref{tab:extreme}), so it is not ranked with two-sided intervals.
+
+\FloatBarrier
+\section{Conclusions}
+\begin{itemize}\setlength\itemsep{2pt}
+\item Point accuracy: GradientBoosting has the lowest 5-fold CV RMSE (102.4); on the test set the lowest RMSE is GPBoost (109.2, target std 197.1).
+\item Raw quantile regression undercovers: median 90\%-interval coverage 86.5\% (range 13.5\%--94.8\%); 5 of 9 models reach the target. Quantile crossing occurs on a median 57.3\% of test points.
+\item Best probabilistic score: CatBoost (Quantile regression) with CRPS 48.76.
+\item PGBM (native) predictive distributions are over-confident here: the Gaussian 90\% interval covers only 16.7\%.
+\item CARD (diffusion) intervals: median coverage 78.1\% at 0.99$\times$ the target std.
+\item Recommended interval method: J+aB (MAPIE) -- the narrowest method that reaches the 90\% target (within sampling tolerance, n=96) on $\geq$75\% of models: median coverage 88.5\%, median width 260.4 (1.3$\times$ target std).
+\item Narrowest single valid interval (coverage within tolerance of 90\%): Quantile regression (raw) on TabNet, coverage 86.5\%, mean width 218.4.
+\item Among valid intervals, median width / target std by family: CARD 1.19; Quantile regression 1.52; Online conformal 1.57; COP 1.60; Conformal (MAPIE/PUNCC) 1.62; Weighted conformal (NexCP) 1.72; Distributional 6.56.
+\item ACP policy saturated at the boundary $\tilde\alpha$ = 0.999 for 9 of 9 models (CatBoost, GPBoost, GradientBoosting, HistGB, LightGBM, NGBoost, PGBM, TabNet, XGBoost): the sets have constant width and the learned level carries no information; realised coverage 59.4\%--66.7\%.
+\item HCM (single network, 95\% interval): coverage 95.8\%, RMSE 192.4, error--uncertainty Spearman correlation -0.15.
+\end{itemize}
+\paragraph{Limitations.} One fixed train/test split is used, so all coverages carry the sampling error stated above; widths are compared on the same split. The online methods treat the test set as a sequence in its stored order. Optuna tuning is not bit-reproducible. CARD, HCM and TabNet are neural and sensitive to their seeds.
+
+\paragraph{Reproducibility.} Code: \url{https://github.com/DaneshSelwal/Regression_Uncertainty_Quantification_Analysis} (branch \texttt{version2.0}), folder \texttt{examples/streamflow\_uncertainty\_analysis}. Every executed notebook is stored next to its Excel outputs and is listed below.
+\begin{table}[h]\centering\scriptsize\caption{Kaggle runs whose outputs are reported here.}\label{tab:runs}
+\begin{tabular}{lll}\toprule Notebook & Run & Kaggle URL\\\midrule
+NB1 & \texttt{REG22\_11\_2026\_15\_16} & \url{https://www.kaggle.com/code/daneshjangra/reg22-11-2026-15-16}\\
+NB2 & \texttt{REG23\_11\_2026\_01\_13} & \url{https://www.kaggle.com/code/daneshjangra/reg23-11-2026-01-13}\\
+NB3 & \texttt{REG23\_11\_2026\_01\_14} & \url{https://www.kaggle.com/code/daneshjangra/reg23-11-2026-01-14}\\
+NB4 & \texttt{REG23\_11\_2026\_01\_15} & \url{https://www.kaggle.com/code/daneshjangra/reg23-11-2026-01-15}\\
+NB5 & \texttt{REG23\_11\_2026\_01\_16} & \url{https://www.kaggle.com/code/daneshjangra/reg23-11-2026-01-16}\\
+NB6 & \texttt{REG23\_11\_2026\_06\_59} & \url{https://www.kaggle.com/code/daneshselwal/reg23-11-2026-06-59}\\
+NB6 & \texttt{REG23\_11\_2026\_11\_40} & \url{https://www.kaggle.com/code/daneshselwal/reg23-11-2026-11-40}\\
+NB6 & \texttt{REG23\_11\_2026\_13\_10} & \url{https://www.kaggle.com/code/daneshselwal/reg23-11-2026-13-10}\\
+NB6 & \texttt{REG23\_11\_2026\_13\_35} & \url{https://www.kaggle.com/code/daneshselwal/reg23-11-2026-13-35}\\
+NB6 & \texttt{REG23\_11\_2026\_14\_01} & \url{https://www.kaggle.com/code/daneshselwal/reg23-11-2026-14-01}\\
+NB6 & \texttt{REG23\_11\_2026\_14\_11} & \url{https://www.kaggle.com/code/daneshselwal/reg23-11-2026-14-11}\\
+NB6 & \texttt{REG23\_11\_2026\_14\_22} & \url{https://www.kaggle.com/code/daneshselwal/reg23-11-2026-14-22}\\
+NB6 & \texttt{REG23\_11\_2026\_14\_33} & \url{https://www.kaggle.com/code/daneshselwal/reg23-11-2026-14-33}\\
+NB6 & \texttt{REG23\_11\_2026\_06\_25} & \url{https://www.kaggle.com/code/daneshselwal/reg23-11-2026-06-25}\\
+NB7 & \texttt{REG23\_11\_2026\_01\_17} & \url{https://www.kaggle.com/code/daneshjangra/reg23-11-2026-01-17}\\
+NB8 & \texttt{REG23\_11\_2026\_01\_23} & \url{https://www.kaggle.com/code/daneshjangra/reg23-11-2026-01-23}\\
+\bottomrule\end{tabular}\end{table}
+
+\paragraph{Acknowledgements.} This work was carried out under the guidance of Dr.\ Mahesh Pal.
+
+\FloatBarrier
+\bibliographystyle{plainnat}\bibliography{references}
+\end{document}

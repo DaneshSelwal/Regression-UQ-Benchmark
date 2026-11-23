@@ -1,47 +1,43 @@
-# Byte-compiled / optimized / DLL files
+
 __pycache__/
-*.py[cod]
-*$py.class
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# IDE / Editor
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS generated files
+!best_params.pkl
+._*
 .DS_Store
 .DS_Store?
-._*
+.env
+.idea/
+.ipynb_checkpoints
 .Spotlight-V100
 .Trashes
+.venv
+.vscode/
+*.jpeg
+*.jpg
+*.pkl
+*.png
+*.py[cod]
+*.pyc
+*.swo
+*.swp
+*.zip
+*$py.class
+# (best_params.pkl / best_params.json from the tuning notebook ARE committed)
+# *.xlsx
+# Byte-compiled / optimized / DLL files
+# Environments
+# IDE / Editor
+# Jupyter Notebook
+# OS generated files
+# Results and outputs
+# Version 2.0: model artefacts and run caches
+catboost_info/
 ehthumbs.db
+env.bak/
+env/
+ENV/
+lightning_logs/
+mail/
 Thumbs.db
 Thumbs.db:encryptable
-
-# Results and outputs
-*.png
-*.jpg
-*.jpeg
-# *.xlsx
-mail/
-
-# Version 2.0: model artefacts and run caches
-# (best_params.pkl / best_params.json from the tuning notebook ARE committed)
-*.pkl
-!best_params.pkl
-catboost_info/
-lightning_logs/
-*.zip
+venv.bak/
+venv/

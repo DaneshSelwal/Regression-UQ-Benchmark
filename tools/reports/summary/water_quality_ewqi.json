@@ -1,0 +1,1569 @@
+{
+ "dataset": "water_quality_ewqi",
+ "data": {
+  "n_train": 47,
+  "n_test": 47,
+  "features": [
+   "pH",
+   "TDS",
+   "EC",
+   "TH",
+   "ca",
+   "mg",
+   "CO3",
+   "HCO3",
+   "NA",
+   "K",
+   "CHLORIDE",
+   "SULPHATE",
+   "NITRATE",
+   "FLUORIDE"
+  ],
+  "target": "Pre monsoon EWQI ",
+  "target_stats": {
+   "count": 47.0,
+   "mean": 145.797447,
+   "std": 57.440828,
+   "min": 61.01,
+   "25%": 107.37,
+   "50%": 132.29,
+   "75%": 166.12,
+   "max": 330.83
+  }
+ },
+ "tuning": {
+  "RandomForest": {
+   "pruner": "SuccessiveHalvingPruner",
+   "cv_rmse": 28.140422,
+   "test_rmse": 22.665904,
+   "test_r": 0.955951
+  },
+  "GradientBoosting": {
+   "pruner": "SuccessiveHalvingPruner",
+   "cv_rmse": 23.222811,
+   "test_rmse": 22.274845,
+   "test_r": 0.943456
+  },
+  "XGBoost": {
+   "pruner": "HyperbandPruner",
+   "cv_rmse": 22.432606,
+   "test_rmse": 20.335771,
+   "test_r": 0.953234
+  },
+  "LightGBM": {
+   "pruner": "PercentilePruner",
+   "cv_rmse": 22.880039,
+   "test_rmse": 18.13609,
+   "test_r": 0.956009
+  },
+  "GPBoost": {
+   "pruner": "SuccessiveHalvingPruner",
+   "cv_rmse": 22.903919,
+   "test_rmse": 17.946718,
+   "test_r": 0.956529
+  },
+  "CatBoost": {
+   "pruner": "NopPruner",
+   "cv_rmse": 24.396882,
+   "test_rmse": 19.407678,
+   "test_r": 0.950344
+  },
+  "NGBoost": {
+   "pruner": "MedianPruner",
+   "cv_rmse": 23.380968,
+   "test_rmse": 20.806614,
+   "test_r": 0.950954
+  },
+  "TabNet": {
+   "pruner": "WilcoxonPruner",
+   "cv_rmse": 28.125361,
+   "test_rmse": 46.986503,
+   "test_r": 0.875732
+  },
+  "HistGB": {
+   "pruner": "WilcoxonPruner",
+   "cv_rmse": 25.502173,
+   "test_rmse": 18.719715,
+   "test_r": 0.954022
+  },
+  "PGBM": {
+   "pruner": "ThresholdPruner",
+   "cv_rmse": 24.505348,
+   "test_rmse": 19.531829,
+   "test_r": 0.946898
+  }
+ },
+ "quantile_regression": {
+  "LightGBM": {
+   "coverage90": 0.5319,
+   "crossing_rate": 0.9787234042553191,
+   "width90": 56.4258,
+   "nll": 5.076497,
+   "crps": 14.367278
+  },
+  "XGBoost": {
+   "coverage90": 0.9362,
+   "crossing_rate": 1.0,
+   "width90": 142.7412,
+   "nll": 4.808243,
+   "crps": 14.349877
+  },
+  "GPBoost": {
+   "coverage90": 0.6596,
+   "crossing_rate": 1.0,
+   "width90": 66.4249,
+   "nll": 4.522669,
+   "crps": 12.947755
+  },
+  "NGBoost": {
+   "coverage90": 0.0,
+   "crossing_rate": 0.0,
+   "width90": 0.0,
+   "nll": 23626678997949.88,
+   "crps": 14.766436
+  },
+  "GradientBoosting": {
+   "coverage90": 0.8936,
+   "crossing_rate": 0.8085106382978723,
+   "width90": 182.86,
+   "nll": 5.572663,
+   "crps": 30.048035
+  },
+  "CatBoost": {
+   "coverage90": 0.6383,
+   "crossing_rate": 1.0,
+   "width90": 36.4117,
+   "nll": 5.876415,
+   "crps": 12.639222
+  },
+  "HistGB": {
+   "coverage90": 0.8298,
+   "crossing_rate": 1.0,
+   "width90": 97.6588,
+   "nll": 4.496916,
+   "crps": 14.553755
+  },
+  "TabNet": {
+   "coverage90": 0.8936,
+   "crossing_rate": 1.0,
+   "width90": 152.4984,
+   "nll": 4.877435,
+   "crps": 17.067836
+  },
+  "PGBM": {
+   "coverage90": 0.0426,
+   "crossing_rate": 0.0,
+   "width90": 1.896,
+   "nll": 2226.094768,
+   "crps": 15.399084
+  }
+ },
+ "probabilistic": {
+  "XGBoost": {
+   "rmse": 28.300588,
+   "coverage90_gauss": 0.957447,
+   "width90_gauss": 135.618603,
+   "crps_gauss": 16.699866
+  },
+  "LightGBM (TF)": {
+   "rmse": 54.185426,
+   "coverage90_gauss": 1.0,
+   "width90_gauss": 676.414902,
+   "crps_gauss": 52.534192,
+   "crps": 52.534192,
+   "pit_ks": 0.345527,
+   "pit_var": 0.007053,
+   "diagnosis": "Over-dispersed (Under-confident)",
+   "mce": 0.175048,
+   "rmsce": 0.204607
+  },
+  "GradientBoosting (TF)": {
+   "rmse": 334.475978,
+   "coverage90_gauss": 1.0,
+   "width90_gauss": 3608.153096,
+   "crps_gauss": 296.242641,
+   "crps": 296.242641,
+   "pit_ks": 0.540062,
+   "pit_var": 0.000908,
+   "diagnosis": "Over-dispersed (Under-confident)",
+   "mce": 0.214507,
+   "rmsce": 0.262398
+  },
+  "XGBoost (TF)": {
+   "rmse": 58.938647,
+   "coverage90_gauss": 1.0,
+   "width90_gauss": 855.573646,
+   "crps_gauss": 64.987192,
+   "crps": 64.987192,
+   "pit_ks": 0.407915,
+   "pit_var": 0.004249,
+   "diagnosis": "Over-dispersed (Under-confident)",
+   "mce": 0.178917,
+   "rmsce": 0.213119
+  },
+  "LightGBM": {
+   "rmse": 26.20634,
+   "coverage90_gauss": 0.957447,
+   "width90_gauss": 134.858697,
+   "crps_gauss": 15.843094
+  },
+  "CatBoost (TF)": {
+   "rmse": 42.233151,
+   "coverage90_gauss": 1.0,
+   "width90_gauss": 628.059876,
+   "crps_gauss": 47.683142,
+   "crps": 47.683142,
+   "pit_ks": 0.366385,
+   "pit_var": 0.004542,
+   "diagnosis": "Over-dispersed (Under-confident)",
+   "mce": 0.192456,
+   "rmsce": 0.226523
+  },
+  "NGBoost": {
+   "rmse": 21.731998,
+   "coverage90_gauss": 0.0,
+   "width90_gauss": 1.5e-05,
+   "crps_gauss": 16.550005,
+   "crps": 16.550005,
+   "pit_ks": 0.765957,
+   "pit_var": 0.179267,
+   "diagnosis": "Under-dispersed (Over-confident)",
+   "mce": 0.248162,
+   "rmsce": 0.335288
+  },
+  "GPBoost (TF)": {
+   "rmse": 44.483345,
+   "coverage90_gauss": 1.0,
+   "width90_gauss": 605.547154,
+   "crps_gauss": 46.731715,
+   "crps": 46.731715,
+   "pit_ks": 0.387305,
+   "pit_var": 0.006741,
+   "diagnosis": "Over-dispersed (Under-confident)",
+   "mce": 0.169246,
+   "rmsce": 0.203011
+  },
+  "PGBM": {
+   "rmse": 19.540553,
+   "coverage90_gauss": 0.021277,
+   "width90_gauss": 1.964591,
+   "crps_gauss": 15.335806,
+   "crps": 15.335806,
+   "pit_ks": 0.638298,
+   "pit_var": 0.221242,
+   "diagnosis": "Under-dispersed (Over-confident)",
+   "mce": 0.201354,
+   "rmsce": 0.264895
+  }
+ },
+ "card": {
+  "LightGBM": {
+   "rmse": 17.389593,
+   "coverage90_gauss": 0.404255,
+   "width90_gauss": 14.224877,
+   "crps_gauss": 10.910399,
+   "crps": 10.910399,
+   "pit_ks": 0.410606,
+   "pit_var": 0.139451,
+   "diagnosis": "Under-dispersed (Over-confident)",
+   "mce": 0.166538,
+   "rmsce": 0.213582
+  },
+  "CatBoost": {
+   "rmse": 18.628993,
+   "coverage90_gauss": 0.468085,
+   "width90_gauss": 13.76816,
+   "crps_gauss": 11.030362,
+   "crps": 11.030362,
+   "pit_ks": 0.353943,
+   "pit_var": 0.143949,
+   "diagnosis": "Under-dispersed (Over-confident)",
+   "mce": 0.131721,
+   "rmsce": 0.179538
+  },
+  "HistGB": {
+   "rmse": 17.178741,
+   "coverage90_gauss": 0.340426,
+   "width90_gauss": 15.619895,
+   "crps_gauss": 11.302256,
+   "crps": 11.302256,
+   "pit_ks": 0.42983,
+   "pit_var": 0.15352,
+   "diagnosis": "Under-dispersed (Over-confident)",
+   "mce": 0.180464,
+   "rmsce": 0.234539
+  },
+  "NGBoost": {
+   "rmse": 20.841253,
+   "coverage90_gauss": 0.255319,
+   "width90_gauss": 13.768787,
+   "crps_gauss": 14.552546,
+   "crps": 14.552546,
+   "pit_ks": 0.566441,
+   "pit_var": 0.158106,
+   "diagnosis": "Under-dispersed (Over-confident)",
+   "mce": 0.217215,
+   "rmsce": 0.291041
+  },
+  "GPBoost": {
+   "rmse": 17.266494,
+   "coverage90_gauss": 0.404255,
+   "width90_gauss": 13.971401,
+   "crps_gauss": 10.956624,
+   "crps": 10.956624,
+   "pit_ks": 0.408646,
+   "pit_var": 0.146848,
+   "diagnosis": "Under-dispersed (Over-confident)",
+   "mce": 0.161122,
+   "rmsce": 0.208235
+  },
+  "PGBM": {
+   "rmse": 18.38052,
+   "coverage90_gauss": 0.340426,
+   "width90_gauss": 16.020501,
+   "crps_gauss": 12.247365,
+   "crps": 12.247365,
+   "pit_ks": 0.453802,
+   "pit_var": 0.168779,
+   "diagnosis": "Under-dispersed (Over-confident)",
+   "mce": 0.155319,
+   "rmsce": 0.217041
+  },
+  "XGBoost": {
+   "rmse": 19.130499,
+   "coverage90_gauss": 0.361702,
+   "width90_gauss": 14.029072,
+   "crps_gauss": 13.005905,
+   "crps": 13.005905,
+   "pit_ks": 0.523095,
+   "pit_var": 0.123621,
+   "diagnosis": "Under-dispersed (Over-confident)",
+   "mce": 0.222631,
+   "rmsce": 0.295657
+  },
+  "GradientBoosting": {
+   "rmse": 21.194948,
+   "coverage90_gauss": 0.234043,
+   "width90_gauss": 14.223209,
+   "crps_gauss": 14.684715,
+   "crps": 14.684715,
+   "pit_ks": 0.595564,
+   "pit_var": 0.144114,
+   "diagnosis": "Under-dispersed (Over-confident)",
+   "mce": 0.232302,
+   "rmsce": 0.309144
+  },
+  "TabNet": {
+   "rmse": 26.830495,
+   "coverage90_gauss": 0.276596,
+   "width90_gauss": 14.401828,
+   "crps_gauss": 17.620319,
+   "crps": 17.620319,
+   "pit_ks": 0.338845,
+   "pit_var": 0.203738,
+   "diagnosis": "Under-dispersed (Over-confident)",
+   "mce": 0.138298,
+   "rmsce": 0.173096
+  }
+ },
+ "mapie_puncc": {
+  "LightGBM": {
+   "MAPIE CV+": {
+    "coverage": 0.957447,
+    "width": 112.561716
+   },
+   "MAPIE J+aB": {
+    "coverage": 0.957447,
+    "width": 79.773098
+   },
+   "MAPIE SCP": {
+    "coverage": 1.0,
+    "width": 137.422373
+   },
+   "PUNCC CQR": {
+    "coverage": 0.851064,
+    "width": 90.54432
+   },
+   "PUNCC CVPlus": {
+    "coverage": 0.978723,
+    "width": 99.41835
+   },
+   "PUNCC SplitCP": {
+    "coverage": 0.914894,
+    "width": 95.185884
+   }
+  },
+  "CatBoost": {
+   "MAPIE CV+": {
+    "coverage": 0.957447,
+    "width": 91.236118
+   },
+   "MAPIE J+aB": {
+    "coverage": 0.914894,
+    "width": 79.471356
+   },
+   "MAPIE SCP": {
+    "coverage": 1.0,
+    "width": 138.143774
+   },
+   "PUNCC CQR": {
+    "coverage": 0.978723,
+    "width": 145.314476
+   },
+   "PUNCC CVPlus": {
+    "coverage": 0.978723,
+    "width": 99.82339
+   },
+   "PUNCC SplitCP": {
+    "coverage": 0.93617,
+    "width": 74.84642
+   }
+  },
+  "HistGB": {
+   "MAPIE CV+": {
+    "coverage": 1.0,
+    "width": 119.456487
+   },
+   "MAPIE J+aB": {
+    "coverage": 0.978723,
+    "width": 91.481688
+   },
+   "MAPIE SCP": {
+    "coverage": 1.0,
+    "width": 133.10693
+   },
+   "PUNCC CQR": {
+    "coverage": 0.957447,
+    "width": 142.917519
+   },
+   "PUNCC CVPlus": {
+    "coverage": 0.957447,
+    "width": 103.436322
+   },
+   "PUNCC SplitCP": {
+    "coverage": 0.978723,
+    "width": 121.722436
+   }
+  },
+  "NGBoost": {
+   "MAPIE CV+": {
+    "coverage": 1.0,
+    "width": 115.790377
+   },
+   "MAPIE J+aB": {
+    "coverage": 1.0,
+    "width": 98.033209
+   },
+   "MAPIE SCP": {
+    "coverage": 0.893617,
+    "width": 86.74217
+   },
+   "PUNCC CQR": {
+    "coverage": 0.978723,
+    "width": 129.557326
+   },
+   "PUNCC CVPlus": {
+    "coverage": 1.0,
+    "width": 115.526114
+   },
+   "PUNCC SplitCP": {
+    "coverage": 1.0,
+    "width": 133.043522
+   }
+  },
+  "GPBoost": {
+   "MAPIE CV+": {
+    "coverage": 0.957447,
+    "width": 111.060161
+   },
+   "MAPIE J+aB": {
+    "coverage": 0.978723,
+    "width": 80.753318
+   },
+   "MAPIE SCP": {
+    "coverage": 1.0,
+    "width": 133.039156
+   },
+   "PUNCC CQR": {
+    "coverage": 0.957447,
+    "width": 147.479555
+   },
+   "PUNCC CVPlus": {
+    "coverage": 0.978723,
+    "width": 95.656398
+   },
+   "PUNCC SplitCP": {
+    "coverage": 0.978723,
+    "width": 97.587902
+   }
+  },
+  "PGBM": {
+   "MAPIE CV+": {
+    "coverage": 1.0,
+    "width": 113.73943
+   },
+   "MAPIE J+aB": {
+    "coverage": 0.978723,
+    "width": 84.04255
+   },
+   "MAPIE SCP": {
+    "coverage": 1.0,
+    "width": 142.667222
+   },
+   "PUNCC CQR": {
+    "coverage": 0.978723,
+    "width": 91.386897
+   },
+   "PUNCC CVPlus": {
+    "coverage": 1.0,
+    "width": 115.610857
+   },
+   "PUNCC SplitCP": {
+    "coverage": 1.0,
+    "width": 134.923662
+   }
+  },
+  "XGBoost": {
+   "MAPIE CV+": {
+    "coverage": 1.0,
+    "width": 105.90443
+   },
+   "MAPIE J+aB": {
+    "coverage": 0.893617,
+    "width": 74.042637
+   },
+   "MAPIE SCP": {
+    "coverage": 1.0,
+    "width": 138.518561
+   },
+   "PUNCC CQR": {
+    "coverage": 0.93617,
+    "width": 239.277279
+   },
+   "PUNCC CVPlus": {
+    "coverage": 0.957447,
+    "width": 101.98348
+   },
+   "PUNCC SplitCP": {
+    "coverage": 0.93617,
+    "width": 118.837693
+   }
+  },
+  "GradientBoosting": {
+   "MAPIE CV+": {
+    "coverage": 0.978723,
+    "width": 112.659931
+   },
+   "MAPIE J+aB": {
+    "coverage": 0.957447,
+    "width": 81.326281
+   },
+   "MAPIE SCP": {
+    "coverage": 1.0,
+    "width": 131.835079
+   },
+   "PUNCC CQR": {
+    "coverage": 0.87234,
+    "width": 186.95
+   },
+   "PUNCC CVPlus": {
+    "coverage": 0.978723,
+    "width": 103.629205
+   },
+   "PUNCC SplitCP": {
+    "coverage": 0.978723,
+    "width": 114.19448
+   }
+  },
+  "TabNet": {
+   "MAPIE CV+": {
+    "coverage": 0.978723,
+    "width": 187.653382
+   },
+   "MAPIE J+aB": {
+    "coverage": 0.957447,
+    "width": 97.694405
+   },
+   "MAPIE SCP": {
+    "coverage": 0.914894,
+    "width": 148.168448
+   },
+   "PUNCC CQR": {
+    "coverage": 0.957447,
+    "width": 215.569637
+   },
+   "PUNCC CVPlus": {
+    "coverage": 1.0,
+    "width": 220.285905
+   },
+   "PUNCC SplitCP": {
+    "coverage": 0.914894,
+    "width": 154.645911
+   }
+  }
+ },
+ "nexcp_online": {
+  "LightGBM": {
+   "AlphaNet Conformal": {
+    "coverage": 0.744681,
+    "width": 54.112175,
+    "rmse": 26.083406,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.93617,
+    "width": 83.739366,
+    "rmse": 18.13609,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.978723,
+    "width": 128.790636,
+    "rmse": 18.13609,
+    "note": "32 of 47 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.957447,
+    "width": 77.591157,
+    "rmse": 20.423533,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.957447,
+    "width": 90.017655,
+    "rmse": 23.0741,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.93617,
+    "width": 83.739366,
+    "rmse": 18.13609,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.93617,
+    "width": 82.554964,
+    "rmse": 18.13609,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.93617,
+    "width": 77.290953,
+    "rmse": 20.486318,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.93617,
+    "width": 84.881099,
+    "rmse": 18.13609,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.914894,
+    "width": 76.978942,
+    "rmse": 18.13609,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.914894,
+    "width": 70.877839,
+    "rmse": 18.13609,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.914894,
+    "width": 71.684693,
+    "rmse": 18.13609,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.93617,
+    "width": 83.739366,
+    "rmse": 18.13609,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.93617,
+    "width": 87.622229,
+    "rmse": 19.352375,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.914894,
+    "width": 72.122231,
+    "rmse": 18.13609,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.787234,
+    "width": 21.74949,
+    "rmse": 26.389378,
+    "note": null
+   }
+  },
+  "CatBoost": {
+   "AlphaNet Conformal": {
+    "coverage": 0.680851,
+    "width": 35.169325,
+    "rmse": 27.252402,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.978723,
+    "width": 117.411105,
+    "rmse": 19.407678,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.893617,
+    "width": 192.201418,
+    "rmse": 19.407678,
+    "note": "37 of 47 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.93617,
+    "width": 86.996115,
+    "rmse": 25.093631,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.978723,
+    "width": 114.285494,
+    "rmse": 21.632813,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.978723,
+    "width": 117.411105,
+    "rmse": 19.407678,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.957447,
+    "width": 98.288169,
+    "rmse": 19.407678,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.893617,
+    "width": 86.257865,
+    "rmse": 25.046094,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.914894,
+    "width": 89.137116,
+    "rmse": 19.407678,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.914894,
+    "width": 99.688227,
+    "rmse": 19.407678,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.93617,
+    "width": 78.270426,
+    "rmse": 19.407678,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.93617,
+    "width": 82.189793,
+    "rmse": 19.407678,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.978723,
+    "width": 117.411105,
+    "rmse": 19.407678,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.893617,
+    "width": 78.84331,
+    "rmse": 19.5412,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.93617,
+    "width": 81.006416,
+    "rmse": 19.407678,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.957447,
+    "width": 50.321471,
+    "rmse": 24.035847,
+    "note": null
+   }
+  },
+  "HistGB": {
+   "AlphaNet Conformal": {
+    "coverage": 0.765957,
+    "width": 55.668808,
+    "rmse": 29.637644,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 1.0,
+    "width": 112.758082,
+    "rmse": 18.719715,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.957447,
+    "width": 160.495438,
+    "rmse": 18.719715,
+    "note": "16 of 47 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.93617,
+    "width": 91.264321,
+    "rmse": 21.092195,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 1.0,
+    "width": 124.387766,
+    "rmse": 19.439032,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 1.0,
+    "width": 112.758082,
+    "rmse": 18.719715,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.957447,
+    "width": 105.612982,
+    "rmse": 18.719715,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.957447,
+    "width": 88.231116,
+    "rmse": 21.04795,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.93617,
+    "width": 83.557492,
+    "rmse": 18.719715,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.914894,
+    "width": 86.381354,
+    "rmse": 18.719715,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.978723,
+    "width": 78.194764,
+    "rmse": 18.719715,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.978723,
+    "width": 89.824766,
+    "rmse": 18.719715,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 1.0,
+    "width": 112.758082,
+    "rmse": 18.719715,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.957447,
+    "width": 90.674193,
+    "rmse": 20.061251,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.957447,
+    "width": 104.545443,
+    "rmse": 18.719715,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.787234,
+    "width": 21.625008,
+    "rmse": 25.986288,
+    "note": null
+   }
+  },
+  "NGBoost": {
+   "AlphaNet Conformal": {
+    "coverage": 0.702128,
+    "width": 43.448494,
+    "rmse": 21.700597,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.978723,
+    "width": 130.709858,
+    "rmse": 23.384239,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 1.0,
+    "width": 253.700854,
+    "rmse": 23.384239,
+    "note": "42 of 47 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.957447,
+    "width": 101.033015,
+    "rmse": 20.227825,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 1.0,
+    "width": 133.613775,
+    "rmse": 18.577339,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.978723,
+    "width": 130.709858,
+    "rmse": 23.384239,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 1.0,
+    "width": 118.770321,
+    "rmse": 23.384239,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.93617,
+    "width": 88.850121,
+    "rmse": 20.108095,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.87234,
+    "width": 101.033857,
+    "rmse": 23.384239,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.914894,
+    "width": 128.927924,
+    "rmse": 23.384239,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.914894,
+    "width": 104.714296,
+    "rmse": 23.384239,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.93617,
+    "width": 108.080821,
+    "rmse": 23.384239,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.978723,
+    "width": 130.709858,
+    "rmse": 23.384239,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.978723,
+    "width": 92.283712,
+    "rmse": 14.076046,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.93617,
+    "width": 108.888995,
+    "rmse": 23.384239,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.93617,
+    "width": 37.430643,
+    "rmse": 19.875983,
+    "note": null
+   }
+  },
+  "GPBoost": {
+   "AlphaNet Conformal": {
+    "coverage": 0.744681,
+    "width": 54.614196,
+    "rmse": 25.901481,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.93617,
+    "width": 80.475292,
+    "rmse": 17.946718,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.978723,
+    "width": 131.947331,
+    "rmse": 17.946718,
+    "note": "37 of 47 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.93617,
+    "width": 77.698387,
+    "rmse": 20.405864,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.93617,
+    "width": 88.752867,
+    "rmse": 22.877651,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.93617,
+    "width": 80.475292,
+    "rmse": 17.946718,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.93617,
+    "width": 82.945669,
+    "rmse": 17.946718,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.914894,
+    "width": 77.244551,
+    "rmse": 20.476329,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.93617,
+    "width": 78.719001,
+    "rmse": 17.946718,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.914894,
+    "width": 79.27865,
+    "rmse": 17.946718,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.914894,
+    "width": 70.223847,
+    "rmse": 17.946718,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.914894,
+    "width": 71.461644,
+    "rmse": 17.946718,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.93617,
+    "width": 80.475292,
+    "rmse": 17.946718,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.93617,
+    "width": 87.626349,
+    "rmse": 19.33259,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.914894,
+    "width": 70.753047,
+    "rmse": 17.946718,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.744681,
+    "width": 19.768782,
+    "rmse": 26.443809,
+    "note": null
+   }
+  },
+  "PGBM": {
+   "NexCP Split": {
+    "coverage": 1.0,
+    "width": 101.937531,
+    "rmse": 19.531829,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 1.0,
+    "width": 148.015259,
+    "rmse": 19.531829,
+    "note": "8 of 47 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.978723,
+    "width": 86.837594,
+    "rmse": 19.88049,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.978723,
+    "width": 104.895595,
+    "rmse": 19.621725,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 1.0,
+    "width": 101.937531,
+    "rmse": 19.531829,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.978723,
+    "width": 88.203443,
+    "rmse": 19.531829,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.978723,
+    "width": 79.042428,
+    "rmse": 19.816158,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.914894,
+    "width": 76.632126,
+    "rmse": 19.531829,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.914894,
+    "width": 91.521635,
+    "rmse": 19.531829,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.93617,
+    "width": 72.088743,
+    "rmse": 19.531829,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.93617,
+    "width": 76.42956,
+    "rmse": 19.531829,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 1.0,
+    "width": 101.937531,
+    "rmse": 19.531829,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.978723,
+    "width": 81.073165,
+    "rmse": 15.512175,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.93617,
+    "width": 76.559699,
+    "rmse": 19.531829,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.893617,
+    "width": 23.481194,
+    "rmse": 23.435874,
+    "note": null
+   },
+   "AlphaNet Conformal": {
+    "coverage": 0.638298,
+    "width": 40.80202,
+    "rmse": 23.604563,
+    "note": null
+   }
+  },
+  "XGBoost": {
+   "AlphaNet Conformal": {
+    "coverage": 0.659574,
+    "width": 58.27657,
+    "rmse": 28.820829,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.957447,
+    "width": 81.280907,
+    "rmse": 20.335771,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.978723,
+    "width": 149.362061,
+    "rmse": 20.335771,
+    "note": "40 of 47 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.957447,
+    "width": 88.734557,
+    "rmse": 22.946151,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.978723,
+    "width": 97.919705,
+    "rmse": 22.394875,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.957447,
+    "width": 81.280907,
+    "rmse": 20.335771,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.978723,
+    "width": 86.305922,
+    "rmse": 20.335771,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.93617,
+    "width": 81.402906,
+    "rmse": 22.636952,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.93617,
+    "width": 86.078453,
+    "rmse": 20.335771,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.914894,
+    "width": 93.177401,
+    "rmse": 20.335771,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.93617,
+    "width": 74.373211,
+    "rmse": 20.335771,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.93617,
+    "width": 75.861483,
+    "rmse": 20.335771,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.957447,
+    "width": 81.280907,
+    "rmse": 20.335771,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.93617,
+    "width": 81.944792,
+    "rmse": 19.388849,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.914894,
+    "width": 73.724973,
+    "rmse": 20.335771,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.659574,
+    "width": 15.485324,
+    "rmse": 24.318527,
+    "note": null
+   }
+  },
+  "GradientBoosting": {
+   "AlphaNet Conformal": {
+    "coverage": 0.702128,
+    "width": 61.928031,
+    "rmse": 29.861877,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.978723,
+    "width": 112.37891,
+    "rmse": 22.274845,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.93617,
+    "width": 165.713755,
+    "rmse": 22.274845,
+    "note": "19 of 47 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.957447,
+    "width": 86.200292,
+    "rmse": 22.553917,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.957447,
+    "width": 108.48349,
+    "rmse": 22.920246,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.978723,
+    "width": 112.37891,
+    "rmse": 22.274845,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.957447,
+    "width": 95.926467,
+    "rmse": 22.274845,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.957447,
+    "width": 81.814988,
+    "rmse": 22.219015,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.914894,
+    "width": 94.136979,
+    "rmse": 22.274845,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.914894,
+    "width": 99.732938,
+    "rmse": 22.274845,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.914894,
+    "width": 76.559732,
+    "rmse": 22.274845,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.914894,
+    "width": 79.448395,
+    "rmse": 22.274845,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.978723,
+    "width": 112.37891,
+    "rmse": 22.274845,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 1.0,
+    "width": 86.635486,
+    "rmse": 17.790291,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.914894,
+    "width": 77.704704,
+    "rmse": 22.274845,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.87234,
+    "width": 27.342422,
+    "rmse": 24.820713,
+    "note": null
+   }
+  },
+  "TabNet": {
+   "NexCP Split": {
+    "coverage": 0.914894,
+    "width": 136.862152,
+    "rmse": 46.986503,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.978723,
+    "width": 256.014771,
+    "rmse": 46.986503,
+    "note": "44 of 47 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.978723,
+    "width": 108.860235,
+    "rmse": 22.070255,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 1.0,
+    "width": 185.601301,
+    "rmse": 25.62794,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.914894,
+    "width": 136.862152,
+    "rmse": 46.986503,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 1.0,
+    "width": 184.799922,
+    "rmse": 46.986503,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.978723,
+    "width": 95.529167,
+    "rmse": 21.728309,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.914894,
+    "width": 161.45978,
+    "rmse": 46.986503,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.93617,
+    "width": 180.60322,
+    "rmse": 46.986503,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.914894,
+    "width": 134.968582,
+    "rmse": 46.986503,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.893617,
+    "width": 135.550123,
+    "rmse": 46.986503,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.914894,
+    "width": 136.862152,
+    "rmse": 46.986503,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.93617,
+    "width": 122.18994,
+    "rmse": 31.331525,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.914894,
+    "width": 138.085102,
+    "rmse": 46.986503,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.957447,
+    "width": 54.76378,
+    "rmse": 34.573504,
+    "note": null
+   },
+   "AlphaNet Conformal": {
+    "coverage": 0.489362,
+    "width": 60.061355,
+    "rmse": 63.742576,
+    "note": null
+   }
+  }
+ },
+ "nb6_readme": "# Final results \u2014 water_quality_ewqi\n\n- Kaggle run: `REG23_11_2026_01_18` (`daneshselwal/reg23-11-2026-01-18`), see `docs/run_registry.tsv`.\n- Parameters: `hyperparameter_tuning/results/best_params.json` (tuning run REG22_11_2026_14_57).\n- Notebook: the fixed pile notebook (all approved fixes, incl. B12, D4, D5) with this dataset's data and labels.\n- `EXECUTED_*.ipynb` holds every cell output; the `.xlsx` files are the notebook's own outputs.\n",
+ "acp": {
+  "LightGBM": {
+   "coverage": 0.638298,
+   "interval_width": 49.969387,
+   "rmse": 30.97256,
+   "best_lambda": 50.0,
+   "Target_coverage": 0.001
+  },
+  "CatBoost": {
+   "coverage": 0.765957,
+   "interval_width": 49.997921,
+   "rmse": 28.07262,
+   "best_lambda": 50.0,
+   "Target_coverage": 0.001
+  },
+  "HistGB": {
+   "coverage": 0.787234,
+   "interval_width": 56.769543,
+   "rmse": 24.636091,
+   "best_lambda": 50.0,
+   "Target_coverage": 0.001
+  },
+  "NGBoost": {
+   "coverage": 0.723404,
+   "interval_width": 44.345741,
+   "rmse": 28.705763,
+   "best_lambda": 50.0,
+   "Target_coverage": 0.018409
+  },
+  "GPBoost": {
+   "coverage": 0.595745,
+   "interval_width": 50.170906,
+   "rmse": 31.395561,
+   "best_lambda": 50.0,
+   "Target_coverage": 0.001
+  },
+  "PGBM": {
+   "coverage": 0.595745,
+   "interval_width": 43.315083,
+   "rmse": 25.799822,
+   "best_lambda": 50.0,
+   "Target_coverage": 0.035571
+  },
+  "XGBoost": {
+   "coverage": 0.595745,
+   "interval_width": 41.430569,
+   "rmse": 27.052211,
+   "best_lambda": 50.0,
+   "Target_coverage": 0.070262
+  },
+  "GradientBoosting": {
+   "coverage": 0.531915,
+   "interval_width": 43.375843,
+   "rmse": 29.192601,
+   "best_lambda": 50.0,
+   "Target_coverage": 0.03306
+  },
+  "TabNet": {
+   "coverage": 0.553191,
+   "interval_width": 39.063511,
+   "rmse": 38.923357,
+   "best_lambda": 50.0,
+   "Target_coverage": 0.114731
+  }
+ },
+ "hcm": {
+  "Cov@1Sigma": 0.829787,
+  "Cov@2Sigma": 0.978723,
+  "Cov@3Sigma": 1.0,
+  "Coverage_95Interval": 0.978723,
+  "Average_95Interval_Width": 266.191781,
+  "Pearson": 0.430191,
+  "Spearman": 0.306314,
+  "ECE_reg": 26.519957,
+  "RMSE": 58.766625,
+  "MAE": 41.386109,
+  "Mean_CRPS": 30.775009,
+  "Mean_Negative_LogLikelihood": 5.388159
+ }
+}
