@@ -376,6 +376,27 @@ leave-one-out scores were already precomputed here. The progress print is now ab
 An earlier A2 edit left `.to(device)` inside the `# FIX A2` comment on the test-feature line, so the test
 input was not moved to the GPU. That's harmless on CPU and would crash on a GPU. It's now code again.
 
+### B15 (non-math): NexCP-Full speed-up, same intervals (approved 2026-11-23)
+NexCP-Full (N3) refits the model for each of 50 candidate y values at every test point, and keeps the
+interval [smallest kept y, largest kept y]. On pile it took 163 of the notebook's 207 minutes, and the
+larger datasets would have needed 18–700 hours (Kaggle stops a run after 12).
+- **Edge scan:** for each test point, check candidates from the bottom of the grid up to the first kept
+  y, then from the top down to the first kept y. The keep rule is unchanged, so lo and hi are exactly
+  the values the full scan gives, as are the "reaches the grid edge" and "empty set" notes. Candidates
+  in the middle are skipped.
+- **Workers:** test points can run on 2 worker processes. The code times 3 points with 1 worker and 6 with
+  2, then uses the faster way for the rest. A model that already uses every core (LightGBM) gets slower
+  with 2 workers (1.0 vs 26.8 s per point on pile), so it stays on 1. If the workers fail, it falls back to 1.
+- **Split runs:** for large datasets, the notebook can run as one Kaggle job per model section (shared
+  setup cells, the definitions from earlier sections, then that model's cells); each model writes its
+  own workbook, so the merged result is the same set of files.
+- **Check on pile (REG23_11_2026_05_10 … 05_51, one job per model, against REG22_11_2026_13_17):** every
+  NexCP, online CP, COP and Extreme CP value is identical for 8 models. NGBoost's NexCP-Full and J+aB
+  values differ by up to 1.0 because NGBoost is not exactly repeatable from run to run (J+aB is not
+  touched by B15). AlphaNet differs only in run time and by at most 1.5e-6 (CatBoost) from run-to-run
+  variation in its training. NexCP-Full time: 163 → 19 min in total (NGBoost 79.7 → 3.5, TabNet
+  50.6 → 4.9, Gradient Boosting 10.7 → 0.2).
+
 ### M4: one ALPHA
 `ALPHA = 0.1` in the helper cell; all 45 method calls use it (were 0.05 / 0.1 mixed).
 
