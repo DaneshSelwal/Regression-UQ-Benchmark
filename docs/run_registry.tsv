@@ -156,7 +156,11 @@ REG23_11_2026_11_31	daneshselwal/reg23-11-2026-11-31	Conformal_Predictions(NEXCP
 REG23_11_2026_11_40	daneshselwal/reg23-11-2026-11-40	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_streamflow_TabNet	2026-11-23 11:40	demo	running/queued
 REG23_11_2026_11_41	daneshjangra/reg23-11-2026-11-41	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_PGBM	2026-11-23 11:41	demo	running/queued
 REG23_11_2026_11_54	daneshjangra/reg23-11-2026-11-54	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_concrete_GradientBoosting	2026-11-23 11:54	demo	OK kn6_concrete_GradientBoosting (32.4 min, from log)
-REG23_11_2026_12_12	daneshselwal/reg23-11-2026-12-12	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_noise_PGBM	2026-11-23 12:12	demo	running/queued
+REG23_11_2026_12_12	daneshselwal/reg23-11-2026-12-12	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_noise_PGBM	2026-11-23 12:12	demo	OK kn6_noise_PGBM (58.1 min, from log)
 REG23_11_2026_12_28	daneshjangra/reg23-11-2026-12-28	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_GradientBoosting	2026-11-23 12:28	demo	OK kn6_pile_settlement_GradientBoosting (37.9 min, from log)
-REG23_11_2026_12_35	daneshselwal/reg23-11-2026-12-35	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_scour_PGBM	2026-11-23 12:35	demo	running/queued
+REG23_11_2026_12_35	daneshselwal/reg23-11-2026-12-35	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_scour_PGBM	2026-11-23 12:35	demo	OK kn6_scour_PGBM (32.5 min, from log)
 REG23_11_2026_13_04	daneshjangra/reg23-11-2026-13-04	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_CatBoost	2026-11-23 13:04	demo	running/queued
+REG23_11_2026_13_09	daneshjangra/reg23-11-2026-13-09	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_concrete_XGBoost	2026-11-23 13:09	demo	OK kn6_concrete_XGBoost (9.8 min, from log)
+REG23_11_2026_13_10	daneshselwal/reg23-11-2026-13-10	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_streamflow_PGBM	2026-11-23 13:10	demo	running/queued
+REG23_11_2026_13_13	daneshselwal/reg23-11-2026-13-13	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_noise_GradientBoosting	2026-11-23 13:13	demo	running/queued
+REG23_11_2026_13_20	daneshjangra/reg23-11-2026-13-20	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_XGBoost	2026-11-23 13:20	demo	running/queued
