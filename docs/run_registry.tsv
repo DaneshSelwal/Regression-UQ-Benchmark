@@ -132,7 +132,12 @@ REG23_11_2026_06_15	daneshselwal/reg23-11-2026-06-15	Conformal_Predictions(NEXCP
 REG23_11_2026_06_19	daneshjangra/reg23-11-2026-06-19	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_HistGradientBoosting	2026-11-23 06:19	demo	OK kn6_pile_settlement_HistGradientBoosting (96.1 min, 25/25)
 REG23_11_2026_06_25	daneshselwal/reg23-11-2026-06-25	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_streamflow_HistGradientBoosting	2026-11-23 06:25	demo	running/queued
 REG23_11_2026_06_40	daneshselwal/reg23-11-2026-06-40	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_scour_NGBoost	2026-11-23 06:40	demo	OK kn6_scour_NGBoost (64.7 min, 25/25)
-REG23_11_2026_06_59	daneshselwal/reg23-11-2026-06-59	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_streamflow_NGBoost	2026-11-23 06:59	demo	running/queued
+REG23_11_2026_06_59	daneshselwal/reg23-11-2026-06-59	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_streamflow_NGBoost	2026-11-23 06:59	demo	OK kn6_streamflow_NGBoost (68.9 min, 25/25)
 REG23_11_2026_07_27	daneshjangra/reg23-11-2026-07-27	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_concrete_NGBoost	2026-11-23 07:27	demo	running/queued
 REG23_11_2026_07_38	daneshjangra/reg23-11-2026-07-38	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_NGBoost	2026-11-23 07:38	demo	running/queued
-REG23_11_2026_08_17	daneshselwal/reg23-11-2026-08-17	Quantile_Regression.ipynb	kd_water_quality_wqi_2	2026-11-23 08:17	demo	running/queued
+REG23_11_2026_08_17	daneshselwal/reg23-11-2026-08-17	Quantile_Regression.ipynb	kd_water_quality_wqi_2	2026-11-23 08:17	demo	OK kd_water_quality_wqi_2 (16.2 min, 74/74)
+REG23_11_2026_08_48	daneshselwal/reg23-11-2026-08-48	Probabilistic__Distribution.ipynb	kd_water_quality_wqi_3	2026-11-23 08:48	demo	running/queued
+REG23_11_2026_08_49	daneshselwal/reg23-11-2026-08-49	Probabilistic__Distribution(CARD).ipynb	kd_water_quality_wqi_4	2026-11-23 08:49	demo	running/queued
+REG23_11_2026_08_50	daneshselwal/reg23-11-2026-08-50	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_water_quality_wqi_5	2026-11-23 08:50	demo	running/queued
+REG23_11_2026_08_51	daneshselwal/reg23-11-2026-08-51	Adaptive_Coverage_Policies(ACP).ipynb	kd_water_quality_wqi_6	2026-11-23 08:51	demo	running/queued
+REG23_11_2026_08_52	daneshjangra/reg23-11-2026-08-52	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_concrete_PGBM	2026-11-23 08:52	demo	running/queued
