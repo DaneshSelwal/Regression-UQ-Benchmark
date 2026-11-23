@@ -142,7 +142,7 @@ REG23_11_2026_08_50	daneshselwal/reg23-11-2026-08-50	Conformal Predictions(MAPIE
 REG23_11_2026_08_51	daneshselwal/reg23-11-2026-08-51	Adaptive_Coverage_Policies(ACP).ipynb	kd_water_quality_wqi_6	2026-11-23 08:51	demo	OK kd_water_quality_wqi_6 (17.1 min, from log)
 REG23_11_2026_08_52	daneshjangra/reg23-11-2026-08-52	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_concrete_PGBM	2026-11-23 08:52	demo	OK kn6_concrete_PGBM (166.6 min, from log)
 REG23_11_2026_08_58	daneshselwal/reg23-11-2026-08-58	Hyperspherical_Confidence_Mapping(HCM).ipynb	kd_water_quality_wqi_7	2026-11-23 08:58	demo	OK kd_water_quality_wqi_7 (0.7 min, 25/25)
-REG23_11_2026_08_59	daneshselwal/reg23-11-2026-08-59	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_water_quality_wqi_NGBoost	2026-11-23 08:59	demo	running/queued
+REG23_11_2026_08_59	daneshselwal/reg23-11-2026-08-59	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_water_quality_wqi_NGBoost	2026-11-23 08:59	demo	OK kn6_water_quality_wqi_NGBoost (420.0 min, from log)
 REG23_11_2026_09_10	daneshselwal/reg23-11-2026-09-10	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_water_quality_wqi_TabNet	2026-11-23 09:10	demo	OK kn6_water_quality_wqi_TabNet (66.6 min, 35/35)
 REG23_11_2026_10_06	daneshselwal/reg23-11-2026-10-06	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_water_quality_wqi_PGBM	2026-11-23 10:06	demo	running/queued
 REG23_11_2026_10_09	daneshselwal/reg23-11-2026-10-09	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_water_quality_wqi_GradientBoosting	2026-11-23 10:09	demo	OK kn6_water_quality_wqi_GradientBoosting (57.4 min, from log)
