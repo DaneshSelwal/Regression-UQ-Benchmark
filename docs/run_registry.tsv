@@ -111,3 +111,24 @@ REG23_11_2026_01_38	daneshjangra/reg23-11-2026-01-38	Adaptive_Coverage_Policies(
 REG23_11_2026_01_45	daneshjangra/reg23-11-2026-01-45	Hyperspherical_Confidence_Mapping(HCM).ipynb	kd_sediment_load_7	2026-11-23 01:45	demo	OK kd_sediment_load_7 (0.8 min, 25/25)
 REG23_11_2026_01_48	daneshjangra/reg23-11-2026-01-48	Probabilistic__Distribution.ipynb	kd_scour_3	2026-11-23 01:48	demo	OK kd_scour_3 (5.8 min, 71/71)
 REG23_11_2026_01_54	daneshselwal/reg23-11-2026-01-54	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_water_quality_ewqi_5	2026-11-23 01:54	demo	OK kd_water_quality_ewqi_5 (27.7 min, 54/54)
+REG23_11_2026_05_10	daneshjangra/reg23-11-2026-05-10	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kv15_NGBoost	2026-11-23 05:10	demo	running/queued
+REG23_11_2026_05_11	daneshjangra/reg23-11-2026-05-11	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kv15_TabNet	2026-11-23 05:11	demo	running/queued
+REG23_11_2026_05_12	daneshjangra/reg23-11-2026-05-12	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kv15_GPBoost	2026-11-23 05:12	demo	running/queued
+REG23_11_2026_05_13	daneshjangra/reg23-11-2026-05-13	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kv15_CatBoost	2026-11-23 05:13	demo	running/queued
+REG23_11_2026_05_18	daneshjangra/reg23-11-2026-05-18	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kv15_XGBoost	2026-11-23 05:18	demo	running/queued
+REG23_11_2026_05_19	daneshjangra/reg23-11-2026-05-19	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kv15_GradientBoosting	2026-11-23 05:19	demo	running/queued
+REG23_11_2026_05_24	daneshjangra/reg23-11-2026-05-24	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kv15_HistGradientBoosting	2026-11-23 05:24	demo	running/queued
+REG23_11_2026_05_27	daneshjangra/reg23-11-2026-05-27	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kv15_Lightgbm	2026-11-23 05:27	demo	running/queued
+REG23_11_2026_05_37	daneshjangra/reg23-11-2026-05-37	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kv15_TabNet	2026-11-23 05:37	demo	running/queued
+REG23_11_2026_05_38	daneshjangra/reg23-11-2026-05-38	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kv15_PGBM	2026-11-23 05:38	demo	running/queued
+REG23_11_2026_05_51	daneshjangra/reg23-11-2026-05-51	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kv15b_Lightgbm	2026-11-23 05:51	demo	running/queued
+REG23_11_2026_06_07	daneshjangra/reg23-11-2026-06-07	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_concrete_TabNet	2026-11-23 06:07	demo	running/queued
+REG23_11_2026_06_08	daneshjangra/reg23-11-2026-06-08	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_concrete_CatBoost	2026-11-23 06:08	demo	OK kn6_concrete_CatBoost (16.8 min, 25/25)
+REG23_11_2026_06_09	daneshjangra/reg23-11-2026-06-09	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_concrete_Lightgbm	2026-11-23 06:09	demo	running/queued
+REG23_11_2026_06_10	daneshselwal/reg23-11-2026-06-10	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_noise_NGBoost	2026-11-23 06:10	demo	running/queued
+REG23_11_2026_06_12	daneshjangra/reg23-11-2026-06-12	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_TabNet	2026-11-23 06:13	demo	running/queued
+REG23_11_2026_06_14	daneshselwal/reg23-11-2026-06-14	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_scour_CatBoost	2026-11-23 06:14	demo	OK kn6_scour_CatBoost (20.8 min, 25/25)
+REG23_11_2026_06_15	daneshselwal/reg23-11-2026-06-15	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_scour_XGBoost	2026-11-23 06:15	demo	OK kn6_scour_XGBoost (7.2 min, 25/25)
+REG23_11_2026_06_19	daneshjangra/reg23-11-2026-06-19	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_HistGradientBoosting	2026-11-23 06:19	demo	running/queued
+REG23_11_2026_06_25	daneshselwal/reg23-11-2026-06-25	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_streamflow_HistGradientBoosting	2026-11-23 06:25	demo	running/queued
+REG23_11_2026_06_40	daneshselwal/reg23-11-2026-06-40	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_scour_NGBoost	2026-11-23 06:40	demo	running/queued
