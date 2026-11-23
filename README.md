@@ -55,11 +55,11 @@ Relative width = interval width / standard deviation of the test target.
 | [Sediment load](examples/sediment_load_uncertainty_analysis/) | 1095 / 365 | TabNet | 81.1% | NexCP J+aB | 89.3% | 0.24 | [PDF](papers/sediment_load/paper.pdf) |
 | [Streamflow](examples/streamflow_uncertainty_analysis/) | 192 / 96 | GradientBoosting | 86.5% | J+aB (MAPIE) | 88.5% | 1.32 | [PDF](papers/streamflow/paper.pdf) |
 | [Water quality (EWQI)](examples/water_quality_ewqi_uncertainty_analysis/) | 47 / 47 | XGBoost | 66.0% | FACI | 91.5% | 1.33 | [PDF](papers/water_quality_ewqi/paper.pdf) |
-| [Pile settlement](examples/pile_settlement_uncertainty_analysis/) | 371 / 186 | – | – | – | – | – | in progress |
+| [Pile settlement](examples/pile_settlement_uncertainty_analysis/) | 371 / 186 | GPBoost | 82.8% | MFCS Full | 89.8% | 0.74 | [PDF](papers/pile_settlement/paper.pdf) |
 | [Water quality (WQI)](examples/water_quality_wqi_uncertainty_analysis/) | 190 / 82 | XGBoost | 79.3% | J+aB (MAPIE) | 89.0% | 1.18 | [PDF](papers/water_quality_wqi/paper.pdf) |
 
-Pile settlement has results for notebooks 1–5, 7 and 8; its last notebook 6 job is still running
-on Kaggle, and its report will be added once that job finishes.
+All nine datasets are complete. Notebook 6 jobs that exceeded Kaggle's 12-hour limit were not
+re-run (see [below](#datasets-results-and-reports)).
 
 **Findings that hold across datasets**
 
@@ -67,12 +67,12 @@ on Kaggle, and its report will be added once that job finishes.
   undercover on almost every dataset, with median coverage between 58% and 90%, and their quantiles
   cross on most test points. Conformalising them (CQR) restores coverage, but the intervals are wide.
 - **Native NGBoost and PGBM distributions are usually over-confident.** Their Gaussian 90%
-  intervals cover far less than 90% on most datasets (PGBM: 2–42% on seven of eight), while Treeffuser goes the other way (close to 100% coverage with very
+  intervals cover far less than 90% on most datasets (PGBM: 2–42% on eight of nine), while Treeffuser goes the other way (close to 100% coverage with very
   wide intervals). CARD's diffusion intervals are sharp but undercover on most datasets.
 - **Conformal methods are valid almost everywhere.** Split CP, CV+, J+aB, CQR, NexCP and the
-  online methods (ACI, FACI, SF-OGD, SAOCP, MFCS, COP) reach the target in 1,349 of 1,405
-  dataset × model × method cases (96%) on the eight completed datasets. The misses are concentrated on WQI
-  (151 features, 190 training rows), the smallest test sets and the weakest models. The methods differ mainly in
+  online methods (ACI, FACI, SF-OGD, SAOCP, MFCS, COP) reach the target in 1,480 of 1,557
+  dataset × model × method cases (95%) on the nine datasets. The misses are concentrated on WQI
+  (37; 151 features, 190 training rows) and pile settlement (21); elsewhere they are rare. The methods differ mainly in
   width, and the online and weighted variants are usually the sharpest.
 - **The sharpest valid method depends on the data.** It can be an online method (MFCS, FACI), a
   weighted method (NexCP J+aB on the large, heavy-tailed sediment data) or plain J+aB / split CP
@@ -196,7 +196,7 @@ predictions.
 | Concrete | 189 / 95 | 7 | `str` | [examples/concrete_uncertainty_analysis](examples/concrete_uncertainty_analysis/) | [PDF](papers/concrete/paper.pdf) |
 | Noise | 168 / 60 | 5 | `Leq` | [examples/noise_uncertainty_analysis](examples/noise_uncertainty_analysis/) | [PDF](papers/noise/paper.pdf) |
 | Pile (v2.0 pilot) | 81 / 24 | 7 | `Total` | [examples/pile_uncertainty_analysis](examples/pile_uncertainty_analysis/) | [PDF](papers/pile/paper.pdf) |
-| Pile settlement | 371 / 186 | 8 | `S_exp` | [examples/pile_settlement_uncertainty_analysis](examples/pile_settlement_uncertainty_analysis/) | in progress |
+| Pile settlement | 371 / 186 | 8 | `S_exp` | [examples/pile_settlement_uncertainty_analysis](examples/pile_settlement_uncertainty_analysis/) | [PDF](papers/pile_settlement/paper.pdf) |
 | Scour | 154 / 78 | 7 | `Scour` | [examples/scour_uncertainty_analysis](examples/scour_uncertainty_analysis/) | [PDF](papers/scour/paper.pdf) |
 | Sediment load | 1095 / 365 | 3 | `St` | [examples/sediment_load_uncertainty_analysis](examples/sediment_load_uncertainty_analysis/) | [PDF](papers/sediment_load/paper.pdf) |
 | Streamflow | 192 / 96 | 4 | `TDS` | [examples/streamflow_uncertainty_analysis](examples/streamflow_uncertainty_analysis/) | [PDF](papers/streamflow/paper.pdf) |
@@ -208,9 +208,13 @@ table and **links to the original Kaggle notebooks** that produced its results. 
 contains `results/` with the executed notebook (`EXECUTED_*.ipynb`, every cell output) and the
 Excel files.
 
-**Runs that were not completed (not enough compute).** On sediment load (the largest dataset),
-NB6 was not run for TabNet and PGBM, and NexCP Full conformal was switched off, because these jobs
-exceed Kaggle's 12-hour limit. This is stated in the dataset's README and report.
+**Runs that were not completed (not enough compute).** These jobs exceed Kaggle's 12-hour limit
+and were not re-run:
+
+- sediment load (the largest dataset): NB6 for TabNet and PGBM; NexCP Full conformal switched off for all models;
+- pile settlement: NB6 for NGBoost and PGBM (stopped by Kaggle at 12 hours).
+
+This is stated in each dataset's README and report.
 
 ---
 

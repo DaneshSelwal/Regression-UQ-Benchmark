@@ -12,7 +12,7 @@ conclusions and the links to the Kaggle runs that produced the numbers.
 | Sediment load | [paper.pdf](sediment_load/paper.pdf) | [paper.tex](sediment_load/paper.tex) |
 | Streamflow | [paper.pdf](streamflow/paper.pdf) | [paper.tex](streamflow/paper.tex) |
 | Water quality (EWQI) | [paper.pdf](water_quality_ewqi/paper.pdf) | [paper.tex](water_quality_ewqi/paper.tex) |
-| Pile settlement | in progress (notebook 6 running) | |
+| Pile settlement | [paper.pdf](pile_settlement/paper.pdf) | [paper.tex](pile_settlement/paper.tex) |
 | Water quality (WQI) | [paper.pdf](water_quality_wqi/paper.pdf) | [paper.tex](water_quality_wqi/paper.tex) |
 
 Every report is generated from the stored results by [`tools/reports/`](../tools/reports/), so
