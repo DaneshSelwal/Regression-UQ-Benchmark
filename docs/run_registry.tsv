@@ -68,7 +68,7 @@ REG22_11_2026_17_57	daneshjangra/reg22-11-2026-17-57	Optuna_autosampler.ipynb	kf
 REG22_11_2026_17_58	daneshselwal/reg22-11-2026-17-58	Optuna_autosampler.ipynb	kf14_sediment_load	2026-11-22 17:58	demo	OK FULL tuning sediment_load (B14, 252.1 min, 17/17) - FINAL, on GitHub
 REG22_11_2026_17_59	daneshselwal/reg22-11-2026-17-59	Optuna_autosampler.ipynb	kf14_noise	2026-11-22 17:59	demo	OK FULL tuning noise (B14, 17/17, tuning 96.8 min) - FINAL, on GitHub
 REG22_11_2026_19_52	daneshjangra/reg22-11-2026-19-52	Quantile_Regression.ipynb	kd_concrete_2	2026-11-22 19:52	demo	OK concrete NB2 quantile regression (5.6 min, 74/74)
-REG22_11_2026_19_53	daneshselwal/reg22-11-2026-19-53	Optuna_autosampler.ipynb	kf14_water_quality_wqi	2026-11-22 19:53	demo	RUNNING FULL tuning water_quality_wqi (B14)
+REG22_11_2026_19_53	daneshselwal/reg22-11-2026-19-53	Optuna_autosampler.ipynb	kf14_water_quality_wqi	2026-11-22 19:53	demo	OK FULL tuning water_quality_wqi (B14, tuning 254 min, all 80 entries saved); run stopped at the 12 h limit in the last cell (model explanations) - FINAL, on GitHub
 REG22_11_2026_19_59	daneshjangra/reg22-11-2026-19-59	Probabilistic__Distribution.ipynb	kd_concrete_3	2026-11-22 19:59	demo	OK concrete NB3 probabilistic (7.2 min, 71/71)
 REG22_11_2026_20_08	daneshjangra/reg22-11-2026-20-08	Probabilistic__Distribution(CARD).ipynb	kd_concrete_4	2026-11-22 20:08	demo	OK kd_concrete_4 (95.0 min, 65/65)
 REG22_11_2026_20_15	daneshjangra/reg22-11-2026-20-15	Conformal Predictions(MAPIE,PUNCC).ipynb	kd_concrete_5	2026-11-22 20:15	demo	OK concrete NB5 MAPIE/PUNCC (36.8 min, 54/54)
@@ -129,6 +129,10 @@ REG23_11_2026_06_10	daneshselwal/reg23-11-2026-06-10	Conformal_Predictions(NEXCP
 REG23_11_2026_06_12	daneshjangra/reg23-11-2026-06-12	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_TabNet	2026-11-23 06:13	demo	running/queued
 REG23_11_2026_06_14	daneshselwal/reg23-11-2026-06-14	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_scour_CatBoost	2026-11-23 06:14	demo	OK kn6_scour_CatBoost (20.8 min, 25/25)
 REG23_11_2026_06_15	daneshselwal/reg23-11-2026-06-15	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_scour_XGBoost	2026-11-23 06:15	demo	OK kn6_scour_XGBoost (7.2 min, 25/25)
-REG23_11_2026_06_19	daneshjangra/reg23-11-2026-06-19	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_HistGradientBoosting	2026-11-23 06:19	demo	running/queued
+REG23_11_2026_06_19	daneshjangra/reg23-11-2026-06-19	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_HistGradientBoosting	2026-11-23 06:19	demo	OK kn6_pile_settlement_HistGradientBoosting (96.1 min, 25/25)
 REG23_11_2026_06_25	daneshselwal/reg23-11-2026-06-25	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_streamflow_HistGradientBoosting	2026-11-23 06:25	demo	running/queued
-REG23_11_2026_06_40	daneshselwal/reg23-11-2026-06-40	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_scour_NGBoost	2026-11-23 06:40	demo	running/queued
+REG23_11_2026_06_40	daneshselwal/reg23-11-2026-06-40	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_scour_NGBoost	2026-11-23 06:40	demo	OK kn6_scour_NGBoost (64.7 min, 25/25)
+REG23_11_2026_06_59	daneshselwal/reg23-11-2026-06-59	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_streamflow_NGBoost	2026-11-23 06:59	demo	running/queued
+REG23_11_2026_07_27	daneshjangra/reg23-11-2026-07-27	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_concrete_NGBoost	2026-11-23 07:27	demo	running/queued
+REG23_11_2026_07_38	daneshjangra/reg23-11-2026-07-38	Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb	kn6_pile_settlement_NGBoost	2026-11-23 07:38	demo	running/queued
+REG23_11_2026_08_17	daneshselwal/reg23-11-2026-08-17	Quantile_Regression.ipynb	kd_water_quality_wqi_2	2026-11-23 08:17	demo	running/queued
