@@ -397,6 +397,17 @@ larger datasets would have needed 18–700 hours (Kaggle stops a run after 12).
   variation in its training. NexCP-Full time: 163 → 19 min in total (NGBoost 79.7 → 3.5, TabNet
   50.6 → 4.9, Gradient Boosting 10.7 → 0.2).
 
+### B16: NexCP-Full on/off switch (user decision 2026-11-23)
+Even with B15, NexCP-Full would need about 200 hours for sediment_load (1095 train / 365 test rows).
+The user decided to run that dataset's Notebook 6 without NexCP-Full and to say so in the notebook.
+- **Switch:** `RUN_NEXCP_FULL = True` next to `ALPHA` (cell 15). True is the default and changes nothing.
+  Only sediment_load's Notebook 6 sets it to False.
+- **When False:** `_nexcp_full` prints "not run, out of compute" and returns NaN bounds. The NexCP Full
+  row then has NaN coverage, width and CWC, with the note "not run: out of compute". The coverage
+  helpers in the NEXCP functions (default, PGBM, TabNet) return NaN instead of 0% for a method whose
+  bounds are all NaN. Every other method, NexCP Split, J+aB, CV+, the online methods (including MFCS
+  Full), COP, Extreme CP and AlphaNet, runs as before.
+
 ### M4: one ALPHA
 `ALPHA = 0.1` in the helper cell; all 45 method calls use it (were 0.05 / 0.1 mixed).
 
