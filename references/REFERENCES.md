@@ -57,7 +57,7 @@ Entries marked **[fix]** are the sources the changes in `CHANGELOG_FIXES.md` wer
 ## 6. Conformal prediction: general and MAPIE / PUNCC notebook
 - Vovk, V., Gammerman, A. & Shafer, G. (2005). *Algorithmic Learning in a Random World.* Springer.
 - Lei, J., G'Sell, M., Rinaldo, A., Tibshirani, R. J. & Wasserman, L. (2018). *Distribution-Free Predictive Inference for Regression.* JASA 113. (split conformal)
-- Angelopoulos, A. N. & Bates, S. (2023). *Conformal Prediction: A Gentle Introduction.* Foundations and Trends in ML. Copy in `resources/Gentle_Intro_to_Conformal_Prediction.pdf`.
+- Angelopoulos, A. N. & Bates, S. (2023). *Conformal Prediction: A Gentle Introduction.* Foundations and Trends in ML. Copy in `references/papers/Gentle_Intro_to_Conformal_Prediction.pdf`.
 - Romano, Y., Patterson, E. & Candès, E. (2019). *Conformalized Quantile Regression.* NeurIPS. (fix M1) **[fix]**
 - Barber, R. F., Candès, E. J., Ramdas, A. & Tibshirani, R. J. (2021). *Predictive Inference with the Jackknife+.* Annals of Statistics 49(1). (CV+, Jackknife+, fix M3) **[fix]**
 - Kim, B., Xu, C. & Barber, R. F. (2020). *Predictive Inference Is Free with the Jackknife+-after-Bootstrap.* NeurIPS. (fixes M3, N3) **[fix]**
@@ -66,8 +66,8 @@ Entries marked **[fix]** are the sources the changes in `CHANGELOG_FIXES.md` wer
 - Khosravi, A., Nahavandi, S., Creighton, D. & Atiya, A. F. (2011). *Lower Upper Bound Estimation Method for Construction of Neural Network-Based Prediction Intervals.* IEEE TNN 22(3). (PICP, MPIW, CWC)
 
 ## 7. NEXCP / Adaptive CP / MFCS notebook
-- Barber, R. F., Candès, E. J., Ramdas, A. & Tibshirani, R. J. (2023). *Conformal Prediction Beyond Exchangeability.* Annals of Statistics 51(2). Copy in `resources/NEXCP_beyond_exchangeability.pdf`. Eq. (10)–(11): weighted split; eq. (12): weighted full; eq. (33): weighted jackknife+ / CV+ (fixes N1–N3). **[fix]**
-- Gibbs, I. & Candès, E. (2021). *Adaptive Conformal Inference Under Distribution Shift.* NeurIPS. Copy in `resources/Adaptive_Conformal_Inference.pdf` (ACI, fix N5). **[fix]**
+- Barber, R. F., Candès, E. J., Ramdas, A. & Tibshirani, R. J. (2023). *Conformal Prediction Beyond Exchangeability.* Annals of Statistics 51(2). Copy in `references/papers/NEXCP_beyond_exchangeability.pdf`. Eq. (10)–(11): weighted split; eq. (12): weighted full; eq. (33): weighted jackknife+ / CV+ (fixes N1–N3). **[fix]**
+- Gibbs, I. & Candès, E. (2021). *Adaptive Conformal Inference Under Distribution Shift.* NeurIPS. Copy in `references/papers/Adaptive_Conformal_Inference.pdf` (ACI, fix N5). **[fix]**
 - Gibbs, I. & Candès, E. (2024). *Conformal Inference for Online Prediction with Arbitrary Distribution Shifts.* JMLR 25 (FACI, fix N5). **[fix]**
 - Bhatnagar, A., Wang, H., Xiong, C. & Bai, Y. (2023). *Improved Online Conformal Prediction via Strongly Adaptive Online Learning.* ICML (SF-OGD, SAOCP; fixes N4, N6). Reference code: https://github.com/salesforce/online_conformal **[fix]**
 - Orabona, F. & Pál, D. (2018). *Scale-Free Online Learning.* Theoretical Computer Science 716. (scale-free OGD background)

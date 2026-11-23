@@ -26,9 +26,9 @@ Notebooks 2–7 load the tuned parameters from step 1. Notebook 8 (HCM) trains i
 
 ## Documents
 
-- [`CHANGELOG_FIXES.md`](CHANGELOG_FIXES.md): every fix, with before, why and after, and its
+- [`docs/CHANGELOG_FIXES.md`](../../docs/CHANGELOG_FIXES.md): every fix, with before, why and after, and its
   approval. Each fix is marked `# FIX <id>` in the code.
-- [`REFERENCES.md`](REFERENCES.md): all papers, repositories and libraries used. Sources used to
+- [`references/REFERENCES.md`](../../references/REFERENCES.md): all papers, repositories and libraries used. Sources used to
   verify a fix are marked **[fix]**.
 - [`../../docs/KAGGLE_RUNS.md`](../../docs/KAGGLE_RUNS.md): which Kaggle job runs which notebook,
   its status and where its outputs are stored.

@@ -317,7 +317,7 @@ calibration, the other half to fit) is now passed as a `PredefinedSplit` via `_s
 
 All changes are in one helper cell (inserted before `conformal_predictions_NEXCP`) plus the method
 sections of every copy (generic, `_PGBM`, `_tabnet`). Metrics, plots and Excel layout are unchanged
-except for the added columns/sheets named below. Sources: see REFERENCES.md (NEXCP section).
+except for the added columns/sheets named below. Sources: see references/REFERENCES.md (NEXCP section).
 
 ### K1 / K2: Kaggle setup and loading the tuned settings
 Same as Notebook 5.
