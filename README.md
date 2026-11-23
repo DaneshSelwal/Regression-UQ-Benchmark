@@ -56,10 +56,10 @@ Relative width = interval width / standard deviation of the test target.
 | [Streamflow](examples/streamflow_uncertainty_analysis/) | 192 / 96 | GradientBoosting | 86.5% | J+aB (MAPIE) | 88.5% | 1.32 | [PDF](papers/streamflow/paper.pdf) |
 | [Water quality (EWQI)](examples/water_quality_ewqi_uncertainty_analysis/) | 47 / 47 | XGBoost | 66.0% | FACI | 91.5% | 1.33 | [PDF](papers/water_quality_ewqi/paper.pdf) |
 | [Pile settlement](examples/pile_settlement_uncertainty_analysis/) | 371 / 186 | – | – | – | – | – | in progress |
-| [Water quality (WQI)](examples/water_quality_wqi_uncertainty_analysis/) | 190 / 82 | – | – | – | – | – | in progress |
+| [Water quality (WQI)](examples/water_quality_wqi_uncertainty_analysis/) | 190 / 82 | XGBoost | 79.3% | J+aB (MAPIE) | 89.0% | 1.18 | [PDF](papers/water_quality_wqi/paper.pdf) |
 
-Pile settlement and WQI have results for notebooks 1–5, 7 and 8; their notebook 6 jobs are still
-running on Kaggle, and their reports will be added once those jobs finish.
+Pile settlement has results for notebooks 1–5, 7 and 8; its last notebook 6 job is still running
+on Kaggle, and its report will be added once that job finishes.
 
 **Findings that hold across datasets**
 
@@ -67,12 +67,12 @@ running on Kaggle, and their reports will be added once those jobs finish.
   undercover on almost every dataset, with median coverage between 58% and 90%, and their quantiles
   cross on most test points. Conformalising them (CQR) restores coverage, but the intervals are wide.
 - **Native NGBoost and PGBM distributions are usually over-confident.** Their Gaussian 90%
-  intervals cover far less than 90% on most datasets (PGBM: 2–42% on six of seven), while Treeffuser goes the other way (close to 100% coverage with very
+  intervals cover far less than 90% on most datasets (PGBM: 2–42% on seven of eight), while Treeffuser goes the other way (close to 100% coverage with very
   wide intervals). CARD's diffusion intervals are sharp but undercover on most datasets.
 - **Conformal methods are valid almost everywhere.** Split CP, CV+, J+aB, CQR, NexCP and the
-  online methods (ACI, FACI, SF-OGD, SAOCP, MFCS, COP) reach the target in 1,026 of 1,045
-  dataset × model × method cases (98%) on the seven completed datasets. The few misses are on the
-  smallest test sets or with the weakest models (TabNet, PGBM). The methods differ mainly in
+  online methods (ACI, FACI, SF-OGD, SAOCP, MFCS, COP) reach the target in 1,349 of 1,405
+  dataset × model × method cases (96%) on the eight completed datasets. The misses are concentrated on WQI
+  (151 features, 190 training rows), the smallest test sets and the weakest models. The methods differ mainly in
   width, and the online and weighted variants are usually the sharpest.
 - **The sharpest valid method depends on the data.** It can be an online method (MFCS, FACI), a
   weighted method (NexCP J+aB on the large, heavy-tailed sediment data) or plain J+aB / split CP
@@ -201,7 +201,7 @@ predictions.
 | Sediment load | 1095 / 365 | 3 | `St` | [examples/sediment_load_uncertainty_analysis](examples/sediment_load_uncertainty_analysis/) | [PDF](papers/sediment_load/paper.pdf) |
 | Streamflow | 192 / 96 | 4 | `TDS` | [examples/streamflow_uncertainty_analysis](examples/streamflow_uncertainty_analysis/) | [PDF](papers/streamflow/paper.pdf) |
 | Water quality (EWQI) | 47 / 47 | 14 | `Pre monsoon EWQI` | [examples/water_quality_ewqi_uncertainty_analysis](examples/water_quality_ewqi_uncertainty_analysis/) | [PDF](papers/water_quality_ewqi/paper.pdf) |
-| Water quality (WQI) | 190 / 82 | 151 | `WQI` | [examples/water_quality_wqi_uncertainty_analysis](examples/water_quality_wqi_uncertainty_analysis/) | in progress |
+| Water quality (WQI) | 190 / 82 | 151 | `WQI` | [examples/water_quality_wqi_uncertainty_analysis](examples/water_quality_wqi_uncertainty_analysis/) | [PDF](papers/water_quality_wqi/paper.pdf) |
 
 Each example folder has a `README.md` with the dataset's key findings, figures, the full method
 table and **links to the original Kaggle notebooks** that produced its results. Each phase folder

@@ -739,8 +739,891 @@
    }
   }
  },
- "nexcp_online": {},
- "nb6_readme": "",
+ "nexcp_online": {
+  "LightGBM": {
+   "AlphaNet Conformal": {
+    "coverage": 0.560976,
+    "width": 41.799197,
+    "rmse": 31.00035,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.865854,
+    "width": 89.601504,
+    "rmse": 31.900289,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.792683,
+    "width": 62.796873,
+    "rmse": 31.900289,
+    "note": "5 of 82 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.890244,
+    "width": 84.904706,
+    "rmse": 31.047576,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.865854,
+    "width": 90.597566,
+    "rmse": 32.43663,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.829268,
+    "width": 83.884956,
+    "rmse": 31.900289,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.890244,
+    "width": 93.413069,
+    "rmse": 31.900289,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.890244,
+    "width": 92.837826,
+    "rmse": 30.817058,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.890244,
+    "width": 110.461888,
+    "rmse": 31.900289,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.890244,
+    "width": 133.54405,
+    "rmse": 31.900289,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.865854,
+    "width": 96.416328,
+    "rmse": 31.900289,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.865854,
+    "width": 92.182837,
+    "rmse": 31.900289,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.829268,
+    "width": 83.884956,
+    "rmse": 31.900289,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.939024,
+    "width": 89.110902,
+    "rmse": 26.323479,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.865854,
+    "width": 97.531234,
+    "rmse": 31.900289,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.926829,
+    "width": 26.393076,
+    "rmse": 35.170572,
+    "note": null
+   }
+  },
+  "CatBoost": {
+   "AlphaNet Conformal": {
+    "coverage": 0.585366,
+    "width": 43.705226,
+    "rmse": 31.39639,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.926829,
+    "width": 100.326768,
+    "rmse": 27.157499,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.792683,
+    "width": 117.40579,
+    "rmse": 27.157499,
+    "note": "35 of 82 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.939024,
+    "width": 97.058104,
+    "rmse": 29.200188,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.95122,
+    "width": 101.439904,
+    "rmse": 28.024643,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.914634,
+    "width": 97.948883,
+    "rmse": 27.157499,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.939024,
+    "width": 100.946487,
+    "rmse": 27.157499,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.95122,
+    "width": 106.617595,
+    "rmse": 29.30997,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.914634,
+    "width": 104.606449,
+    "rmse": 27.157499,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.902439,
+    "width": 97.975277,
+    "rmse": 27.157499,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.914634,
+    "width": 100.596201,
+    "rmse": 27.157499,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.902439,
+    "width": 99.865095,
+    "rmse": 27.157499,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.914634,
+    "width": 97.948883,
+    "rmse": 27.157499,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.914634,
+    "width": 86.476053,
+    "rmse": 22.131496,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.902439,
+    "width": 103.150333,
+    "rmse": 27.157499,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.963415,
+    "width": 19.948421,
+    "rmse": 30.103611,
+    "note": null
+   }
+  },
+  "HistGB": {
+   "AlphaNet Conformal": {
+    "coverage": 0.585366,
+    "width": 45.276292,
+    "rmse": 32.690212,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.743902,
+    "width": 76.749646,
+    "rmse": 34.611199,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.865854,
+    "width": 107.006351,
+    "rmse": 34.611199,
+    "note": "41 of 82 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.865854,
+    "width": 83.613814,
+    "rmse": 31.005925,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.853659,
+    "width": 83.381177,
+    "rmse": 31.864196,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.731707,
+    "width": 76.160315,
+    "rmse": 34.611199,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.902439,
+    "width": 96.454852,
+    "rmse": 34.611199,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.890244,
+    "width": 90.383812,
+    "rmse": 30.628633,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.890244,
+    "width": 135.410631,
+    "rmse": 34.611199,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.890244,
+    "width": 125.789348,
+    "rmse": 34.611199,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.853659,
+    "width": 107.181786,
+    "rmse": 34.611199,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.804878,
+    "width": 100.562079,
+    "rmse": 34.611199,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.731707,
+    "width": 76.160315,
+    "rmse": 34.611199,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.890244,
+    "width": 91.253584,
+    "rmse": 27.390991,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.829268,
+    "width": 105.472699,
+    "rmse": 34.611199,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.987805,
+    "width": 46.016465,
+    "rmse": 35.03569,
+    "note": null
+   }
+  },
+  "NGBoost": {
+   "AlphaNet Conformal": {
+    "coverage": 0.573171,
+    "width": 44.389827,
+    "rmse": 29.769033,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.865854,
+    "width": 89.500861,
+    "rmse": 29.721875,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.902439,
+    "width": 138.639462,
+    "rmse": 29.721875,
+    "note": "53 of 82 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.841463,
+    "width": 82.848549,
+    "rmse": 31.039127,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.853659,
+    "width": 88.217461,
+    "rmse": 30.402521,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.865854,
+    "width": 89.500861,
+    "rmse": 29.721875,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.865854,
+    "width": 91.199642,
+    "rmse": 29.721875,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.902439,
+    "width": 92.020252,
+    "rmse": 30.626158,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.902439,
+    "width": 112.596679,
+    "rmse": 29.721875,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.890244,
+    "width": 122.686085,
+    "rmse": 29.721875,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.878049,
+    "width": 91.690057,
+    "rmse": 29.721875,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.865854,
+    "width": 89.238484,
+    "rmse": 29.721875,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.865854,
+    "width": 89.500861,
+    "rmse": 29.721875,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.914634,
+    "width": 88.081344,
+    "rmse": 24.327544,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.878049,
+    "width": 86.758549,
+    "rmse": 29.721875,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.939024,
+    "width": 23.601407,
+    "rmse": 32.747565,
+    "note": null
+   }
+  },
+  "GPBoost": {
+   "AlphaNet Conformal": {
+    "coverage": 0.512195,
+    "width": 39.093165,
+    "rmse": 32.428229,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.804878,
+    "width": 100.325389,
+    "rmse": 34.909616,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.878049,
+    "width": 120.700082,
+    "rmse": 34.909616,
+    "note": "24 of 82 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.841463,
+    "width": 78.108995,
+    "rmse": 30.575892,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.914634,
+    "width": 103.126208,
+    "rmse": 32.297236,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.804878,
+    "width": 100.149081,
+    "rmse": 34.909616,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.914634,
+    "width": 115.115794,
+    "rmse": 34.909616,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.890244,
+    "width": 85.017394,
+    "rmse": 30.174259,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.926829,
+    "width": 137.495329,
+    "rmse": 34.909616,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.902439,
+    "width": 132.678832,
+    "rmse": 34.909616,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.865854,
+    "width": 127.797326,
+    "rmse": 34.909616,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.865854,
+    "width": 120.585538,
+    "rmse": 34.909616,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.804878,
+    "width": 100.149081,
+    "rmse": 34.909616,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.926829,
+    "width": 95.470592,
+    "rmse": 24.569079,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.865854,
+    "width": 121.76149,
+    "rmse": 34.909616,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.939024,
+    "width": 23.843225,
+    "rmse": 34.76571,
+    "note": null
+   }
+  },
+  "PGBM": {
+   "NexCP Split": {
+    "coverage": 0.829268,
+    "width": 75.656372,
+    "rmse": 29.375592,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.865854,
+    "width": 84.393196,
+    "rmse": 29.375592,
+    "note": "17 of 82 intervals reach the edge of the y-grid (true interval may be wider); 2 empty sets (set to the point prediction)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.853659,
+    "width": 79.35794,
+    "rmse": 30.137605,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.853659,
+    "width": 82.205751,
+    "rmse": 30.616272,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.829268,
+    "width": 75.656372,
+    "rmse": 29.375592,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.878049,
+    "width": 85.645451,
+    "rmse": 29.375592,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.890244,
+    "width": 91.76732,
+    "rmse": 29.882607,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.914634,
+    "width": 115.990235,
+    "rmse": 29.375592,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.902439,
+    "width": 120.977245,
+    "rmse": 29.375592,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.878049,
+    "width": 88.271616,
+    "rmse": 29.375592,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.853659,
+    "width": 85.13705,
+    "rmse": 29.375592,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.829268,
+    "width": 75.656372,
+    "rmse": 29.375592,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.878049,
+    "width": 82.340025,
+    "rmse": 25.475245,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.878049,
+    "width": 95.230552,
+    "rmse": 29.375592,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.95122,
+    "width": 24.758829,
+    "rmse": 31.692133,
+    "note": null
+   },
+   "AlphaNet Conformal": {
+    "coverage": 0.5,
+    "width": 37.047527,
+    "rmse": 30.948713,
+    "note": null
+   }
+  },
+  "XGBoost": {
+   "AlphaNet Conformal": {
+    "coverage": 0.646341,
+    "width": 38.068058,
+    "rmse": 27.360496,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.719512,
+    "width": 62.773949,
+    "rmse": 28.743325,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.890244,
+    "width": 88.708443,
+    "rmse": 28.743325,
+    "note": "27 of 82 intervals reach the edge of the y-grid (true interval may be wider); 1 empty sets (set to the point prediction)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.841463,
+    "width": 76.173127,
+    "rmse": 28.726942,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.853659,
+    "width": 77.00077,
+    "rmse": 28.798963,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.719512,
+    "width": 62.773949,
+    "rmse": 28.743325,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.878049,
+    "width": 83.679658,
+    "rmse": 28.743325,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.890244,
+    "width": 86.179227,
+    "rmse": 28.617959,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.890244,
+    "width": 107.917149,
+    "rmse": 28.743325,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.890244,
+    "width": 97.876561,
+    "rmse": 28.743325,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.841463,
+    "width": 90.134437,
+    "rmse": 28.743325,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.865854,
+    "width": 85.975939,
+    "rmse": 28.743325,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.719512,
+    "width": 62.773949,
+    "rmse": 28.743325,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.890244,
+    "width": 81.196179,
+    "rmse": 23.70436,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.853659,
+    "width": 86.977891,
+    "rmse": 28.743325,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.95122,
+    "width": 23.826142,
+    "rmse": 31.305564,
+    "note": null
+   }
+  },
+  "GradientBoosting": {
+   "AlphaNet Conformal": {
+    "coverage": 0.47561,
+    "width": 44.612566,
+    "rmse": 35.49269,
+    "note": null
+   },
+   "NexCP Split": {
+    "coverage": 0.841463,
+    "width": 85.239033,
+    "rmse": 31.406096,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.804878,
+    "width": 106.66547,
+    "rmse": 31.406096,
+    "note": "27 of 82 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.890244,
+    "width": 88.498432,
+    "rmse": 31.154336,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.890244,
+    "width": 92.312088,
+    "rmse": 30.989806,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.841463,
+    "width": 85.748977,
+    "rmse": 31.406096,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.902439,
+    "width": 95.524312,
+    "rmse": 31.406096,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.902439,
+    "width": 94.400594,
+    "rmse": 30.617172,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.914634,
+    "width": 118.938155,
+    "rmse": 31.406096,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.890244,
+    "width": 117.85508,
+    "rmse": 31.406096,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.865854,
+    "width": 95.427727,
+    "rmse": 31.406096,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.865854,
+    "width": 92.059358,
+    "rmse": 31.406096,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.841463,
+    "width": 85.748977,
+    "rmse": 31.406096,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.926829,
+    "width": 92.389355,
+    "rmse": 28.368983,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.890244,
+    "width": 97.770013,
+    "rmse": 31.406096,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.926829,
+    "width": 17.145703,
+    "rmse": 31.917019,
+    "note": null
+   }
+  },
+  "TabNet": {
+   "NexCP Split": {
+    "coverage": 0.939024,
+    "width": 114.709724,
+    "rmse": 30.868891,
+    "note": null
+   },
+   "NexCP Full": {
+    "coverage": 0.987805,
+    "width": 221.482803,
+    "rmse": 30.868891,
+    "note": "62 of 82 intervals reach the edge of the y-grid (true interval may be wider)"
+   },
+   "NexCP Jackknife+ aB": {
+    "coverage": 0.926829,
+    "width": 98.514549,
+    "rmse": 25.280149,
+    "note": null
+   },
+   "NexCP CV+": {
+    "coverage": 0.987805,
+    "width": 132.653207,
+    "rmse": 25.417862,
+    "note": null
+   },
+   "Online Split": {
+    "coverage": 0.95122,
+    "width": 124.164612,
+    "rmse": 30.868891,
+    "note": null
+   },
+   "Online CV+": {
+    "coverage": 0.987805,
+    "width": 138.012886,
+    "rmse": 30.868891,
+    "note": null
+   },
+   "Online Jackknife+ aB": {
+    "coverage": 0.926829,
+    "width": 106.350057,
+    "rmse": 27.108769,
+    "note": null
+   },
+   "SAOCP": {
+    "coverage": 0.914634,
+    "width": 110.398715,
+    "rmse": 30.868891,
+    "note": null
+   },
+   "SF-OGD": {
+    "coverage": 0.902439,
+    "width": 118.122965,
+    "rmse": 30.868891,
+    "note": null
+   },
+   "FACI": {
+    "coverage": 0.914634,
+    "width": 101.392684,
+    "rmse": 30.868891,
+    "note": null
+   },
+   "ACI": {
+    "coverage": 0.939024,
+    "width": 119.220016,
+    "rmse": 30.868891,
+    "note": null
+   },
+   "MFCS Split": {
+    "coverage": 0.95122,
+    "width": 124.164612,
+    "rmse": 30.868891,
+    "note": null
+   },
+   "MFCS Full": {
+    "coverage": 0.914634,
+    "width": 118.568496,
+    "rmse": 38.428539,
+    "note": null
+   },
+   "COP": {
+    "coverage": 0.939024,
+    "width": 107.141406,
+    "rmse": 30.868891,
+    "note": null
+   },
+   "EXTREME CP": {
+    "coverage": 0.987805,
+    "width": 45.161573,
+    "rmse": 29.499482,
+    "note": null
+   },
+   "AlphaNet Conformal": {
+    "coverage": 0.52439,
+    "width": 49.752734,
+    "rmse": 34.603819,
+    "note": null
+   }
+  }
+ },
+ "nb6_readme": "# Notebook 6 results: water_quality_wqi (NexCP, Adaptive CP, MFCS)\n\nRun with FIX B15 (faster NexCP-Full: same intervals) and split into **one Kaggle job per model**,\nso each model fits inside Kaggle's 12-hour limit. Every job runs the notebook's common cells,\nthen only that model's section. Each executed notebook is renamed after its model.\n\n| Model | Kaggle run | Files |\n|---|---|---|\n| NGBoost | REG23_11_2026_08_59 | `EXECUTED_NGBoost.ipynb`, `NGBoost.xlsx` |\n| TabNet | REG23_11_2026_09_10 | `EXECUTED_TabNet.ipynb`, `TabNet.xlsx` |\n| PGBM | REG23_11_2026_10_06 | `EXECUTED_PGBM.ipynb`, `PGBM.xlsx` |\n| GradientBoosting | REG23_11_2026_10_09 | `EXECUTED_GradientBoosting.ipynb`, `Gradient Boosting.xlsx` |\n| CatBoost | REG23_11_2026_10_18 | `EXECUTED_CatBoost.ipynb`, `CatBoost.xlsx` |\n| XGBoost | REG23_11_2026_10_23 | `EXECUTED_XGBoost.ipynb`, `XGBoost.xlsx` |\n| Lightgbm | REG23_11_2026_11_07 | `EXECUTED_Lightgbm.ipynb`, `LightGBM.xlsx` |\n| GPBoost | REG23_11_2026_11_12 | `EXECUTED_GPBoost.ipynb`, `GPBoost.xlsx` |\n| HistGradientBoosting | REG23_11_2026_11_21 | `EXECUTED_HistGradientBoosting.ipynb`, `HGBM.xlsx` |\n",
  "acp": {
   "LightGBM": {
    "coverage": 0.54878,

@@ -13,7 +13,7 @@ conclusions and the links to the Kaggle runs that produced the numbers.
 | Streamflow | [paper.pdf](streamflow/paper.pdf) | [paper.tex](streamflow/paper.tex) |
 | Water quality (EWQI) | [paper.pdf](water_quality_ewqi/paper.pdf) | [paper.tex](water_quality_ewqi/paper.tex) |
 | Pile settlement | in progress (notebook 6 running) | |
-| Water quality (WQI) | in progress (notebook 6 running) | |
+| Water quality (WQI) | [paper.pdf](water_quality_wqi/paper.pdf) | [paper.tex](water_quality_wqi/paper.tex) |
 
 Every report is generated from the stored results by [`tools/reports/`](../tools/reports/), so
 the numbers in the text, tables and figures are the ones in the Excel files.
