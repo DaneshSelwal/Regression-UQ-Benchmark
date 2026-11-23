@@ -1,12 +1,19 @@
-# Not run — out of compute
+# Notebook 6 results: sediment_load (NexCP, Adaptive CP, MFCS)
 
-This notebook (NexCP, Adaptive CP, MFCS) was **not run** for sediment_load.
+Run with FIX B15 (faster NexCP-Full: same intervals) and split into **one Kaggle job per model**,
+so each model fits inside Kaggle's 12-hour limit. Every job runs the notebook's common cells,
+then only that model's section. Each executed notebook is renamed after its model.
 
-- sediment_load has 1095 training and 365 test rows, the largest dataset here.
-- NexCP-Full refits the model for many candidate values at every test point. Even with FIX B15
-  (edge scan + measured workers), the whole notebook is estimated at about 200 hours of CPU time;
-  its slowest model alone would need about 48 hours. A Kaggle run stops after 12 hours.
-- The online methods in the same notebook process the test points in order, so the run cannot be
-  split into smaller jobs by test points.
+| Model | Kaggle run | Files |
+|---|---|---|
+| NGBoost | REG23_11_2026_13_40 | `EXECUTED_NGBoost.ipynb`, `NGBoost.xlsx` |
+| GradientBoosting | REG23_11_2026_14_42 | `EXECUTED_GradientBoosting.ipynb`, `Gradient Boosting.xlsx` |
+| CatBoost | REG23_11_2026_14_49 | `EXECUTED_CatBoost.ipynb`, `CatBoost.xlsx` |
+| XGBoost | REG23_11_2026_14_54 | `EXECUTED_XGBoost.ipynb`, `XGBoost.xlsx` |
+| Lightgbm | REG23_11_2026_15_01 | `EXECUTED_Lightgbm.ipynb`, `LightGBM.xlsx` |
+| GPBoost | REG23_11_2026_15_04 | `EXECUTED_GPBoost.ipynb`, `GPBoost.xlsx` |
+| HistGradientBoosting | REG23_11_2026_15_09 | `EXECUTED_HistGradientBoosting.ipynb`, `HGBM.xlsx` |
 
-All the other notebooks were run for sediment_load. The same notebook was run for every other dataset.
+**Not run (out of compute):** TabNet, PGBM.
+
+NexCP-Full was not run for any model (out of compute, FIX B16): its rows show empty values with the note 'not run: out of compute'. Every other method was run. TabNet and PGBM were skipped by decision (slow models, out of compute).
