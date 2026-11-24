@@ -1,3 +1,5 @@
+> **Note.** This theory note was written for the v1.2 notebooks and is kept for reference. The v2.0 method guide, which matches the code as it ran, is [`README.md`](README.md) in this folder; every code change is listed in [`docs/CHANGELOG_FIXES.md`](../../docs/CHANGELOG_FIXES.md).
+
 # Hyperspherical Confidence Mapping (HCM): Theory & Implementation Summary
 
 > **One-line description:** A regression uncertainty method that maps 1D targets to higher-dimensional hyperspheres to independently predict target magnitude and direction, using the predicted direction's norm deviation to estimate predictive uncertainty.

@@ -1,3 +1,5 @@
+> **Note.** This theory note was written for the v1.2 notebooks and is kept for reference. The v2.0 method guide, which matches the code as it ran, is [`README.md`](README.md) in this folder; every code change is listed in [`docs/CHANGELOG_FIXES.md`](../../docs/CHANGELOG_FIXES.md).
+
 # Adaptive Coverage Policies (ACP): Theory & Implementation Summary
 
 > **One-line description:** Adaptive Coverage Policies (ACP) treats the miscoverage rate $\alpha$ as a learnable parameter, optimizing a differentiable proxy of the interval size penalized by $\alpha$ to find a dataset-specific optimal confidence level.

@@ -12,13 +12,21 @@ re-run.
 | `figures.py` | Matplotlib figures (PNG for READMEs, PDF for the papers). |
 | `make_reports.py <repo> dataset ...` | Writes `papers/<dataset>/` (LaTeX, figures, PDF via [tectonic](https://tectonic-typesetting.github.io)) and `examples/<dataset>_uncertainty_analysis/README.md`. |
 | `cross.py <repo> dataset ...` | Prints the cross-dataset table and writes `docs/figures/*_heatmap.png`. |
+| `study.py <repo>` | Cross-dataset tables `results/benchmark_*.csv` and figures `docs/figures/fig_*.png/pdf` (pipeline, datasets, conformal explainer, validity tolerance, family validity, model-based coverage, ranking, ACP/HCM, recommended). |
+| `texblocks.py` | Shared LaTeX text: set-up and notation, methods with maths, evaluation protocol, limitations, future work. |
+| `paper_benchmark.py <repo>` | The cross-dataset paper `papers/benchmark/`. |
 | `references.bib` | Bibliography used by every report. |
+
+`make_reports.py` also writes a README in every phase folder (`examples/<dataset>_uncertainty_analysis/<phase>/README.md`).
 
 ```bash
 cd tools/reports
+DS="concrete noise pile pile_settlement scour sediment_load streamflow water_quality_ewqi water_quality_wqi"
 python build_summary.py ../.. summary            # all datasets
-python make_reports.py ../.. concrete noise ...
-python cross.py ../.. concrete noise ...
+python study.py ../..                            # cross-dataset figures + results/*.csv (needed by the papers)
+python cross.py ../.. $DS                        # heatmaps
+python make_reports.py ../.. $DS                 # per-dataset papers + READMEs
+python paper_benchmark.py ../..                  # benchmark paper
 ```
 
 **Rules used in the reports.** Target coverage 90% (α = 0.1). An interval is *valid* when its

@@ -1,3 +1,5 @@
+> **Note.** This theory note was written for the v1.2 notebooks and is kept for reference. The v2.0 method guide, which matches the code as it ran, is [`README.md`](README.md) in this folder; every code change is listed in [`docs/CHANGELOG_FIXES.md`](../../docs/CHANGELOG_FIXES.md).
+
 # Optuna Hyperparameter Optimization and Explainability: Theory & Implementation Summary
 
 > **One-line description:** An automated hyperparameter tuning framework using Optuna's Tree-structured Parzen Estimator (TPE) combined with LIME and SHAP for model interpretability in regression tasks.

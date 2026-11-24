@@ -1,3 +1,5 @@
+> **Note.** This theory note was written for the v1.2 notebooks and is kept for reference. The v2.0 method guide, which matches the code as it ran, is [`README.md`](README.md) in this folder; every code change is listed in [`docs/CHANGELOG_FIXES.md`](../../docs/CHANGELOG_FIXES.md).
+
 # Conformal Predictions (NEXCP, Adaptive CP, mfcs): Theory & Implementation Summary
 
 > **One-line description:** A comprehensive suite of adaptive conformal prediction algorithms—including Non-Exchangeable Conformal Prediction (NEXCP), Online Conformal Prediction, Conformal Optimistic Prediction (COP), and Extreme Conformal Prediction—designed to provide valid, dynamically adjusting predictive intervals for regression under distribution drift and extreme value scenarios.
