@@ -1,6 +1,6 @@
 # Sediment load · NB4 Distributional (CARD diffusion)
 
-[← Sediment load README](../README.md) · [method guide](../../../notebooks/04_probabilistic_distribution_card/README.md) · [report (PDF)](../../../papers/sediment_load/paper.pdf)
+[← Sediment load README](../README.md) · [method guide](../../../notebooks/04_probabilistic_distribution_card/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

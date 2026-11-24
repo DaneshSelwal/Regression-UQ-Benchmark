@@ -1,6 +1,6 @@
 # Pile settlement · NB5 Conformal (MAPIE, PUNCC)
 
-[← Pile settlement README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../../../papers/pile_settlement/paper.pdf)
+[← Pile settlement README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

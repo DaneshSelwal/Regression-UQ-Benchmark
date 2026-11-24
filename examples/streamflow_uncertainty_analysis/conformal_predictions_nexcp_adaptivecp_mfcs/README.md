@@ -1,6 +1,6 @@
 # Streamflow · NB6 NexCP and online conformal
 
-[← Streamflow README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../../../papers/streamflow/paper.pdf)
+[← Streamflow README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

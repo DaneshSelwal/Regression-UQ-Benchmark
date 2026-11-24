@@ -15,7 +15,7 @@
 \rho_\tau(r)=r\,\bigl(\tau-\mathbb 1\{r<0\}\bigr)=\begin{cases}\tau\,r & r\ge 0\\ (\tau-1)\,r & r<0\end{cases},\qquad r=y-q
 ```
 
-*In words: a prediction below the truth costs $`\tau`$ per unit, a prediction above it costs $`1-\tau`$.* For
+**Interpretation.** A prediction below the truth costs $`\tau`$ per unit, a prediction above it costs $`1-\tau`$. For
 $`\tau=0.95`$ under-predicting is 19 times as expensive as over-predicting, so the model is pushed up until only 5% of the
 points lie above it. Formally, the derivative of $`\mathbb E\,\rho_\tau(Y-q)`$ in $`q`$ is $`\Pr(Y<q)-\tau`$, which is zero exactly at
 the $`\tau`$-quantile.

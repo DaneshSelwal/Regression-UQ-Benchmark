@@ -1,6 +1,6 @@
 # Pile · NB3 Distributional (NGBoost, PGBM, IBUG, Treeffuser)
 
-[← Pile README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../../../papers/pile/paper.pdf)
+[← Pile README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

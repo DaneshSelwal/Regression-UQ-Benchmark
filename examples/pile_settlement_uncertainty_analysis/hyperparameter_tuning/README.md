@@ -1,6 +1,6 @@
 # Pile settlement · NB1 Hyperparameter tuning (Optuna)
 
-[← Pile settlement README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../../../papers/pile_settlement/paper.pdf)
+[← Pile settlement README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

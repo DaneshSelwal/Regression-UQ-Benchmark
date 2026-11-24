@@ -1,6 +1,6 @@
 # Sediment load · NB7 Adaptive coverage policies (ACP)
 
-[← Sediment load README](../README.md) · [method guide](../../../notebooks/07_adaptive_coverage_policies/README.md) · [report (PDF)](../../../papers/sediment_load/paper.pdf)
+[← Sediment load README](../README.md) · [method guide](../../../notebooks/07_adaptive_coverage_policies/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

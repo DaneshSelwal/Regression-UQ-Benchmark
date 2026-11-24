@@ -493,6 +493,17 @@ only `properscoring` and `XlsxWriter` are installed. The Colab blocks are unchan
 ### B7 (non-math): output folder on Kaggle
 On Kaggle, outputs now go to the same `./drive/MyDrive/Regression/<dataset>/...` tree as the other notebooks.
 
+### H1: training schedule too short for small tabular datasets (approved 2026-11-24)
+- **Before:** `epochs = 200`, `patience = 40`, with batch size 64 and learning rate 1e-4. On a dataset of a few hundred rows
+  this is only a few hundred optimiser steps. On concrete the validation MSE fell only from 0.623 to 0.552 and was still
+  falling at epoch 200; the network predicted nearly the same value (about 36 MPa, spread 0.4 MPa) for every mix
+  (RMSE 9.8 MPa against a target standard deviation of 10.0 MPa), and σ̂ was negatively correlated with the error.
+- **Why:** the network had not converged, so neither its predictions nor its uncertainty could be assessed. The learning
+  rate, batch size, weight decay and architecture follow the HCM paper and are unchanged.
+- **After:** `epochs = 5000` (an upper limit) and `patience = 200`. Early stopping on the validation split, with restoration
+  of the best weights, ends training once the validation error stops improving. On concrete training now stops at epoch 912
+  (best epoch 712, validation MSE 0.164); RMSE 5.6 MPa, Spearman(σ̂, error) +0.18. Run time remains about one minute per dataset.
+
 ---
 
 ## All notebooks

@@ -55,6 +55,16 @@ def main(R):
         ok = [v for v in ac.values() if (v.get("Target_coverage") or 1) >= 0.01]
         ah.append(f"{tex(ST.NAMES[ds])} & {sat}/{len(ac)} & {pct(np.mean([v['Target_coverage'] for v in ok])) if ok else '--'} & {pct(np.mean([v['coverage'] for v in ok])) if ok else '--'} & "
                   f"{pct(h.get('Coverage_95Interval'))} & {f(h.get('Spearman'), 2)}\\\\")
+    hs = {ds: (S[ds].get("hcm") or {}) for ds in ST.DS}
+    hsp = [h.get("Spearman") for h in hs.values() if h.get("Spearman") is not None]
+    hcv = [h.get("Coverage_95Interval") for h in hs.values() if h.get("Coverage_95Interval") is not None]
+    hval = sum((h.get("Coverage_95Interval") or 0) >= 0.95 - 1.645 * np.sqrt(0.0475 / S[ds]["data"]["n_test"]) for ds, h in hs.items())
+    hworse = sum((h.get("RMSE") or 0) > 1.005 * min((v.get("test_rmse") or 1e18) for v in S[ds]["tuning"].values()) for ds, h in hs.items())
+    hcm_txt = (f"HCM was trained with the extended schedule of fix H1 (up to 5{{,}}000 epochs with early stopping on a validation split). Its 95\\% interval "
+               f"covers {pct(min(hcv))}--{pct(max(hcv))} of the test points and is valid at the 95\\% level on {hval} of {len(hcv)} datasets. The Spearman correlation "
+               f"between its predicted spread and the absolute error is positive on {sum(v > 0 for v in hsp)} of {len(hsp)} datasets (range {min(hsp):.2f} to {max(hsp):.2f}; "
+               f"Fig.~\\ref{{fig:acphcm}}, right): the single-network uncertainty is informative, but only moderately. Its point predictions are less accurate than "
+               f"the best tuned model on {hworse} of {len(hsp)} datasets (test RMSE).")
     t_ah = tab("Adaptive coverage policies (ACP) and HCM per dataset. Saturated: models whose policy sits at $\\tilde\\alpha=0.999$; target and coverage are means over the other models.",
                "tab:acphcm", "lrrrrr", "Dataset & ACP saturated & ACP target & ACP coverage & HCM 95\\% cov. & HCM Spearman", ah, resize=True)
     nr = ("Two sets of jobs exceeded Kaggle's 12-hour limit and were not re-run (not enough compute): Notebook 6 for TabNet and PGBM on sediment load "
@@ -180,8 +190,7 @@ FACI or MFCS) and pick the narrowest on held-out data, rather than commit to one
 \begin{figure}[t]\centering\includegraphics[width=\linewidth]{figures/fig_acp_hcm.pdf}\caption{Left: ACP realised coverage against its learned target. Right: HCM's Spearman correlation between absolute error and predicted spread.}\label{fig:acphcm}\end{figure}
 ACP's guarantee is relative to its own learned level, and its realised coverage is always above that level (Fig.~\ref{fig:acphcm}, left). On
 sediment load and streamflow, and for four models on EWQI, the policy saturated at $\tilde\alpha=0.999$: the learned level then carries no information and
-every set has the same width. HCM's 95\% interval covers 80--100\%, but its predicted spread is negatively correlated with the error, or not at all, on six of
-nine datasets (Fig.~\ref{fig:acphcm}, right), so on these small tabular problems a single network does not know when it is wrong.
+every set has the same width. """ + hcm_txt + r"""
 
 \section{Discussion}\label{sec:discussion}
 \paragraph{A practical recipe.} (1) Tune the base model by cross-validation only. (2) Wrap it in jackknife+-after-bootstrap or CV+; these are valid
@@ -199,7 +208,7 @@ exactly this, and they recover coverage on pile settlement (MFCS Full is recomme
 \item The sharpest valid method depends on the dataset; J+aB, FACI, MFCS Full, NexCP J+aB and split conformal are each recommended at least once.
 \item Learned-coverage policies can saturate, and single-network uncertainty is not reliably informative on small tabular data.
 \end{itemize}
-\paragraph{Per-dataset reports.} \texttt{papers/<dataset>/paper.pdf} for """ + ", ".join(tex(ST.NAMES[d]) for d in ST.DS) + r""".
+\paragraph{Per-dataset reports.} \texttt{examples/<dataset>\_uncertainty\_analysis/report/paper.pdf} for """ + ", ".join(tex(ST.NAMES[d]) for d in ST.DS) + r""".
 \paragraph{Reproducibility.} Code, executed notebooks and raw outputs: \url{""" + REPO + r"""} (branch \texttt{version2.0}). Machine-readable results:
 \url{results/benchmark_long.csv} (every interval), \url{benchmark_methods.csv}, \url{benchmark_datasets.csv}. Every Kaggle run is listed in
 \url{docs/run_registry.tsv} and in each dataset's report.

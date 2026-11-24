@@ -1,6 +1,6 @@
 # Water quality (WQI) · NB7 Adaptive coverage policies (ACP)
 
-[← Water quality (WQI) README](../README.md) · [method guide](../../../notebooks/07_adaptive_coverage_policies/README.md) · [report (PDF)](../../../papers/water_quality_wqi/paper.pdf)
+[← Water quality (WQI) README](../README.md) · [method guide](../../../notebooks/07_adaptive_coverage_policies/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

@@ -1,6 +1,6 @@
 # Concrete · NB2 Quantile regression
 
-[← Concrete README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../../../papers/concrete/paper.pdf)
+[← Concrete README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

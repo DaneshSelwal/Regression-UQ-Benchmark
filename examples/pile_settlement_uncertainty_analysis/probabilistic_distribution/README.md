@@ -1,6 +1,6 @@
 # Pile settlement · NB3 Distributional (NGBoost, PGBM, IBUG, Treeffuser)
 
-[← Pile settlement README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../../../papers/pile_settlement/paper.pdf)
+[← Pile settlement README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

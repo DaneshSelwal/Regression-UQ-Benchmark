@@ -1,6 +1,6 @@
 # Scour · NB1 Hyperparameter tuning (Optuna)
 
-[← Scour README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../../../papers/scour/paper.pdf)
+[← Scour README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

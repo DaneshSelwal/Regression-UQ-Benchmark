@@ -1,6 +1,6 @@
 # Water quality (WQI) · NB1 Hyperparameter tuning (Optuna)
 
-[← Water quality (WQI) README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../../../papers/water_quality_wqi/paper.pdf)
+[← Water quality (WQI) README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

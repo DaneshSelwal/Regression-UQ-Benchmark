@@ -30,8 +30,10 @@ One scale factor is fitted on a validation split so that $`\pm1,2,3\hat\sigma`$ 
 
 ## 3. What to expect
 
-Across the nine datasets the 95% interval covers 80–100%, but the predicted spread is negatively correlated with the actual error,
-or not at all, on six of the nine (Spearman between −0.57 and 0.0): on small tabular problems this single network does not reliably
-know when it is wrong.
+With the training schedule of fix H1 (up to 5,000 epochs, early stopping with patience 200), the network converges on eight of
+the nine datasets; on water quality (EWQI, 47 training rows) the validation error does not improve after the first epoch. Across the
+nine datasets the 95% interval covers 78.9–97.9% and is valid on four; the Spearman correlation between the predicted spread and
+the absolute error is positive on all nine (0.12–0.56). The uncertainty estimate is therefore informative but weak, and the
+intervals require calibration.
 
-**Fixes in v2.0:** K1, B6 (silent fallback to synthetic data removed), B7. **Reference:** Choi et al. 2026 (ICLR).
+**Fixes in v2.0:** K1, B6 (silent fallback to synthetic data removed), B7, H1 (training schedule extended). **Reference:** Choi et al. 2026 (ICLR).

@@ -1,6 +1,6 @@
 # Sediment load · NB6 NexCP and online conformal
 
-[← Sediment load README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../../../papers/sediment_load/paper.pdf)
+[← Sediment load README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

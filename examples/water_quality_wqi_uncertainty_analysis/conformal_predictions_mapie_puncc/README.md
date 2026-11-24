@@ -1,6 +1,6 @@
 # Water quality (WQI) · NB5 Conformal (MAPIE, PUNCC)
 
-[← Water quality (WQI) README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../../../papers/water_quality_wqi/paper.pdf)
+[← Water quality (WQI) README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

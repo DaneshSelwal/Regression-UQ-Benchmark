@@ -19,8 +19,8 @@ All methods start from **out-of-fold** training residuals (5-fold): each trainin
 \tilde w_i=\frac{w_i}{\sum_j w_j+1},\quad w_i=\rho^{\,n+1-i},\ \rho=0.99
 ```
 
-*In words: a weighted version of split conformal in which old residuals count less; the mass at $`+\infty`$ plays the role of
-the "+1".* Barber et al. (2023) show coverage $`\ge 1-\alpha-\sum_i\tilde w_i\,d_{\mathrm{TV}}(Z,Z^i)`$: exact under
+**Interpretation.** A weighted version of split conformal in which old residuals count less; the mass at $`+\infty`$ plays the role of
+the "+1". Barber et al. (2023) show coverage $`\ge 1-\alpha-\sum_i\tilde w_i\,d_{\mathrm{TV}}(Z,Z^i)`$: exact under
 exchangeability, and only slightly below under slow drift. **Full** NexCP refits the model with each of 50 candidate labels for
 every test point and keeps those that conform (expensive: switched off on sediment load, FIX B16). If a Full interval reaches the
 edge of its grid, its width is a lower bound (marked †, not ranked).

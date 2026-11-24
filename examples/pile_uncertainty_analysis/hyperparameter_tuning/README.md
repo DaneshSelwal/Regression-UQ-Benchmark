@@ -1,6 +1,6 @@
 # Pile · NB1 Hyperparameter tuning (Optuna)
 
-[← Pile README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../../../papers/pile/paper.pdf)
+[← Pile README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

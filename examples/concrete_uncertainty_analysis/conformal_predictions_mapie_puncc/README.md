@@ -1,6 +1,6 @@
 # Concrete · NB5 Conformal (MAPIE, PUNCC)
 
-[← Concrete README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../../../papers/concrete/paper.pdf)
+[← Concrete README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

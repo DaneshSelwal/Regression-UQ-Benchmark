@@ -1,6 +1,6 @@
 # Streamflow · NB1 Hyperparameter tuning (Optuna)
 
-[← Streamflow README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../../../papers/streamflow/paper.pdf)
+[← Streamflow README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

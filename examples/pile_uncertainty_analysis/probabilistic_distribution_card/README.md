@@ -1,6 +1,6 @@
 # Pile · NB4 Distributional (CARD diffusion)
 
-[← Pile README](../README.md) · [method guide](../../../notebooks/04_probabilistic_distribution_card/README.md) · [report (PDF)](../../../papers/pile/paper.pdf)
+[← Pile README](../README.md) · [method guide](../../../notebooks/04_probabilistic_distribution_card/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

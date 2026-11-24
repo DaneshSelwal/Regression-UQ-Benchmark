@@ -1,6 +1,6 @@
 # Water quality (WQI) · NB4 Distributional (CARD diffusion)
 
-[← Water quality (WQI) README](../README.md) · [method guide](../../../notebooks/04_probabilistic_distribution_card/README.md) · [report (PDF)](../../../papers/water_quality_wqi/paper.pdf)
+[← Water quality (WQI) README](../README.md) · [method guide](../../../notebooks/04_probabilistic_distribution_card/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

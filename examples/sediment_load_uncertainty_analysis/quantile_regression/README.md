@@ -1,6 +1,6 @@
 # Sediment load · NB2 Quantile regression
 
-[← Sediment load README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../../../papers/sediment_load/paper.pdf)
+[← Sediment load README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

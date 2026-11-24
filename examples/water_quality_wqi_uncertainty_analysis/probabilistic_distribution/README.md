@@ -1,6 +1,6 @@
 # Water quality (WQI) · NB3 Distributional (NGBoost, PGBM, IBUG, Treeffuser)
 
-[← Water quality (WQI) README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../../../papers/water_quality_wqi/paper.pdf)
+[← Water quality (WQI) README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

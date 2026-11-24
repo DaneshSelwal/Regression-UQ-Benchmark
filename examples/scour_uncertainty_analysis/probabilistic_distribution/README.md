@@ -1,6 +1,6 @@
 # Scour · NB3 Distributional (NGBoost, PGBM, IBUG, Treeffuser)
 
-[← Scour README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../../../papers/scour/paper.pdf)
+[← Scour README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

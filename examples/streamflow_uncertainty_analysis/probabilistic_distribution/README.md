@@ -1,6 +1,6 @@
 # Streamflow · NB3 Distributional (NGBoost, PGBM, IBUG, Treeffuser)
 
-[← Streamflow README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../../../papers/streamflow/paper.pdf)
+[← Streamflow README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

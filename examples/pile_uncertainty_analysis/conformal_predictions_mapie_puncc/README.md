@@ -1,6 +1,6 @@
 # Pile · NB5 Conformal (MAPIE, PUNCC)
 
-[← Pile README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../../../papers/pile/paper.pdf)
+[← Pile README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

@@ -1,6 +1,6 @@
 # Streamflow · NB4 Distributional (CARD diffusion)
 
-[← Streamflow README](../README.md) · [method guide](../../../notebooks/04_probabilistic_distribution_card/README.md) · [report (PDF)](../../../papers/streamflow/paper.pdf)
+[← Streamflow README](../README.md) · [method guide](../../../notebooks/04_probabilistic_distribution_card/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

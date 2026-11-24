@@ -1,6 +1,6 @@
 # Water quality (EWQI) · NB6 NexCP and online conformal
 
-[← Water quality (EWQI) README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../../../papers/water_quality_ewqi/paper.pdf)
+[← Water quality (EWQI) README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

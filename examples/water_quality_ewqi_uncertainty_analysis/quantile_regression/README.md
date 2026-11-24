@@ -1,6 +1,6 @@
 # Water quality (EWQI) · NB2 Quantile regression
 
-[← Water quality (EWQI) README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../../../papers/water_quality_ewqi/paper.pdf)
+[← Water quality (EWQI) README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

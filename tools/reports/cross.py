@@ -8,7 +8,7 @@ R = sys.argv[1]; dss = sys.argv[2:]; rows = []; cov = {}; wid = {}
 for ds in dss:
     F_ = M.facts(R, ds); S = F_["S"]; L = F_["L"]; rec = F_["rec"]
     rows.append(f"| [{M.NAMES[ds]}](examples/{ds}_uncertainty_analysis/) | {S['data']['n_train']} / {F_['n']} | {F_['best']} | "
-                f"{M.pmd(F_['qr'].coverage.median())} | {rec['label']} | {M.pmd(rec.cov_med)} | {rec.relw_med:.2f} | [PDF](papers/{ds}/paper.pdf) |")
+                f"{M.pmd(F_['qr'].coverage.median())} | {rec['label']} | {M.pmd(rec.cov_med)} | {rec.relw_med:.2f} | [PDF](examples/{ds}_uncertainty_analysis/report/paper.pdf) |")
     g = L[L.n >= 3].set_index("label"); cov[M.NAMES[ds]] = g.cov_med; wid[M.NAMES[ds]] = g.relw_med
 print("\n".join(rows))
 C = pd.DataFrame(cov); W = pd.DataFrame(wid)

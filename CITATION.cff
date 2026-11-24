@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this benchmark or its results, please cite it as below, together with the original papers of the methods you use."
-title: "How Far Can a Regression Prediction Be Trusted? A Benchmark of Uncertainty Quantification Methods on Nine Engineering and Environmental Datasets"
+title: "Regression Uncertainty Quantification Benchmark: Over Thirty Methods on Nine Engineering and Environmental Datasets"
 type: software
 authors:
   - family-names: Selwal

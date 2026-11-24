@@ -1,6 +1,6 @@
 # Noise · NB1 Hyperparameter tuning (Optuna)
 
-[← Noise README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../../../papers/noise/paper.pdf)
+[← Noise README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

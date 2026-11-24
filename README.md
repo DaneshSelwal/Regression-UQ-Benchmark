@@ -1,557 +1,397 @@
 <div align="center">
 
-# How Far Can a Regression Prediction Be Trusted?
+# Regression Uncertainty Quantification Benchmark
 
-### A benchmark of 30+ uncertainty-quantification methods × 9 tuned regressors × 9 engineering and environmental datasets
+### Over 30 uncertainty-quantification methods evaluated with 9 tuned regressors on 9 engineering and environmental datasets
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-2a78d6)](LICENSE)
 ![Datasets](https://img.shields.io/badge/datasets-9-2a78d6)
 ![Base models](https://img.shields.io/badge/tuned%20regressors-9%2B1-2a78d6)
 ![UQ methods](https://img.shields.io/badge/UQ%20methods-30%2B-eb6834)
-![Intervals checked](https://img.shields.io/badge/intervals%20checked-1%2C800-1baf7a)
+![Intervals evaluated](https://img.shields.io/badge/intervals%20evaluated-1%2C800-1baf7a)
 ![Compute](https://img.shields.io/badge/compute-Kaggle%20CPU-20BEFF)
-[![Paper](https://img.shields.io/badge/paper-PDF-b31b1b)](papers/benchmark/paper.pdf)
+[![Paper](https://img.shields.io/badge/benchmark%20paper-PDF-b31b1b)](papers/benchmark/paper.pdf)
 [![Version](https://img.shields.io/badge/version-2.0-1baf7a)](https://github.com/DaneshSelwal/Regression-UQ-Benchmark/releases)
 
-<img src="docs/figures/fig_recommended.png" width="100%" alt="Width of every conformal method, raw quantile regression and the recommended method on each dataset">
+<img src="docs/figures/concrete/c9_overall.png" width="85%" alt="Coverage and relative width of every 90% interval on the concrete dataset">
 
 </div>
 
-<sub>Repository formerly named <code>Regression_Uncertainty_Quantification_Analysis</code>; old links redirect here.</sub>
+<sub>Repository formerly named <code>Regression_Uncertainty_Quantification_Analysis</code>; former links redirect here.</sub>
 
-> **Abstract.** A regression model always returns a number, even when it should not be trusted. We attach **more than
-> thirty uncertainty-quantification (UQ) methods** to **nine tuned regressors** and check every 90% prediction interval on
-> held-out data from **nine engineering and environmental datasets** (concrete strength, noise, pile capacity, pile
-> settlement, bridge scour, sediment load, streamflow and two water-quality indices). The methods range from quantile
-> regression and predictive distributions (NGBoost, PGBM, IBUG, Treeffuser, CARD diffusion) to split, cross, bootstrap,
-> weighted and online conformal prediction, learned-coverage policies and single-network uncertainty.
+> **Abstract.** A regression model returns a point prediction without indicating how far that prediction can be trusted.
+> This repository evaluates **more than thirty uncertainty-quantification (UQ) methods**, applied to **nine tuned regressors**,
+> on **nine engineering and environmental datasets**. The methods cover quantile regression, parametric and generative
+> predictive distributions (NGBoost, PGBM, IBUG, Treeffuser, CARD), split, cross-validation, bootstrap, weighted and online
+> conformal prediction, learned coverage policies and single-network uncertainty. Every 90% prediction interval is assessed
+> on held-out data for validity (coverage within sampling tolerance of 90%) and sharpness (width).
 >
-> Four findings stand out:
-> 1. **Model-based intervals are not reliable.** Raw quantile regression covers a median of only 58–90% of test points, and
->    native NGBoost and PGBM Gaussians are over-confident on most datasets (PGBM: 2–42% on eight of nine).
-> 2. **Conformal intervals keep their promise.** They are valid in **1,480 of 1,557** dataset × model × method cases (95%).
-> 3. **Validity is easy, sharpness is not.** Valid methods differ in width by a factor of two or more, and the sharpest one
->    changes with the data (J+aB, FACI, MFCS, NexCP J+aB, split CP).
-> 4. **Learned coverage and single-network UQ need care.** ACP's policy saturates on two datasets, and HCM's uncertainty is
->    negatively correlated with the error, or not at all, on six of nine.
+> The analysis is presented in detail on the **concrete compressive-strength dataset** (Section 2), one page per notebook.
+> On that dataset, raw quantile regression and the native predictive distributions undercover for most models, whereas all
+> 171 ranked conformal intervals are valid; the sharpest valid intervals are obtained with J+aB and, when labels are revealed
+> sequentially, with online methods (MFCS Full, FACI, COP). The same conclusions hold across the nine datasets (Section 3):
+> conformal intervals are valid in 1,480 of 1,557 cases (95%), and the sharpest valid method depends on the dataset.
 >
-> Every number here is read from executed Kaggle notebooks committed to this repository. The full write-up, with the
-> mathematics of every method, is the **[benchmark paper (PDF)](papers/benchmark/paper.pdf)**; each dataset has its own report.
+> All numbers are read from executed Kaggle notebooks stored in this repository. A report per dataset and a cross-dataset
+> **[benchmark paper](papers/benchmark/paper.pdf)** give the full mathematical treatment.
 
 ---
 
 ## Contents
 
-1. [Key findings](#1-key-findings)
-2. [Why uncertainty matters for regression](#2-why-uncertainty-matters-for-regression)
-3. [Results at a glance](#3-results-at-a-glance)
-4. [The pipeline](#4-the-pipeline)
-5. [The nine datasets](#5-the-nine-datasets)
-6. [Methods in clear words](#6-methods-in-clear-words)
-7. [How the intervals are judged](#7-how-the-intervals-are-judged)
-8. [Results, question by question](#8-results-question-by-question)
-9. [Worked example: concrete](#9-worked-example-concrete)
-10. [Discussion, recommendations and limitations](#10-discussion-recommendations-and-limitations)
-11. [Reproducing the results](#11-reproducing-the-results)
-12. [Repository map](#12-repository-map)
-13. [What changed in version 2.0](#13-what-changed-in-version-20)
-14. [Future work: the `reguq` library](#14-future-work-the-reguq-library)
-15. [Resources, citation and license](#15-resources-citation-and-license)
+1. [Overview and pipeline](#1-overview-and-pipeline)
+2. [Case study: concrete compressive strength](#2-case-study-concrete-compressive-strength)
+3. [Results on all nine datasets](#3-results-on-all-nine-datasets)
+4. [Methods](#4-methods)
+5. [Evaluation protocol](#5-evaluation-protocol)
+6. [Reproducing the results](#6-reproducing-the-results)
+7. [Repository structure](#7-repository-structure)
+8. [Changes in version 2.0](#8-changes-in-version-20)
+9. [Limitations](#9-limitations)
+10. [Future work: the `reguq` library](#10-future-work-the-reguq-library)
+11. [Citation, license and authors](#11-citation-license-and-authors)
 
 ---
 
-## 1. Key findings
+## 1. Overview and pipeline
 
-| # | Finding | Evidence | Details |
-|:-:|---|---|---|
-| F1 | **Raw quantile regression undercovers.** Median coverage of the 90% interval is 58–90% across datasets; the 13 separately fitted quantiles cross on most test points | [Fig. 5](#81-rq1--do-model-based-intervals-reach-90) | [NB2 guide](notebooks/02_quantile_regression/README.md) |
-| F2 | **Native Gaussian distributions are over-confident.** NGBoost is invalid on 7 of 9 datasets, PGBM on 8 of 9 (coverage 2–42%); their PIT histograms are U-shaped | [Fig. 5](#81-rq1--do-model-based-intervals-reach-90) | [NB3 guide](notebooks/03_probabilistic_distribution/README.md) |
-| F3 | **A good CRPS is not a good interval.** CARD's diffusion distributions are sharp (median width 0.26 × std(y)) but only 15% of its intervals are valid | [§8.1](#81-rq1--do-model-based-intervals-reach-90) | [NB4 guide](notebooks/04_probabilistic_distribution_card/README.md) |
-| F4 | **Conformal methods are valid almost everywhere**: 1,480 of 1,557 cases (95%) | [Fig. 6](#82-rq2--do-conformal-methods-keep-their-promise) | [NB5](notebooks/05_conformal_mapie_puncc/README.md), [NB6](notebooks/06_conformal_nexcp_online/README.md) |
-| F5 | **Failures point to the data.** 58 of the 77 conformal misses are on WQI (151 features, 190 rows) and pile settlement (heavy right tail) | [§8.2](#82-rq2--do-conformal-methods-keep-their-promise) | [WQI](examples/water_quality_wqi_uncertainty_analysis/README.md), [pile settl.](examples/pile_settlement_uncertainty_analysis/README.md) |
-| F6 | **The sharpest valid method depends on the dataset.** J+aB wins on 3 datasets, FACI and MFCS Full on 2 each, NexCP J+aB and split CP on 1 | [Fig. 7](#83-rq3--which-valid-method-is-the-sharpest) | [§8.3](#83-rq3--which-valid-method-is-the-sharpest) |
-| F7 | **Learned coverage can collapse.** ACP's policy saturates at α̃ = 0.999 on sediment load and streamflow for every model | [Fig. 8](#84-rq4--what-do-learned-coverage-and-single-network-methods-add) | [NB7 guide](notebooks/07_adaptive_coverage_policies/README.md) |
-| F8 | **Single-network uncertainty is not informative here.** HCM's σ̂ correlates negatively or not at all with the error on 6 of 9 datasets | [Fig. 8](#84-rq4--what-do-learned-coverage-and-single-network-methods-add) | [NB8 guide](notebooks/08_hyperspherical_confidence_mapping/README.md) |
+<p align="center"><img src="docs/figures/fig_pipeline.png" width="100%" alt="The eight-notebook pipeline"></p>
+
+*__Figure 1.__ The pipeline of eight notebooks, applied without modification (apart from paths, file names and column names)
+to every dataset.*
+
+| # | Notebook | Methods | Principal outputs | Method guide |
+|:-:|---|---|---|---|
+| 1 | Hyperparameter tuning | Optuna AutoSampler (TPE), 5-fold CV, 8 pruners; SHAP, LIME, EBM | Tuned settings (`best_params.json`), CV and test RMSE | [NB1](notebooks/01_hyperparameter_tuning/README.md) |
+| 2 | Quantile regression | 13 quantile levels per model | Coverage, width, CRPS, crossing rate | [NB2](notebooks/02_quantile_regression/README.md) |
+| 3 | Predictive distributions | NGBoost, PGBM, IBUG, Treeffuser | μ̂, σ̂, NLL, CRPS (Hersbach), PIT, calibration | [NB3](notebooks/03_probabilistic_distribution/README.md) |
+| 4 | CARD | Guided diffusion, 1,000 samples per point | Predictive distribution, CRPS, calibration | [NB4](notebooks/04_probabilistic_distribution_card/README.md) |
+| 5 | Conformal (MAPIE, PUNCC) | Split, CV+, J+aB, CQR | Intervals, coverage, width | [NB5](notebooks/05_conformal_mapie_puncc/README.md) |
+| 6 | Conformal (NexCP, online, MFCS) | NexCP (4 variants), ACI, FACI, SF-OGD, SAOCP, online split/CV+/J+aB, MFCS, COP, AlphaNet, Extreme CP | One workbook sheet per family; GPD fits | [NB6](notebooks/06_conformal_nexcp_online/README.md) |
+| 7 | Adaptive coverage policies | ACP with e-values; λ ∈ {10, 20, 50} | Learned level, coverage, width | [NB7](notebooks/07_adaptive_coverage_policies/README.md) |
+| 8 | Hyperspherical confidence mapping | HCM (single network) | Coverage at 1/2/3σ, error–uncertainty correlation | [NB8](notebooks/08_hyperspherical_confidence_mapping/README.md) |
+
+Base models: RandomForest (tuning only), GradientBoosting, XGBoost, LightGBM, GPBoost, CatBoost, HistGradientBoosting, NGBoost,
+PGBM and TabNet.
 
 ---
 
-## 2. Why uncertainty matters for regression
+## 2. Case study: concrete compressive strength
 
-A design check on a pile, a warning on sediment load or a compliance decision on water quality depends on how wrong the
-prediction could be. Uncertainty quantification answers with an **interval** ("the settlement is between 4 and 11 mm, with
-90% confidence") or a **distribution**. A useful answer must be:
+The concrete dataset is used to present the complete analysis. It is the only dataset on which every notebook ran for every
+model without restriction, and its 95 test mixes allow coverage to be assessed meaningfully. **The full case study, with one
+page per notebook, is in [`docs/concrete_walkthrough/`](docs/concrete_walkthrough/README.md).**
 
-| Property | Meaning | Who provides it here |
+| | |
+|---|---|
+| **Data** | 189 training and 95 test mixes; inputs: cement, mineral powder, fine aggregate, coarse aggregate, fly ash, water/powder ratio, admixture |
+| **Target** | Compressive strength (MPa); test mean 36.2 MPa, standard deviation 10.0 MPa |
+| **Validity criterion** | 90% interval; valid if test coverage ≥ 84.9% ([Section 5.2](#52-validity-of-a-coverage-value)) |
+| **Material** | [Data, notebooks and outputs](examples/concrete_uncertainty_analysis/README.md) · [Dataset report (PDF)](examples/concrete_uncertainty_analysis/report/paper.pdf) |
+
+### 2.1 Step 1: hyperparameter tuning
+
+<p align="center"><img src="docs/figures/concrete/c1_rmse.png" width="75%" alt="CV and test RMSE per model"></p>
+
+**CatBoost** attains the lowest cross-validated RMSE (3.66 MPa); the eight gradient-boosting models lie within 0.5 MPa of it,
+and TabNet is markedly less accurate (7.29 MPa). The AutoSampler selects the Tree-structured Parzen Estimator because every
+hyperparameter is categorical; 50 trials replace grids of up to 3 × 10⁸ combinations. → [Step 1 in detail](docs/concrete_walkthrough/01_tuning.md)
+
+### 2.2 Step 2: quantile regression
+
+<p align="center"><img src="docs/figures/concrete/c2_qr.png" width="100%" alt="Quantile regression per model"></p>
+
+Seven of the nine models cover only 17–81% of the test mixes, and the separately fitted quantiles cross for almost every mix.
+Only XGBoost and TabNet reach the target, with intervals two to three times wider than the others.
+→ [Step 2 in detail](docs/concrete_walkthrough/02_quantile_regression.md)
+
+### 2.3 Step 3: predictive distributions
+
+<p align="center"><img src="docs/figures/concrete/c3_pit.png" width="75%" alt="PIT histograms"></p>
+
+The native NGBoost and PGBM Gaussians are over-confident (U-shaped PIT histograms, 21–34% coverage); Treeffuser is strongly
+over-dispersed. **IBUG with LightGBM** is the best-calibrated distribution (86.3% coverage at 10.3 MPa).
+→ [Step 3 in detail](docs/concrete_walkthrough/03_predictive_distributions.md)
+
+### 2.4 Step 4: CARD
+
+<p align="center"><img src="docs/figures/concrete/c4_band.png" width="75%" alt="CARD intervals with CatBoost as guide"></p>
+
+CARD attains the lowest CRPS of the study (1.61 MPa with XGBoost as guide), but its intervals are 2–7 MPa wide and cover only
+27–60% of the test mixes: a low CRPS does not imply a valid interval. → [Step 4 in detail](docs/concrete_walkthrough/04_card.md)
+
+### 2.5 Step 5: split, CV+, J+aB and CQR conformal prediction
+
+<p align="center"><img src="docs/figures/concrete/c5_heat.png" width="65%" alt="Coverage and width heatmaps for step 5"></p>
+
+**All 54 model–method combinations are valid.** J+aB is the sharpest method (median width 1.10 standard deviations of
+strength); CQR is valid but about three times wider. → [Step 5 in detail](docs/concrete_walkthrough/05_conformal_split_cv_jab.md)
+
+### 2.6 Step 6: weighted, online and optimistic conformal prediction
+
+<p align="center"><img src="docs/figures/concrete/c6_online.png" width="100%" alt="Running coverage and width of online methods"></p>
+
+All 117 ranked intervals are valid. Methods that update after each revealed label are the sharpest: **MFCS Full** (1.00 × std,
+90.5% coverage), FACI and COP. AlphaNet is invalid for two models. → [Step 6 in detail](docs/concrete_walkthrough/06_conformal_weighted_online.md)
+
+### 2.7 Step 7: adaptive coverage policies
+
+<p align="center"><img src="docs/figures/concrete/c7_acp.png" width="100%" alt="ACP target and realised coverage"></p>
+
+ACP is valid at its learned level (target 61–67%, realised 96–98%) and does not saturate, but it is conservative and its
+intervals are 5–7.5 MPa wider than J+aB. → [Step 7 in detail](docs/concrete_walkthrough/07_adaptive_coverage_policies.md)
+
+### 2.8 Step 8: hyperspherical confidence mapping
+
+<p align="center"><img src="docs/figures/concrete/c8_hcm.png" width="100%" alt="HCM coverage, predictions and uncertainty"></p>
+
+With the extended training schedule (fix H1) the network converges: RMSE 5.6 MPa, and its uncertainty estimate is weakly related to the error (Spearman +0.18). Its 95% interval covers only 78.9% of the test mixes and is not valid. → [Step 8 in detail](docs/concrete_walkthrough/08_hcm.md)
+
+### 2.9 Conclusions for the concrete dataset
+
+| Purpose | Recommended method | Result |
 |---|---|---|
-| **Valid** | A "90%" interval contains the truth at least 90% of the time | Conformal prediction (§6) |
-| **Sharp** | Among valid intervals, the narrowest | Compared in §8.3 |
-| **Adaptive** | Wider where the data are noisy, narrower where they are not | CQR, distributional methods, online methods |
-| **Robust to change** | Keeps its promise when the data drift | NexCP, online conformal (ACI, FACI, SAOCP, …) |
-| **Informative** | Its spread tracks the actual error | Checked for HCM (§8.4) |
+| Point prediction | CatBoost (any tuned boosting model is practically equivalent) | CV RMSE 3.66 MPa |
+| Prediction interval, fixed test set | J+aB or CV+ conformal on a boosting model | about 11 MPa at 90–94% coverage |
+| Prediction interval, sequential labels | MFCS Full or FACI | about 10 MPa at 90.5% coverage |
+| Predictive distribution | IBUG with LightGBM (calibrated); CARD (lowest CRPS, requires calibration) | 86.3% coverage; CRPS 1.61 MPa |
+| Not to be used without calibration | Raw quantile regression, native NGBoost/PGBM, CARD intervals, Treeffuser, HCM | coverage 17–81% or excessive width |
+
+→ [Summary of the case study](docs/concrete_walkthrough/09_summary.md)
 
 ---
 
-## 3. Results at a glance
+## 3. Results on all nine datasets
 
-Every interval targets **90%**. *Recommended* = the narrowest method that is valid (§7.3) on at least 75% of the base
-models it wraps. Relative width = interval width / standard deviation of the test target.
+Each dataset has its own folder with the data, the executed notebooks, the Excel outputs, a README per notebook and a full
+report. Every interval targets 90%. *Recommended* denotes the narrowest method that is valid on at least 75% of the base models
+it wraps ([Section 5.3](#53-recommended-method)); relative width is the interval width divided by the standard deviation of the
+test target.
 
-| Dataset | Train / test | Best model (CV) | Raw QR coverage | Recommended method | Its coverage | Relative width | Report |
+| Dataset | Train / test | Best model (CV) | Raw QR coverage | Recommended method | Coverage | Relative width | Report |
 |---|---|---|--:|---|--:|--:|---|
-| [Concrete](examples/concrete_uncertainty_analysis/README.md) | 189 / 95 | CatBoost | 79.0% | MFCS Full | 90.5% | 1.00 | [PDF](papers/concrete/paper.pdf) |
-| [Noise](examples/noise_uncertainty_analysis/README.md) | 168 / 60 | LightGBM | 90.0% | FACI | 85.0% | 0.81 | [PDF](papers/noise/paper.pdf) |
-| [Pile](examples/pile_uncertainty_analysis/README.md) | 81 / 24 | LightGBM | 58.3% | J+aB (MAPIE) | 95.8% | 1.60 | [PDF](papers/pile/paper.pdf) |
-| [Pile settlement](examples/pile_settlement_uncertainty_analysis/README.md) | 371 / 186 | GPBoost | 82.8% | MFCS Full | 89.8% | 0.74 | [PDF](papers/pile_settlement/paper.pdf) |
-| [Scour](examples/scour_uncertainty_analysis/README.md) | 154 / 78 | XGBoost | 84.6% | Split CP (MAPIE) | 93.6% | 1.48 | [PDF](papers/scour/paper.pdf) |
-| [Sediment load](examples/sediment_load_uncertainty_analysis/README.md) | 1095 / 365 | TabNet | 81.1% | NexCP J+aB | 89.3% | 0.24 | [PDF](papers/sediment_load/paper.pdf) |
-| [Streamflow](examples/streamflow_uncertainty_analysis/README.md) | 192 / 96 | GradientBoosting | 86.5% | J+aB (MAPIE) | 88.5% | 1.32 | [PDF](papers/streamflow/paper.pdf) |
-| [Water quality (EWQI)](examples/water_quality_ewqi_uncertainty_analysis/README.md) | 47 / 47 | XGBoost | 66.0% | FACI | 91.5% | 1.33 | [PDF](papers/water_quality_ewqi/paper.pdf) |
-| [Water quality (WQI)](examples/water_quality_wqi_uncertainty_analysis/README.md) | 190 / 82 | XGBoost | 79.3% | J+aB (MAPIE) | 89.0% | 1.18 | [PDF](papers/water_quality_wqi/paper.pdf) |
+| [**Concrete**](examples/concrete_uncertainty_analysis/README.md) | 189 / 95 | CatBoost | 79.0% | MFCS Full | 90.5% | 1.00 | [PDF](examples/concrete_uncertainty_analysis/report/paper.pdf) |
+| [Noise](examples/noise_uncertainty_analysis/README.md) | 168 / 60 | LightGBM | 90.0% | FACI | 85.0% | 0.81 | [PDF](examples/noise_uncertainty_analysis/report/paper.pdf) |
+| [Pile](examples/pile_uncertainty_analysis/README.md) | 81 / 24 | LightGBM | 58.3% | J+aB (MAPIE) | 95.8% | 1.60 | [PDF](examples/pile_uncertainty_analysis/report/paper.pdf) |
+| [Pile settlement](examples/pile_settlement_uncertainty_analysis/README.md) | 371 / 186 | GPBoost | 82.8% | MFCS Full | 89.8% | 0.74 | [PDF](examples/pile_settlement_uncertainty_analysis/report/paper.pdf) |
+| [Scour](examples/scour_uncertainty_analysis/README.md) | 154 / 78 | XGBoost | 84.6% | Split CP (MAPIE) | 93.6% | 1.48 | [PDF](examples/scour_uncertainty_analysis/report/paper.pdf) |
+| [Sediment load](examples/sediment_load_uncertainty_analysis/README.md) | 1095 / 365 | TabNet | 81.1% | NexCP J+aB | 89.3% | 0.24 | [PDF](examples/sediment_load_uncertainty_analysis/report/paper.pdf) |
+| [Streamflow](examples/streamflow_uncertainty_analysis/README.md) | 192 / 96 | GradientBoosting | 86.5% | J+aB (MAPIE) | 88.5% | 1.32 | [PDF](examples/streamflow_uncertainty_analysis/report/paper.pdf) |
+| [Water quality (EWQI)](examples/water_quality_ewqi_uncertainty_analysis/README.md) | 47 / 47 | XGBoost | 66.0% | FACI | 91.5% | 1.33 | [PDF](examples/water_quality_ewqi_uncertainty_analysis/report/paper.pdf) |
+| [Water quality (WQI)](examples/water_quality_wqi_uncertainty_analysis/README.md) | 190 / 82 | XGBoost | 79.3% | J+aB (MAPIE) | 89.0% | 1.18 | [PDF](examples/water_quality_wqi_uncertainty_analysis/report/paper.pdf) |
 
-Coverages slightly below 90% (noise, sediment, streamflow, WQI, pile settlement) are still valid: with 60–365 test points a
-correct 90% method lands that low by chance (§7.3).
+Coverages slightly below 90% are valid within the sampling tolerance of the respective test-set size (Section 5.2).
 
 | Median coverage per method and dataset | Median relative width per method and dataset |
 |:-:|:-:|
 | <img src="docs/figures/coverage_heatmap.png" alt="Median coverage per method and dataset"> | <img src="docs/figures/width_heatmap.png" alt="Median relative width per method and dataset"> |
 
-*__Figure 1.__ Left: median coverage (%) of each two-sided method over the base models, per dataset (n/r = not run). Right:
-median relative width (lower = sharper).*
+*__Figure 2.__ Median coverage (left) and median relative width (right) of each two-sided method over the base models, per
+dataset (n/r: not run).*
+
+### Cross-dataset findings
+
+| # | Finding | Evidence |
+|:-:|---|---|
+| F1 | Raw quantile regression undercovers: median coverage of the 90% interval is 58–90% across datasets | [Benchmark paper](papers/benchmark/paper.pdf), RQ1 |
+| F2 | Native NGBoost and PGBM Gaussians are over-confident: NGBoost is invalid on 7 of 9 datasets, PGBM on 8 of 9 (coverage 2–42%) | RQ1 |
+| F3 | A low CRPS does not imply a valid interval: CARD's distributions are the most concentrated, yet only 15% of its intervals are valid | RQ1 |
+| F4 | Conformal intervals are valid in 1,480 of 1,557 dataset × model × method cases (95%) | RQ2 |
+| F5 | 58 of the 77 conformal failures occur on WQI (151 features, 190 training rows) and pile settlement (heavy right tail) | RQ2 |
+| F6 | The sharpest valid method depends on the dataset: J+aB (3 datasets), FACI and MFCS Full (2 each), NexCP J+aB and split CP (1 each) | RQ3 |
+| F7 | ACP's learned policy saturates (α̃ = 0.999) on sediment load and streamflow for every model | RQ4 |
+| F8 | After fix H1, HCM's predicted spread is positively correlated with the error on all nine datasets (Spearman 0.12–0.56), but its 95% interval is valid on only four | RQ4 |
+
+The cross-dataset analysis, with the mathematics of every method, is given in the
+**[benchmark paper (PDF)](papers/benchmark/paper.pdf)**; machine-readable results are in [`results/`](results/).
 
 ---
 
-## 4. The pipeline
+## 4. Methods
 
-<p align="center"><img src="docs/figures/fig_pipeline.png" width="100%" alt="The eight-notebook pipeline"></p>
-
-*__Figure 2.__ One fixed pipeline of eight notebooks, applied unchanged (apart from paths and column names) to every dataset.*
-
-```mermaid
-flowchart LR
-    D[("train.csv / test.csv")] --> T["NB1 Tuning<br/>Optuna, 5-fold CV on train"]
-    T -- best_params.pkl --> Q["NB2 Quantile regression"]
-    T --> P["NB3 NGBoost, PGBM, IBUG, Treeffuser"]
-    T --> C["NB4 CARD diffusion"]
-    T --> M["NB5 Split CP, CV+, J+aB, CQR"]
-    T --> N["NB6 NexCP, online CP, COP, Extreme CP"]
-    T --> A["NB7 Adaptive coverage policies"]
-    D --> H["NB8 HCM network"]
-    Q --> X[("Executed notebooks + Excel")]
-    P --> X
-    C --> X
-    M --> X
-    N --> X
-    A --> X
-    H --> X
-    X --> R["tools/reports: READMEs, papers, results/*.csv"]
-```
-
-| # | Notebook | Method guide | Main outputs |
+| Family | Principle | Output | Coverage guarantee |
 |---|---|---|---|
-| 1 | [`01_hyperparameter_tuning`](notebooks/01_hyperparameter_tuning/) | [guide](notebooks/01_hyperparameter_tuning/README.md) | tuned settings (`best_params.pkl`), CV and test RMSE, SHAP / LIME / EBM |
-| 2 | [`02_quantile_regression`](notebooks/02_quantile_regression/) | [guide](notebooks/02_quantile_regression/README.md) | 13 quantiles per point, coverage, width, CRPS, crossing rate |
-| 3 | [`03_probabilistic_distribution`](notebooks/03_probabilistic_distribution/) | [guide](notebooks/03_probabilistic_distribution/README.md) | μ̂, σ̂, NLL, CRPS (Hersbach decomposition), PIT, calibration |
-| 4 | [`04_probabilistic_distribution_card`](notebooks/04_probabilistic_distribution_card/) | [guide](notebooks/04_probabilistic_distribution_card/README.md) | 1000 diffusion samples per point, CRPS, calibration |
-| 5 | [`05_conformal_mapie_puncc`](notebooks/05_conformal_mapie_puncc/) | [guide](notebooks/05_conformal_mapie_puncc/README.md) | intervals, coverage, width, conditional coverage |
-| 6 | [`06_conformal_nexcp_online`](notebooks/06_conformal_nexcp_online/) | [guide](notebooks/06_conformal_nexcp_online/README.md) | one sheet per method family; GPD fits for Extreme CP |
-| 7 | [`07_adaptive_coverage_policies`](notebooks/07_adaptive_coverage_policies/) | [guide](notebooks/07_adaptive_coverage_policies/README.md) | learned α̃, e-value intervals, λ comparison |
-| 8 | [`08_hyperspherical_confidence_mapping`](notebooks/08_hyperspherical_confidence_mapping/) | [guide](notebooks/08_hyperspherical_confidence_mapping/README.md) | coverage at 1/2/3σ, 95% interval, error–uncertainty correlation |
-
----
-
-## 5. The nine datasets
-
-<p align="center"><img src="docs/figures/fig_datasets.png" width="100%" alt="Target distributions of the nine datasets"></p>
-
-*__Figure 3.__ Target distribution on the training (filled) and test (outline) sets.*
-
-| Dataset | Train / test | Features | Target | Target skew | What makes it hard | Folder |
-|---|---|--:|---|--:|---|---|
-| Concrete | 189 / 95 | 7 | `str` | 0.9 | – (a clean, mid-sized problem) | [README](examples/concrete_uncertainty_analysis/README.md) |
-| Noise | 168 / 60 | 5 | `Leq` | −1.2 | bimodal target | [README](examples/noise_uncertainty_analysis/README.md) |
-| Pile | 81 / 24 | 7 | `Total` | −0.2 | only 24 test points | [README](examples/pile_uncertainty_analysis/README.md) |
-| Pile settlement | 371 / 186 | 8 | `S_exp` | 2.4 | heavy right tail | [README](examples/pile_settlement_uncertainty_analysis/README.md) |
-| Scour | 154 / 78 | 7 | `Scour` | 2.6 | heavy right tail | [README](examples/scour_uncertainty_analysis/README.md) |
-| Sediment load | 1095 / 365 | 3 | `St` | 12.9 | extreme tail; largest dataset | [README](examples/sediment_load_uncertainty_analysis/README.md) |
-| Streamflow | 192 / 96 | 4 | `TDS` | 4.1 | long right tail | [README](examples/streamflow_uncertainty_analysis/README.md) |
-| Water quality (EWQI) | 47 / 47 | 14 | `Pre monsoon EWQI` | 1.3 | tiny training set | [README](examples/water_quality_ewqi_uncertainty_analysis/README.md) |
-| Water quality (WQI) | 190 / 82 | 151 | `WQI` | 1.3 | more features than rows can support | [README](examples/water_quality_wqi_uncertainty_analysis/README.md) |
-
-Each dataset's README starts with a data analysis (target distribution, train/test comparison, the features most related to the
-target), then answers the research questions for that dataset, and links every Kaggle run that produced its numbers.
-
----
-
-## 6. Methods in clear words
-
-### 6.1 Four families
-
-| Family | Everyday analogy | Output per point | Guarantee? |
-|---|---|---|---|
-| **Quantile regression** | Ask one model for a "low" guess and another for a "high" guess | interval | no (correct only if both models are) |
-| **Predictive distributions**: NGBoost, PGBM, IBUG, Treeffuser, CARD | Describe the whole spread of plausible values | distribution → interval | no (correct only if the noise model is) |
-| **Conformal prediction**: split, CV+, J+aB, CQR, NexCP, online (ACI, FACI, SF-OGD, SAOCP, MFCS), COP | A forecaster who keeps score: *"on points like these, my error stayed below q̂ 90% of the time"* | interval | **yes**: ≥ 90% on average, if the data are exchangeable (online: in the long run, for any data) |
-| **Learned / single-network**: ACP, HCM | Let a network choose how cautious to be, or read uncertainty off its geometry | interval at a learned level / σ̂ | ACP: at its own learned level; HCM: no |
-
-### 6.2 Conformal prediction in three steps
+| **Quantile regression** | Separate models estimate the lower and upper conditional quantiles by minimising the pinball loss | interval | none (holds only if both quantile models are correct) |
+| **Predictive distributions**: NGBoost, PGBM, IBUG, Treeffuser, CARD | A parametric or generative model of the conditional distribution of the target | distribution → interval | none (holds only if the noise model is correct) |
+| **Conformal prediction**: split, CV+, J+aB, CQR, NexCP, online (ACI, FACI, SF-OGD, SAOCP, MFCS), COP | Calibrates the interval radius on held-out residuals so that it exceeds 90% of them | interval | **finite-sample**: ≥ 90% on average under exchangeability (online methods: long-run, without assumptions on the data) |
+| **Learned level / single network**: ACP, HCM | A network learns the miscoverage level (ACP) or derives uncertainty from the geometry of its output (HCM) | interval at a learned level / σ̂ | ACP: at its learned level; HCM: none |
 
 <p align="center"><img src="docs/figures/fig_conformal_explainer.png" width="100%" alt="Split conformal prediction in three steps"></p>
 
-*__Box 1.__ Split conformal prediction on synthetic data, for illustration.*
+*__Box 1.__ Split conformal prediction on synthetic data.*
 
-1. **Score.** Fit the model on part of the training data. On the rest (the *calibration set*, $`m`$ points) measure how wrong it is:
-   $`s_i = |y_i - \hat f(x_i)|`$.
-2. **Cut-off.** Take the score at position $`k=\lceil (m+1)(1-\alpha)\rceil`$ in sorted order:
-
-```math
-\hat q = s_{(k)},\qquad k=\bigl\lceil (m+1)(1-\alpha)\bigr\rceil,\qquad \alpha=0.1
-```
-
-3. **Interval.** For a new point, $`\hat C(x)=[\hat f(x)-\hat q,\ \hat f(x)+\hat q]`$.
-
-The model never saw the calibration points or the new point, so the new point's score is equally likely to fall anywhere among
-the calibration scores, and it is below the cut-off with probability at least 90%. This holds **whatever the model is**: a poor
-model gets a valid but wide interval. Every other conformal method changes one ingredient: how many points are reused for
-calibration (CV+, J+aB), the score (CQR), the weights of old points (NexCP), or the cut-off itself as labels arrive (online
-methods). The [method guides](notebooks/README.md) explain each one with worked examples.
-
-### 6.3 Method map
-
-| Method | What it changes | Guide |
-|---|---|---|
-| Split CP (MAPIE, PUNCC) | the foundation: one fit, one calibration half | [NB5](notebooks/05_conformal_mapie_puncc/README.md) |
-| CV+, J+aB (MAPIE, PUNCC) | reuse every training point for calibration (cross-fitting, bootstrap) | [NB5](notebooks/05_conformal_mapie_puncc/README.md) |
-| CQR (PUNCC) | calibrate a quantile-regression band instead of a fixed ± | [NB5](notebooks/05_conformal_mapie_puncc/README.md) |
-| NexCP split / full / CV+ / J+aB | weight recent calibration points more (robust to drift) | [NB6](notebooks/06_conformal_nexcp_online/README.md) |
-| ACI, FACI | update the requested level after every hit or miss | [NB6](notebooks/06_conformal_nexcp_online/README.md) |
-| SF-OGD, SAOCP | learn the radius by online gradient descent | [NB6](notebooks/06_conformal_nexcp_online/README.md) |
-| Online split / CV+ / J+aB, MFCS | add revealed test errors to the calibration set; MFCS Full also refits | [NB6](notebooks/06_conformal_nexcp_online/README.md) |
-| COP | online update with an optimistic step from recent scores | [NB6](notebooks/06_conformal_nexcp_online/README.md) |
-| Extreme CP | one-sided bound with a Pareto tail fit (reported separately) | [NB6](notebooks/06_conformal_nexcp_online/README.md) |
-| ACP | a network picks each point's level; e-values give validity | [NB7](notebooks/07_adaptive_coverage_policies/README.md) |
-| HCM | uncertainty from the geometry of one network's output | [NB8](notebooks/08_hyperspherical_confidence_mapping/README.md) |
-
----
-
-## 7. How the intervals are judged
-
-### 7.1 Glossary
-
-| Metric | Meaning | Good value |
-|---|---|---|
-| **Coverage** | Share of test points inside their interval | ≥ 90% (within sampling tolerance, §7.3) |
-| **Width** | Mean of upper − lower bound, in target units | small, given coverage |
-| **Relative width** | Width / standard deviation of the test target; comparable across datasets | small |
-| **CRPS** | Distance between the predicted distribution and the observed value; the pinball loss averaged over all levels | low |
-| **PIT** | Predicted CDF evaluated at the truth; uniform if calibrated, U-shaped if over-confident | flat histogram |
-| **Crossing rate** | Share of points whose separately fitted quantiles are out of order | 0 |
-| **Spearman(error, σ̂)** | Does the predicted spread rise with the actual error? | > 0 |
-
-### 7.2 Recommended method
-
-A method wraps up to nine base models. It is **recommended** on a dataset if it is the narrowest (median relative width over
-models) among methods that are valid on at least 75% of the models they ran on, ran on at least three models, and have no width
-that is only a lower bound.
-
-### 7.3 When is a coverage good enough?
-
-<p align="center"><img src="docs/figures/fig_validity_tolerance.png" width="70%" alt="Validity threshold against test-set size"></p>
-
-*__Figure 4.__ Lowest coverage accepted as valid, as a function of the number of test points.*
-
-Even a perfect 90% method does not cover exactly 90% of a finite test set: the number of covered points is binomial, so the
-coverage has standard error $`\sqrt{0.09/n}`$. A method is called **valid** when its coverage is not significantly below 90% in a
-one-sided test at the 5% level:
+**Split conformal prediction.** The model is fitted on part of the training data, and the absolute residuals
+$`s_i=|y_i-\hat f(x_i)|`$ are computed on the remaining $`m`$ calibration points. With
 
 ```math
-\hat c\ \ge\ 0.9-1.645\sqrt{\frac{0.09}{n_{\text{test}}}}
+\hat q = s_{(k)},\qquad k=\bigl\lceil (m+1)(1-\alpha)\bigr\rceil,\qquad \alpha=0.1,
 ```
 
-With 24 test points (pile) the threshold is 79.9%; with 365 (sediment load) it is 87.4%.
+the interval for a new point is $`\hat C(x)=[\hat f(x)-\hat q,\ \hat f(x)+\hat q]`$. Under exchangeability the residual of the new
+point is equally likely to occupy any rank among the $`m+1`$ residuals, so it does not exceed $`\hat q`$ with probability at
+least $`1-\alpha`$, irrespective of the model. The other conformal methods modify one element of this construction: the reuse
+of training points for calibration (CV+, J+aB), the score (CQR), the weighting of residuals (NexCP), or the sequential update
+of the radius (online methods). Each method is derived in the [method guides](notebooks/README.md).
 
 ---
 
-## 8. Results, question by question
+## 5. Evaluation protocol
 
-### 8.1 RQ1 · Do model-based intervals reach 90%?
+### 5.1 Metrics
 
-<p align="center"><img src="docs/figures/fig_model_based_coverage.png" width="100%" alt="Coverage of model-based intervals"></p>
+| Metric | Definition | Desired value |
+|---|---|---|
+| **Coverage** | Share of test points inside their interval | ≥ 90% within sampling tolerance |
+| **Width** | Mean difference between upper and lower bound, in target units | small, given valid coverage |
+| **Relative width** | Width divided by the standard deviation of the test target | small; comparable across datasets |
+| **CRPS** | Continuous ranked probability score; equals the pinball loss integrated over all quantile levels | low |
+| **PIT** | Predicted CDF evaluated at the observation; uniform if calibrated | uniform histogram |
+| **Crossing rate** | Share of points whose separately fitted quantiles are not monotone | 0 |
+| **Spearman (error, σ̂)** | Rank correlation between predicted uncertainty and absolute error | > 0 |
 
-*__Figure 5.__ Coverage of raw quantile regression and of every predictive distribution's Gaussian 90% interval. Small dots:
-base models; large dots: median; green bars: validity threshold of each dataset.*
+### 5.2 Validity of a coverage value
 
-**How to read it.** Each colour is one method. A method is reliable if its dots sit at or above the green bar on every dataset.
+<p align="center"><img src="docs/figures/fig_validity_tolerance.png" width="60%" alt="Validity threshold against test-set size"></p>
 
-**What it shows.**
-- **Raw quantile regression** (red) sits below the bar on most datasets; only 38% of its intervals are valid.
-- **NGBoost and PGBM** native Gaussians (purple, lilac) are far below on most datasets: their σ̂ is too small.
-- **IBUG** is close to or above 90%; **Treeffuser** covers almost everything, with very wide intervals.
-- **CARD** (orange) is sharp but undercovers everywhere except sediment load.
+The number of covered test points is binomial, so the coverage of a correctly calibrated 90% method has standard error
+$`\sqrt{0.09/n}`$. A method is considered **valid** when its coverage is not significantly below 90% in a one-sided test at the
+5% level:
 
-> **Takeaway RQ1.** No model-based method is reliable across datasets. Use them for their predictive distributions (CRPS,
-> shape), and calibrate their intervals with a conformal step before trusting them.
+```math
+\hat c\ \ge\ 0.9-1.645\sqrt{\frac{0.09}{n_{\text{test}}}} .
+```
 
-### 8.2 RQ2 · Do conformal methods keep their promise?
+The threshold is 79.9% for 24 test points (pile), 84.9% for 95 (concrete) and 87.4% for 365 (sediment load).
 
-<p align="center"><img src="docs/figures/fig_family_validity.png" width="100%" alt="Share of valid intervals by family and dataset"></p>
+### 5.3 Recommended method
 
-*__Figure 6.__ Share of model × method intervals that are valid, by family and dataset.*
-
-| Family | Intervals | Valid | Median width / std(y) |
-|---|--:|--:|--:|
-| Quantile regression (raw) | 81 | 38% | 0.91 |
-| Distributional (NGBoost, PGBM, IBUG, Treeffuser) | 81 | 80% | 2.24 |
-| CARD | 81 | 15% | 0.26 |
-| Conformal (MAPIE/PUNCC) | 486 | 94% | 1.48 |
-| Weighted conformal (NexCP) | 301 | 94% | 1.47 |
-| Online conformal | 693 | 96% | 1.40 |
-| COP | 77 | 99% | 1.34 |
-
-**What it shows.**
-- The four conformal families are valid in **1,480 of 1,557** cases (95%).
-- The misses are concentrated: **WQI 37**, **pile settlement 21**, noise 7, sediment load 6, pile 5, streamflow 1. WQI has 151
-  features for 190 training rows, so the out-of-fold residuals come from models fitted on even fewer rows; pile settlement has a
-  heavy right tail whose few large values are hard to cover.
-- Distributional methods look valid 80% of the time only because IBUG and Treeffuser are wide; NGBoost and PGBM are mostly invalid.
-
-> **Takeaway RQ2.** On small real datasets the conformal guarantee holds in practice for 95% of intervals, and its failures point
-> to the data (very high dimension, heavy tails), not to the method.
-
-### 8.3 RQ3 · Which valid method is the sharpest?
-
-<p align="center"><img src="docs/figures/fig_conformal_ranking.png" width="100%" alt="Width ranking of conformal methods per dataset"></p>
-
-*__Figure 7.__ Median relative width of each conformal method on each dataset; colour = rank within the dataset (dark =
-sharpest); * = valid on fewer than 75% of models.*
-
-**How to read it.** Read down a column to rank the methods on one dataset; read along a row to see whether a method is
-consistently sharp. The figure at the top of this page shows the same widths per dataset, with the recommended method starred.
-
-**What it shows.**
-
-| Method (pooled over datasets and models) | Intervals | Valid | Median width / std(y) | Recommended on |
-|---|--:|--:|--:|--:|
-| J+aB (MAPIE) | 81 | 91% | 1.27 | 3 datasets |
-| FACI | 77 | 96% | 1.29 | 2 |
-| MFCS Full | 77 | 100% | 1.32 | 2 |
-| ACI | 77 | 97% | 1.32 | – |
-| COP | 77 | 99% | 1.34 | – |
-| Online J+aB | 77 | 97% | 1.35 | – |
-| NexCP J+aB | 77 | 96% | 1.35 | 1 |
-| CV+ (PUNCC) | 81 | 95% | 1.40 | – |
-| Online split / MFCS Split | 77 | 86% | 1.40 | – |
-| Online CV+ | 77 | 100% | 1.43 | – |
-| Split CP (MAPIE) | 81 | 91% | 1.44 | 1 |
-| NexCP Split | 77 | 90% | 1.45 | – |
-| NexCP Full | 70 | 91% | 1.47 | – |
-| CV+ (MAPIE) | 81 | 98% | 1.48 | – |
-| NexCP CV+ | 77 | 100% | 1.54 | – |
-| SF-OGD | 77 | 100% | 1.62 | – |
-| SAOCP | 77 | 99% | 1.64 | – |
-| Split CP (PUNCC) | 81 | 96% | 1.66 | – |
-| CQR (PUNCC) | 81 | 93% | 1.77 | – |
-
-- No method is the sharpest everywhere; the winner changes with the data.
-- **J+aB**, which reuses every training point, is usually sharper than split conformal, which calibrates on half the data.
-- **Online methods** (FACI, MFCS Full, ACI, COP) are among the sharpest, because they learn from each revealed test label.
-- **CQR** is valid but the widest: the conformal step has to repair quantile models fitted on a few hundred points.
-- On the large, extremely skewed **sediment load** data, **NexCP J+aB** is sharpest by far (0.24 × std(y)).
-
-> **Takeaway RQ3.** Validity is easy to get; sharpness is not. Run a small panel of valid methods (J+aB and CV+; FACI or MFCS
-> if labels arrive one by one) and pick the narrowest on held-out data.
-
-### 8.4 RQ4 · What do learned-coverage and single-network methods add?
-
-<p align="center"><img src="docs/figures/fig_acp_hcm.png" width="100%" alt="ACP and HCM"></p>
-
-*__Figure 8.__ Left: ACP's realised coverage against its own learned target (red × = saturated policy). Right: Spearman
-correlation between HCM's predicted spread and the absolute error, with the coverage of its 95% interval.*
-
-**What it shows.**
-- ACP's realised coverage is always **above** its learned target, as its guarantee requires; the learned targets range from almost 0% to about 88%, so ACP intervals are not comparable with fixed 90% intervals.
-- On **sediment load and streamflow** (all models) and **EWQI** (4 of 9 models) the policy saturates at α̃ = 0.999: every set
-  has the same width and the learned level carries no information.
-- **HCM** covers 80–100% with its 95% interval, but its σ̂ is negatively correlated with the error, or not at all, on six of nine
-  datasets (Spearman −0.57 to 0.0); it is positive on pile settlement (0.51), EWQI and WQI (0.3).
-
-> **Takeaway RQ4.** These methods answer different questions from a fixed 90% interval. Check ACP for saturation, and check
-> whether a single network's uncertainty tracks its error, before relying on either.
-
-### 8.5 Method scorecard
-
-| Method | Valid 90%? | Sharp? | Uses test labels? | Robust to drift? | Extra cost |
-|---|:-:|:-:|:-:|:-:|---|
-| Raw quantile regression | ❌ (38%) | ✅ looks sharp | no | ❌ | 13 models per regressor |
-| NGBoost / PGBM native | ❌ mostly | – | no | ❌ | none |
-| IBUG / Treeffuser | ⚠️ usually / ✅ | ❌ wide | no | ❌ | neighbour search / diffusion |
-| CARD | ❌ (15%) | ✅ very sharp | no | ❌ | diffusion training, 1000 samples |
-| Split CP | ✅ | ⚠️ | no | ❌ | none |
-| CV+, J+aB | ✅ | ✅ J+aB | no | ❌ | K or B refits |
-| CQR | ✅ | ❌ wide | no | ❌ | 2 quantile models |
-| NexCP | ✅ | ⚠️ (✅ on sediment) | no | ✅ by design | refits (Full: very slow) |
-| ACI, FACI, SAOCP, SF-OGD, COP | ✅ | ✅ FACI, ACI, COP | **yes** | ✅ | none |
-| MFCS Full | ✅ (100%) | ✅ | **yes** (also refits) | ✅ | one refit per test point |
-| ACP | at its own level | – | no | – | small network; can saturate |
-| HCM | ⚠️ | – | no | – | one network; σ̂ often uninformative |
+A method wraps up to nine base models. It is **recommended** on a dataset if it has the smallest median relative width among
+methods that are valid on at least 75% of the models they ran on, ran on at least three models, and report no width that is
+only a lower bound.
 
 ---
 
-## 9. Worked example: concrete
+## 6. Reproducing the results
 
-The concrete dataset (189 training and 95 test rows, 7 features, target `str`) is mid-sized and complete, so it shows every
-stage well. The full analysis is in [`papers/concrete/paper.pdf`](papers/concrete/paper.pdf) and
-[`examples/concrete_uncertainty_analysis/`](examples/concrete_uncertainty_analysis/README.md).
-
-1. **Point accuracy.** CatBoost has the lowest CV RMSE (3.66); most boosted models reach a test RMSE of 2.8–3.4 against a
-   target standard deviation of 10.0.
-2. **Model-based intervals.** Raw quantile regression covers 79% (only 2 of 9 models reach the target) and its quantiles cross on
-   98% of test points. NGBoost (34%) and PGBM (21%) Gaussians are severely over-confident; CARD covers 51%.
-3. **Conformal intervals.** Every conformal method is valid on every model. MFCS Full is the narrowest (90.5% coverage, width
-   1.00 × std(y)), as narrow as raw quantile regression but with the target coverage.
-
-| Method (median over 9 models) | Coverage | Width / std(y) |
-|---|--:|--:|
-| Quantile regression (raw) | 79.0% | 1.06 |
-| Split CP (MAPIE) | 94.7% | 1.47 |
-| J+aB (MAPIE) | 91.6% | 1.10 |
-| CQR (PUNCC) | 95.8% | 3.13 |
-| FACI | 90.5% | 1.03 |
-| **MFCS Full (recommended)** | **90.5%** | **1.00** |
-
-<p align="center"><img src="papers/concrete/figures/fig_intervals.png" width="75%" alt="CV+ intervals of CatBoost on concrete"></p>
-
-*__Figure 9.__ CatBoost CV+ intervals on the concrete test set; misses (red) cluster at the high-strength end, where data are sparse.*
-
----
-
-## 10. Discussion, recommendations and limitations
-
-**A practical recipe.**
-1. Tune the base model by cross-validation on the training set only.
-2. Wrap it in **J+aB or CV+**; they are valid on almost every dataset and model here and need no extra data.
-3. If outcomes arrive one at a time, add an **online** method (FACI, MFCS) and let it adapt.
-4. Judge coverage against the sample-size threshold of §7.3, not against exactly 90%.
-5. Use predictive distributions for their CRPS and shape, and conformalise their intervals before trusting them.
-
-| # | Limitation | Effect |
-|:-:|---|---|
-| 1 | One train/test split, one run per notebook | No confidence intervals across splits or seeds; small test sets detect only large departures from 90% |
-| 2 | Online methods use the stored order of the test rows | Their widths partly reflect learning from earlier test labels |
-| 3 | All guarantees are marginal | A method can cover 90% overall and much less for large target values |
-| 4 | Optuna search is not bit-reproducible; neural models depend on seeds | Re-running gives slightly different numbers; the stored tuning run is the one every notebook used |
-| 5 | Kaggle's 12-hour limit | Not run (not enough compute): NB6 TabNet and PGBM on sediment load (and NexCP Full there); NB6 NGBoost and PGBM on pile settlement |
-
----
-
-## 11. Reproducing the results
-
-All results were computed on **Kaggle CPU sessions**; nothing was trained locally.
+All results were computed on **Kaggle CPU sessions**; no model was trained locally.
 
 1. **Data.** Attach the Kaggle dataset `daneshselwal/reguq-uq-data` or upload `examples/<dataset>_uncertainty_analysis/data/`.
-2. **Notebook 1 first.** The `FIX K1` cell detects Kaggle, copies the CSV files into the layout the notebooks expect and installs
-   only missing packages at pinned versions.
-3. **Notebooks 2–8.** Add the tuning run's output as an input; the `FIX K2` cell finds `best_params.pkl`.
-4. **Batch execution.** [`tools/kaggle/`](tools/kaggle/README.md) wraps a notebook into a papermill job, names each run
-   `REG<DD>_<MM>_<YYYY>_<HH>_<MM>` and logs it in [`docs/run_registry.tsv`](docs/run_registry.tsv). Notebook 6 runs as one job per
-   base model to fit the 12-hour limit.
-5. **Reports.** [`tools/reports/`](tools/reports/README.md) rebuilds every README table, figure, paper and `results/*.csv` from the
-   stored outputs.
+2. **Notebook 1 first.** The `FIX K1` cell detects the Kaggle environment, copies the CSV files into the expected layout and
+   installs only missing packages at pinned versions.
+3. **Notebooks 2–8.** Add the output of the tuning run as an input; the `FIX K2` cell locates `best_params.pkl`.
+4. **Batch execution.** [`tools/kaggle/`](tools/kaggle/README.md) wraps a notebook in a papermill job, names each run
+   `REG<DD>_<MM>_<YYYY>_<HH>_<MM>` and records it in [`docs/run_registry.tsv`](docs/run_registry.tsv). Notebook 6 runs as one job
+   per base model to remain within the 12-hour session limit.
+5. **Reports and figures.** [`tools/reports/`](tools/reports/README.md) regenerates every README table, figure, report and
+   `results/*.csv` file from the stored outputs.
 
-The notebooks also run on **Google Colab**: put the dataset folder at `MyDrive/Regression/<dataset>_uncertainty_analysis/` and run
-them in order. **To use your own data:** create `train.csv` and `test.csv` with the target as the last column, copy a folder from
-`notebooks/`, and set the dataset folder name, file names, `feature_names` and target label in the first cell
+The notebooks also run on **Google Colab** with the dataset folder at `MyDrive/Regression/<dataset>_uncertainty_analysis/`. To
+apply the pipeline to a new dataset, provide `train.csv` and `test.csv` with the target in the last column, copy the notebooks
+from `notebooks/`, and set the folder name, file names, `feature_names` and target label in the first cell
 ([`docs/DATASET_PARAMETERS.md`](docs/DATASET_PARAMETERS.md)).
 
 ---
 
-## 12. Repository map
+## 7. Repository structure
 
 ```
 .
-├── README.md                     ← you are here
-├── papers/
-│   ├── benchmark/paper.pdf       ← the cross-dataset paper (all nine datasets)
-│   └── <dataset>/paper.pdf       ← one report per dataset (+ LaTeX source, figures)
-├── examples/<dataset>_uncertainty_analysis/
-│   ├── README.md                 ← data analysis + results by research question + Kaggle links
-│   ├── data/                     ← train.csv, test.csv
-│   └── <phase>/                  ← README (this phase on this dataset), notebook, results/ (EXECUTED_*.ipynb, *.xlsx)
-├── notebooks/                    ← the generalised v2.0 pipeline (no outputs) + a method guide per notebook
-├── results/                      ← benchmark_long.csv (every interval), benchmark_methods.csv, benchmark_datasets.csv
+├── README.md                     ← this document
 ├── docs/
-│   ├── figures/                  ← cross-dataset figures
-│   ├── CHANGELOG_FIXES.md        ← every v2.0 fix: before, why, after
-│   ├── DATASET_PARAMETERS.md     ← settings that depend on the dataset
-│   ├── KAGGLE_RUNS.md            ← how jobs are built and run on Kaggle
-│   └── run_registry.tsv          ← every Kaggle run: code name ↔ notebook ↔ time
-├── references/                   ← REFERENCES.md + key papers (PDF)
+│   ├── concrete_walkthrough/     ← the concrete case study, one page per notebook
+│   ├── figures/                  ← figures (concrete/ for the case study)
+│   ├── CHANGELOG_FIXES.md        ← every v2.0 correction: before, reason, after
+│   ├── DATASET_PARAMETERS.md     ← dataset-specific settings
+│   ├── KAGGLE_RUNS.md            ← construction and execution of the Kaggle jobs
+│   └── run_registry.tsv          ← every Kaggle run: code name, notebook, time
+├── examples/<dataset>_uncertainty_analysis/
+│   ├── README.md                 ← data analysis, results by research question, Kaggle links
+│   ├── report/                   ← dataset report: paper.pdf, LaTeX source, figures
+│   ├── data/                     ← train.csv, test.csv
+│   └── <phase>/                  ← README, notebook, results/ (EXECUTED_*.ipynb, *.xlsx)
+├── notebooks/                    ← the generalised pipeline (without outputs) and a method guide per notebook
+├── papers/benchmark/             ← cross-dataset benchmark paper
+├── results/                      ← benchmark_long.csv (every interval), benchmark_methods.csv, benchmark_datasets.csv
+├── references/                   ← REFERENCES.md and key papers (PDF)
 └── tools/
     ├── kaggle/                   ← job builder and push queue
-    └── reports/                  ← builds READMEs, figures, papers and results/*.csv
+    └── reports/                  ← generators for READMEs, figures, reports and results/*.csv
 ```
 
 ---
 
-## 13. What changed in version 2.0
+## 8. Changes in version 2.0
 
-Version 2.0 is a **correctness release**. Every notebook was checked method by method against the original paper and, where one
-exists, the authors' code. Each confirmed problem was fixed with the smallest possible change, approved individually and marked
-in the code with `# FIX <id>`; the before / why / after record is [`docs/CHANGELOG_FIXES.md`](docs/CHANGELOG_FIXES.md).
+Version 2.0 is a **correctness release**. Each notebook was checked method by method against the original publication and,
+where available, the authors' reference implementation. Each confirmed defect was corrected with the smallest possible change,
+approved individually and marked in the code with `# FIX <id>`; [`docs/CHANGELOG_FIXES.md`](docs/CHANGELOG_FIXES.md) records the
+state before the change, the reason and the state after.
 
 | Area | Change |
 |---|---|
-| Tuning | Model selection by 5-fold CV on the training set (the test set was used before); tuned settings saved and **loaded** by every later notebook |
-| Quantile regression | Crossing measured and removed; CRPS with correct level weights; TabNet early stopping on a validation split |
-| Distributions | Hersbach CRPS decomposition; IBUG scale no longer square-rooted twice; Treeffuser score model uses squared error |
-| CARD | Re-implemented to follow the official CARD code |
-| MAPIE / PUNCC | Correct interval shapes; true split conformal and J+aB; CQR with real quantile models; one α = 0.1 |
-| NexCP / online | Out-of-fold calibration residuals; NexCP weighted quantile per the paper; real weighted full, CV+ and J+aB; SF-OGD, SAOCP, FACI ported from the reference code; ACI added; COP and Extreme CP per their official code |
-| ACP | λ no longer chosen by comparing losses across λ; coverage reported against the learned level |
-| HCM | Silent fallback to synthetic data removed |
-| Infrastructure | Runs on Kaggle or Colab; executed notebooks stored with results; one NB6 job per model; run registry; generated reports |
+| Tuning | Model selection by 5-fold CV on the training set (previously on the test set); tuned settings saved and loaded by every later notebook |
+| Quantile regression | Quantile crossing measured and removed; CRPS with correct level weights; TabNet early stopping on a validation split |
+| Distributions | Hersbach CRPS decomposition; IBUG variance no longer square-rooted twice; Treeffuser score model uses squared error |
+| CARD | Re-implemented following the official CARD code |
+| MAPIE / PUNCC | Correct interval shapes; genuine split conformal and J+aB; CQR with quantile models; a single α = 0.1 |
+| NexCP / online | Out-of-fold calibration residuals; NexCP weighted quantile as published; weighted full, CV+ and J+aB; SF-OGD, SAOCP and FACI ported from the reference code; ACI added; COP and Extreme CP following their official code |
+| ACP | λ no longer selected by comparing losses across λ; coverage reported against the learned level |
+| HCM | Silent fallback to synthetic data removed; training schedule extended so that the network converges (H1) |
+| Infrastructure | Execution on Kaggle or Colab; executed notebooks stored with the results; one NB6 job per model; run registry; generated reports |
 
-Outputs saved in the v1.2 notebooks were not produced on their own datasets, so v1.2 numbers should not be compared with v2.0.
-Earlier versions are kept unchanged on the branches `version1.2`, `version-1.1` and `version-1.0`.
-
----
-
-## 14. Future work: the `reguq` library
-
-The notebooks are a research pipeline: long, dataset-specific copies of one another whose methods cannot be imported into other
-code. The next step of this project is **`reguq`** (regression uncertainty quantification), a Python package that turns the
-verified methods of this benchmark into a tested, documented library:
-
-- one interface (`fit` / `calibrate` / `predict_interval` / `predict_distribution`) for every family studied here, wrapping any
-  scikit-learn-style regressor;
-- the evaluation protocol of §7 (coverage with its sampling tolerance, relative width, CRPS, PIT, crossing rate) and the
-  recommendation rule as functions, so a new dataset can be benchmarked in a few lines;
-- tests that check each method against the authors' reference code and against its theoretical coverage on synthetic data;
-- repeated random splits with confidence intervals, and conditional-coverage diagnostics, which the notebooks do not provide.
+Outputs saved in the v1.2 notebooks were not produced on their stated datasets, so v1.2 numbers should not be compared with
+v2.0. Earlier versions are preserved on the branches `version1.2`, `version-1.1` and `version-1.0`.
 
 ---
 
-## 15. Resources, citation and license
+## 9. Limitations
 
-| Resource | Link |
+| # | Limitation | Consequence |
+|:-:|---|---|
+| 1 | One train/test split and one run per notebook | No confidence intervals across splits or seeds; small test sets detect only large departures from 90% |
+| 2 | Online methods process the test rows in their stored order | Their widths partly reflect learning from earlier test labels |
+| 3 | All guarantees are marginal | A method can cover 90% overall and less for extreme target values |
+| 4 | Optuna search is not bit-reproducible; neural models depend on seeds | Re-running yields slightly different numbers; the stored tuning run is the one used by every notebook |
+| 5 | Kaggle's 12-hour session limit | Not run: NB6 TabNet and PGBM on sediment load (and NexCP Full there); NB6 NGBoost and PGBM on pile settlement |
+
+---
+
+## 10. Future work: the `reguq` library
+
+The notebooks constitute a research pipeline: long, dataset-specific copies whose methods cannot be imported into other code.
+The next stage of this project is **`reguq`** (regression uncertainty quantification), a Python package that provides the
+verified methods of this benchmark as a tested and documented library:
+
+- a common interface (`fit` / `calibrate` / `predict_interval` / `predict_distribution`) for every method family studied here,
+  wrapping any scikit-learn-compatible regressor;
+- the evaluation protocol of Section 5 (coverage with sampling tolerance, relative width, CRPS, PIT, crossing rate) and the
+  recommendation rule as functions, so that a new dataset can be benchmarked with minimal code;
+- tests that verify each method against the authors' reference implementation and against its theoretical coverage on
+  synthetic data;
+- repeated random splits with confidence intervals, and conditional-coverage diagnostics.
+
+---
+
+## 11. Citation, license and authors
+
+| Resource | Location |
 |---|---|
+| Concrete case study | [`docs/concrete_walkthrough/`](docs/concrete_walkthrough/README.md) |
 | Benchmark paper (all datasets) | [`papers/benchmark/paper.pdf`](papers/benchmark/paper.pdf) |
-| Per-dataset reports | [`papers/`](papers/README.md) |
+| Dataset reports | `examples/<dataset>_uncertainty_analysis/report/paper.pdf` ([index](papers/README.md)) |
 | Machine-readable results | [`results/`](results/) |
-| Original Kaggle notebooks | linked in each dataset README (section 2), each `results/README.md`, and each report; full log [`docs/run_registry.tsv`](docs/run_registry.tsv) |
-| Kaggle data | `daneshselwal/reguq-uq-data` |
-| Reference list (every method, library and paper) | [`references/REFERENCES.md`](references/REFERENCES.md) |
-| Key papers (PDF) | [Gentle introduction to conformal prediction](references/papers/Gentle_Intro_to_Conformal_Prediction.pdf) · [Conformal prediction beyond exchangeability](references/papers/NEXCP_beyond_exchangeability.pdf) · [Adaptive conformal inference](references/papers/Adaptive_Conformal_Inference.pdf) |
+| Kaggle runs | linked in each dataset README and report; complete log in [`docs/run_registry.tsv`](docs/run_registry.tsv) |
+| References | [`references/REFERENCES.md`](references/REFERENCES.md) |
 | Libraries | scikit-learn, XGBoost, LightGBM, CatBoost, GPBoost, NGBoost, PGBM, pytorch-tabnet, Optuna, MAPIE, PUNCC, IBUG, Treeffuser, PyTorch, SHAP, LIME, InterpretML |
 
-**Citation.** If you use this pipeline or its results, please cite it (GitHub's *Cite this repository* button uses
-[`CITATION.cff`](CITATION.cff)) and the original papers of the methods you use:
+**Citation.** If you use this benchmark or its results, please cite it (GitHub's *Cite this repository* button uses
+[`CITATION.cff`](CITATION.cff)) together with the original publications of the methods used:
 
 ```bibtex
 @misc{selwal_pal_regression_uq_2026,
   author       = {Selwal, Danesh and Pal, Mahesh},
-  title        = {How Far Can a Regression Prediction Be Trusted? A Benchmark of
-                  Uncertainty Quantification Methods on Nine Engineering and
-                  Environmental Datasets},
+  title        = {Regression Uncertainty Quantification Benchmark: Over Thirty Methods on
+                  Nine Engineering and Environmental Datasets},
   year         = {2026},
   howpublished = {\url{https://github.com/DaneshSelwal/Regression-UQ-Benchmark}},
   note         = {Version 2.0}

@@ -1,6 +1,6 @@
 # Pile · NB7 Adaptive coverage policies (ACP)
 
-[← Pile README](../README.md) · [method guide](../../../notebooks/07_adaptive_coverage_policies/README.md) · [report (PDF)](../../../papers/pile/paper.pdf)
+[← Pile README](../README.md) · [method guide](../../../notebooks/07_adaptive_coverage_policies/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

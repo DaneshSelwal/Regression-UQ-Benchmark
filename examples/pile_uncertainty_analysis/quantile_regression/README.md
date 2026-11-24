@@ -1,6 +1,6 @@
 # Pile · NB2 Quantile regression
 
-[← Pile README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../../../papers/pile/paper.pdf)
+[← Pile README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

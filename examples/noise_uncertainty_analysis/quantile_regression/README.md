@@ -1,6 +1,6 @@
 # Noise · NB2 Quantile regression
 
-[← Noise README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../../../papers/noise/paper.pdf)
+[← Noise README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

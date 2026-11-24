@@ -26,7 +26,7 @@
 \mathrm{CRPS}\bigl(\mathcal N(\mu,\sigma^2),y\bigr)=\sigma\Bigl[z\bigl(2\Phi(z)-1\bigr)+2\varphi(z)-\tfrac{1}{\sqrt\pi}\Bigr],\qquad z=\frac{y-\mu}{\sigma}
 ```
 
-*In words: a sharp distribution centred on the truth scores low; a wide one, or one centred in the wrong place, scores high.*
+**Interpretation.** A sharp distribution centred on the truth scores low; a wide one, or one centred in the wrong place, scores high.
 CRPS is *proper*: in expectation the true distribution gets the best score. The **Hersbach decomposition** splits it into
 reliability (calibration error), resolution and uncertainty (FIX P1).
 

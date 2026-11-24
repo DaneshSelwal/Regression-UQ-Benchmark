@@ -1,7 +1,7 @@
 # Report tools
 
 Scripts that turn the stored results (`examples/<dataset>_uncertainty_analysis/*/results/`) into
-the per-dataset reports in `papers/`, the dataset READMEs and the cross-dataset figures. They read
+the per-dataset reports in `examples/<dataset>_uncertainty_analysis/report/`, the dataset READMEs and the cross-dataset figures. They read
 only the Excel files, executed notebooks, `best_params.json` and the results READMEs; no model is
 re-run.
 
@@ -10,7 +10,7 @@ re-run.
 | `build_summary.py <repo> <out_dir> [dataset ...]` | Extracts the headline numbers of every notebook into `<out_dir>/<dataset>.json`. |
 | `analysis.py` | Builds the coverage/width table of every model × interval method, the sampling tolerance and the recommendation rule. |
 | `figures.py` | Matplotlib figures (PNG for READMEs, PDF for the papers). |
-| `make_reports.py <repo> dataset ...` | Writes `papers/<dataset>/` (LaTeX, figures, PDF via [tectonic](https://tectonic-typesetting.github.io)) and `examples/<dataset>_uncertainty_analysis/README.md`. |
+| `make_reports.py <repo> dataset ...` | Writes `examples/<dataset>_uncertainty_analysis/report/` (LaTeX, figures, PDF via [tectonic](https://tectonic-typesetting.github.io)) and `examples/<dataset>_uncertainty_analysis/README.md`. |
 | `cross.py <repo> dataset ...` | Prints the cross-dataset table and writes `docs/figures/*_heatmap.png`. |
 | `study.py <repo>` | Cross-dataset tables `results/benchmark_*.csv` and figures `docs/figures/fig_*.png/pdf` (pipeline, datasets, conformal explainer, validity tolerance, family validity, model-based coverage, ranking, ACP/HCM, recommended). |
 | `texblocks.py` | Shared LaTeX text: set-up and notation, methods with maths, evaluation protocol, limitations, future work. |

@@ -29,7 +29,7 @@ For a candidate setting $`\theta`$ the objective is the 5-fold cross-validated R
 \mathrm{CV}(\theta)=\frac15\sum_{k=1}^{5}\sqrt{\frac{1}{|I_k|}\sum_{i\in I_k}\bigl(y_i-\hat f^{(-k)}_\theta(x_i)\bigr)^2}
 ```
 
-*In words: train on four folds, measure the error on the fifth, rotate, average.* The test set never enters this
+**Interpretation.** Train on four folds, measure the error on the fifth, rotate, average. The test set never enters this
 number. Optuna's **AutoSampler** chooses the search strategy, and a **pruner** stops trials whose early folds are already
 worse than the median (MedianPruner), than a successive-halving bracket (Hyperband) or than the best trial in a Wilcoxon
 test (WilcoxonPruner). Each model is tuned with each pruner and with none; the setting with the lowest CV RMSE is kept.

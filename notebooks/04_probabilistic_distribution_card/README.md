@@ -26,7 +26,7 @@ A network $`\varepsilon_\theta(x,y_t,\hat f(x),t)`$ (three time-conditioned laye
 $`\min_\theta\ \mathbb E\,\|\varepsilon-\varepsilon_\theta(x,y_t,\hat f(x),t)\|^2`$. Running the process backwards from noise gives one
 sample of $`Y\mid x`$; 1000 samples per test point give the predictive distribution.
 
-*In words: the guide says roughly where the answer is; the diffusion model learns how the truth scatters around it.*
+**Interpretation.** The guide says roughly where the answer is; the diffusion model learns how the truth scatters around it.
 
 ## 3. Settings and what to expect
 

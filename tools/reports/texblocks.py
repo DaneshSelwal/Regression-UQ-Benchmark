@@ -272,7 +272,7 @@ $\tilde q_{t+1}=\tilde q_t-\eta_t g_t$, with $g_t=\alpha$ after a hit and $g_t=-
 \begin{equation}
 \tilde g_t=\hat F_t\big(\tilde q_t-\eta_tg_t\big)-(1-\alpha),\qquad q_{t+1}=\max\big(0,\;\tilde q_{t+1}-c\,\eta_t\,\tilde g_t\big).
 \end{equation}
-In words: if the step about to be taken would already put more than $1-\alpha$ of the recent scores below the radius, the
+Interpretation: if the step about to be taken would already put more than $1-\alpha$ of the recent scores below the radius, the
 correction pulls it back, and vice versa, so the radius anticipates where the coverage is heading. The learning rate is
 $\eta_t=\eta\cdot(\max-\min)$ of the recent scores, as in the official code. \emph{Settings:} $\eta=0.05$, $c=0.5$, start value the
 90\% quantile of the out-of-fold training residuals, $T_{\text{burnin}}$ set from the test-set size (FIX D5).

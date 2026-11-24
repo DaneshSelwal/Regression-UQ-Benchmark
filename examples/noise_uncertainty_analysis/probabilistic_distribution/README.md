@@ -1,6 +1,6 @@
 # Noise · NB3 Distributional (NGBoost, PGBM, IBUG, Treeffuser)
 
-[← Noise README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../../../papers/noise/paper.pdf)
+[← Noise README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

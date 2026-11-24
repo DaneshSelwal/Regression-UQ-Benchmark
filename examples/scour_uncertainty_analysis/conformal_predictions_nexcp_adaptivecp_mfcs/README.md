@@ -1,6 +1,6 @@
 # Scour · NB6 NexCP and online conformal
 
-[← Scour README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../../../papers/scour/paper.pdf)
+[← Scour README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

@@ -1,6 +1,6 @@
 # Streamflow · NB5 Conformal (MAPIE, PUNCC)
 
-[← Streamflow README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../../../papers/streamflow/paper.pdf)
+[← Streamflow README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

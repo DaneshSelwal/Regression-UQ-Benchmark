@@ -1,6 +1,6 @@
 # Sediment load · NB1 Hyperparameter tuning (Optuna)
 
-[← Sediment load README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../../../papers/sediment_load/paper.pdf)
+[← Sediment load README](../README.md) · [method guide](../../../notebooks/01_hyperparameter_tuning/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

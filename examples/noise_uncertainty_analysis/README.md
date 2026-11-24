@@ -1,6 +1,6 @@
 # Noise: how far can the predictions be trusted?
 
-[← main README](../../README.md) · [all datasets](../../README.md#5-the-nine-datasets) · [report (PDF)](../../papers/noise/paper.pdf) · [method guides](../../notebooks/)
+[← main README](../../README.md) · [all datasets](../../README.md#3-results-on-all-nine-datasets) · [report (PDF)](report/paper.pdf) · [method guides](../../notebooks/)
 
 | | |
 |---|---|
@@ -8,7 +8,7 @@
 | **Key result** | Conformal intervals are valid in **173 of 180** model × method cases; the sharpest valid method is **FACI** (85.0% coverage, 0.81 × std(y) wide) |
 | **Watch out** | Raw quantile regression covers only 90.0% (median); native Gaussian intervals: NGBoost 86.7%, PGBM 6.7% |
 | **Best point model** | LightGBM (5-fold CV RMSE 3.97) |
-| **Full report** | [`papers/noise/paper.pdf`](../../papers/noise/paper.pdf): methods with maths, all tables, appendix |
+| **Full report** | [`report/paper.pdf`](report/paper.pdf): methods with maths, all tables, appendix |
 
 ## Contents
 
@@ -22,7 +22,7 @@
 
 ## 1. The data
 
-<p align="center"><img src="../../papers/noise/figures/fig_data.png" width="90%" alt="Target distribution and strongest features"></p>
+<p align="center"><img src="report/figures/fig_data.png" width="90%" alt="Target distribution and strongest features"></p>
 
 *__Figure 1.__ Left: the target on the training and test sets. Right: the features most correlated with it (Spearman, training set).*
 
@@ -43,7 +43,7 @@
 
 ## 2. What was run
 
-The same eight notebooks as every other dataset ([pipeline](../../README.md#4-the-pipeline)); every phase folder has its own README with this dataset's numbers.
+The same eight notebooks as every other dataset ([pipeline](../../README.md#1-overview-and-pipeline)); every phase folder has its own README with this dataset's numbers.
 
 | Phase | What it computes | Results | Kaggle run(s) |
 |---|---|---|---|
@@ -54,17 +54,17 @@ The same eight notebooks as every other dataset ([pipeline](../../README.md#4-th
 | [NB5](conformal_predictions_mapie_puncc/README.md) | Conformal (MAPIE, PUNCC) | [`conformal_predictions_mapie_puncc/results/`](conformal_predictions_mapie_puncc/results/) | [REG22_11_2026_21_25](https://www.kaggle.com/code/daneshselwal/reg22-11-2026-21-25) |
 | [NB6](conformal_predictions_nexcp_adaptivecp_mfcs/README.md) | NexCP and online conformal | [`conformal_predictions_nexcp_adaptivecp_mfcs/results/`](conformal_predictions_nexcp_adaptivecp_mfcs/results/) | [REG23_11_2026_06_10](https://www.kaggle.com/code/daneshselwal/reg23-11-2026-06-10), [REG23_11_2026_11_26](https://www.kaggle.com/code/daneshselwal/reg23-11-2026-11-26), [REG23_11_2026_12_12](https://www.kaggle.com/code/daneshselwal/reg23-11-2026-12-12), [REG23_11_2026_13_13](https://www.kaggle.com/code/daneshselwal/reg23-11-2026-13-13), [REG23_11_2026_13_52](https://www.kaggle.com/code/daneshselwal/reg23-11-2026-13-52), [REG23_11_2026_14_02](https://www.kaggle.com/code/daneshselwal/reg23-11-2026-14-02), [REG23_11_2026_14_12](https://www.kaggle.com/code/daneshselwal/reg23-11-2026-14-12), [REG23_11_2026_14_23](https://www.kaggle.com/code/daneshselwal/reg23-11-2026-14-23), [REG23_11_2026_14_40](https://www.kaggle.com/code/daneshselwal/reg23-11-2026-14-40) |
 | [NB7](conformal_predictions_adaptive_coverage_policies/README.md) | Adaptive coverage policies (ACP) | [`conformal_predictions_adaptive_coverage_policies/results/`](conformal_predictions_adaptive_coverage_policies/results/) | [REG22_11_2026_21_46](https://www.kaggle.com/code/daneshselwal/reg22-11-2026-21-46) |
-| [NB8](hyperspherical_confidence_mapping_hcm/README.md) | Hyperspherical confidence mapping (HCM) | [`hyperspherical_confidence_mapping_hcm/results/`](hyperspherical_confidence_mapping_hcm/results/) | [REG22_11_2026_21_59](https://www.kaggle.com/code/daneshselwal/reg22-11-2026-21-59) |
+| [NB8](hyperspherical_confidence_mapping_hcm/README.md) | Hyperspherical confidence mapping (HCM) | [`hyperspherical_confidence_mapping_hcm/results/`](hyperspherical_confidence_mapping_hcm/results/) | [REG24_11_2026_15_19](https://www.kaggle.com/code/daneshselwal/reg24-11-2026-15-19), [REG22_11_2026_21_59](https://www.kaggle.com/code/daneshselwal/reg22-11-2026-21-59) |
 
 ---
 
 ## 3. Results, question by question
 
-Every interval targets **90%**. With 60 test points a correct method can land anywhere above **0.836** by chance, so that is the validity threshold ([why](../../README.md#73-when-is-a-coverage-good-enough)). Relative width = interval width / std of the test target.
+Every interval targets **90%**. With 60 test points a correct method can land anywhere above **0.836** by chance, so that is the validity threshold ([why](../../README.md#52-validity-of-a-coverage-value)). Relative width = interval width / std of the test target.
 
 ### RQ1 · How accurate are the tuned point predictors?
 
-<p align="center"><img src="../../papers/noise/figures/fig_accuracy.png" width="75%" alt="Accuracy"></p>
+<p align="center"><img src="report/figures/fig_accuracy.png" width="75%" alt="Accuracy"></p>
 
 **How to read it.** Grey bars: 5-fold CV RMSE on the training set (used to choose the model). Blue bars: RMSE on the untouched test set; dark blue = best CV model.
 
@@ -92,7 +92,7 @@ Every interval targets **90%**. With 60 test points a correct method can land an
 
 ### RQ3 · How good are the predictive distributions?
 
-<p align="center"><img src="../../papers/noise/figures/fig_crps.png" width="75%" alt="CRPS"></p>
+<p align="center"><img src="report/figures/fig_crps.png" width="75%" alt="CRPS"></p>
 
 **How to read it.** CRPS (log scale, lower is better) scores a whole predictive distribution: it rewards a sharp distribution centred on the truth. Coverage, in the text, checks only the 90% interval.
 
@@ -110,9 +110,9 @@ Every interval targets **90%**. With 60 test points a correct method can land an
 
 ### RQ4 · Do conformal methods keep their 90% promise?
 
-<p align="center"><img src="../../papers/noise/figures/fig_method_league.png" width="85%" alt="Interval methods"></p>
+<p align="center"><img src="report/figures/fig_method_league.png" width="85%" alt="Interval methods"></p>
 
-<p align="center"><img src="../../papers/noise/figures/fig_coverage_width.png" width="75%" alt="Coverage vs width"></p>
+<p align="center"><img src="report/figures/fig_coverage_width.png" width="75%" alt="Coverage vs width"></p>
 
 **How to read it.** Top: one row per method; dot = median coverage over the base models it wraps, bar = min–max, green band = valid region; right panel = median relative width. Bottom: every model × method pair; good intervals sit in the green band, far to the left.
 
@@ -126,7 +126,7 @@ Every interval targets **90%**. With 60 test points a correct method can land an
 
 ### RQ5 · Which valid method is the sharpest?
 
-<p align="center"><img src="../../papers/noise/figures/fig_intervals.png" width="75%" alt="Intervals"></p>
+<p align="center"><img src="report/figures/fig_intervals.png" width="75%" alt="Intervals"></p>
 
 **How to read it.** The CV+ intervals of LightGBM on every test point, sorted by the observed value; red crosses are misses. Marginal coverage allows misses to cluster, typically at the extremes.
 
@@ -147,7 +147,7 @@ Every interval targets **90%**. With 60 test points a correct method can land an
 **What it shows.**
 
 - ACP learns its own level: mean learned target 1 − α̃ = 61.6%; realised coverage 83.3%–93.3% across 9 models.
-- HCM (one network, 95% interval): coverage 80.0%, RMSE 15.26, Spearman(|error|, σ̂) = -0.12 — its uncertainty is not informative here.
+- HCM (one network, 95% interval): coverage 86.7%, RMSE 5.14, Spearman(|error|, σ̂) = 0.56 — its uncertainty tracks the error.
 - Extreme CP (one-sided upper bound): coverage 83.3%–93.3% of the bound y ≤ ŷ + q.
 
 > **Takeaway RQ6.** Learned-level and single-network methods answer different questions from a fixed 90% interval; they are reported for completeness and are not ranked.
@@ -225,4 +225,4 @@ noise_uncertainty_analysis/
 │   └── results/              ← EXECUTED_*.ipynb (every cell output) + Excel files
 ```
 
-Every run used for the results is linked in the table of [section 2](#2-what-was-run) and in each `results/README.md`. To reproduce, run the eight notebooks in order ([how](../../README.md#11-reproducing-the-results)). Machine-readable numbers: [`results/benchmark_long.csv`](../../results/benchmark_long.csv) (rows with `dataset = noise`).
+Every run used for the results is linked in the table of [section 2](#2-what-was-run) and in each `results/README.md`. To reproduce, run the eight notebooks in order ([how](../../README.md#6-reproducing-the-results)). Machine-readable numbers: [`results/benchmark_long.csv`](../../results/benchmark_long.csv) (rows with `dataset = noise`).

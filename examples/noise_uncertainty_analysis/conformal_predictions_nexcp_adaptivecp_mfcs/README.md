@@ -1,6 +1,6 @@
 # Noise · NB6 NexCP and online conformal
 
-[← Noise README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../../../papers/noise/paper.pdf)
+[← Noise README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

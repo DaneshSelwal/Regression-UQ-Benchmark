@@ -1,6 +1,6 @@
 # Concrete · NB6 NexCP and online conformal
 
-[← Concrete README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../../../papers/concrete/paper.pdf)
+[← Concrete README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

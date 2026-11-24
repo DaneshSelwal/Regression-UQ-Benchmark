@@ -1,6 +1,6 @@
 # Pile settlement · NB6 NexCP and online conformal
 
-[← Pile settlement README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../../../papers/pile_settlement/paper.pdf)
+[← Pile settlement README](../README.md) · [method guide](../../../notebooks/06_conformal_nexcp_online/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

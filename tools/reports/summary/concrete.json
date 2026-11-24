@@ -1546,17 +1546,17 @@
   }
  },
  "hcm": {
-  "Cov@1Sigma": 0.568421,
-  "Cov@2Sigma": 0.842105,
-  "Cov@3Sigma": 0.947368,
-  "Coverage_95Interval": 0.842105,
-  "Average_95Interval_Width": 31.001768,
-  "Pearson": -0.323172,
-  "Spearman": -0.375115,
-  "ECE_reg": 3.095705,
-  "RMSE": 9.834939,
-  "MAE": 7.65229,
-  "Mean_CRPS": 5.699705,
-  "Mean_Negative_LogLikelihood": 4.054674
+  "Cov@1Sigma": 0.515789,
+  "Cov@2Sigma": 0.8,
+  "Cov@3Sigma": 0.915789,
+  "Coverage_95Interval": 0.789474,
+  "Average_95Interval_Width": 15.749732,
+  "Pearson": 0.220775,
+  "Spearman": 0.182032,
+  "ECE_reg": 1.358207,
+  "RMSE": 5.615152,
+  "MAE": 4.462325,
+  "Mean_CRPS": 3.217845,
+  "Mean_Negative_LogLikelihood": 4.637586
  }
 }

@@ -1,6 +1,6 @@
 # Concrete · NB7 Adaptive coverage policies (ACP)
 
-[← Concrete README](../README.md) · [method guide](../../../notebooks/07_adaptive_coverage_policies/README.md) · [report (PDF)](../../../papers/concrete/paper.pdf)
+[← Concrete README](../README.md) · [method guide](../../../notebooks/07_adaptive_coverage_policies/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

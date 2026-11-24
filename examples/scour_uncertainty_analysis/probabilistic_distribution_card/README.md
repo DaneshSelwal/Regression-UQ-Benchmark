@@ -1,6 +1,6 @@
 # Scour · NB4 Distributional (CARD diffusion)
 
-[← Scour README](../README.md) · [method guide](../../../notebooks/04_probabilistic_distribution_card/README.md) · [report (PDF)](../../../papers/scour/paper.pdf)
+[← Scour README](../README.md) · [method guide](../../../notebooks/04_probabilistic_distribution_card/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

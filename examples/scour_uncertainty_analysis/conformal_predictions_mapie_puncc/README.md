@@ -1,6 +1,6 @@
 # Scour · NB5 Conformal (MAPIE, PUNCC)
 
-[← Scour README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../../../papers/scour/paper.pdf)
+[← Scour README](../README.md) · [method guide](../../../notebooks/05_conformal_mapie_puncc/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

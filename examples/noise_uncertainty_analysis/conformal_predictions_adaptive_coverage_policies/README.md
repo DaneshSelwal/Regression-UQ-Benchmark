@@ -1,6 +1,6 @@
 # Noise · NB7 Adaptive coverage policies (ACP)
 
-[← Noise README](../README.md) · [method guide](../../../notebooks/07_adaptive_coverage_policies/README.md) · [report (PDF)](../../../papers/noise/paper.pdf)
+[← Noise README](../README.md) · [method guide](../../../notebooks/07_adaptive_coverage_policies/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

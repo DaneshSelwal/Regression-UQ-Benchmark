@@ -1,6 +1,6 @@
 # Water quality (EWQI) · NB3 Distributional (NGBoost, PGBM, IBUG, Treeffuser)
 
-[← Water quality (EWQI) README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../../../papers/water_quality_ewqi/paper.pdf)
+[← Water quality (EWQI) README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

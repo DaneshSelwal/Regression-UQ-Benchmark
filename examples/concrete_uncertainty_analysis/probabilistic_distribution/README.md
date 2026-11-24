@@ -1,6 +1,6 @@
 # Concrete · NB3 Distributional (NGBoost, PGBM, IBUG, Treeffuser)
 
-[← Concrete README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../../../papers/concrete/paper.pdf)
+[← Concrete README](../README.md) · [method guide](../../../notebooks/03_probabilistic_distribution/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

@@ -1,6 +1,6 @@
 # Pile settlement · NB2 Quantile regression
 
-[← Pile settlement README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../../../papers/pile_settlement/paper.pdf)
+[← Pile settlement README](../README.md) · [method guide](../../../notebooks/02_quantile_regression/README.md) · [report (PDF)](../report/paper.pdf)
 
 | | |
 |---|---|

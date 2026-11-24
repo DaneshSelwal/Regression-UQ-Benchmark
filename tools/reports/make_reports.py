@@ -1,4 +1,4 @@
-"""make_reports.py <R> <ds...>: figures + LaTeX paper (papers/<ds>/) + example README + phase READMEs for each dataset.
+"""make_reports.py <R> <ds...>: figures + LaTeX paper (examples/<ds>_uncertainty_analysis/report/) + example README + phase READMEs for each dataset.
 
 Every number in the generated text is computed from tools/reports/summary/<ds>.json (build_summary.py) or the data CSVs.
 """
@@ -193,7 +193,7 @@ def fig_data(R, ds, F_, d):
     fig.tight_layout(); F.save(fig, d, "fig_data")
 
 def make_figs(R, ds, F_):
-    d = f"{R}/papers/{ds}/figures"; S = F_["S"]
+    d = f"{R}/examples/{ds}_uncertainty_analysis/report/figures"; S = F_["S"]
     F.accuracy(S, d); F.cov_width(F_["df"], S, d); F.league_plot(F_["L"], S, d); F.crps_plot(S, d); fig_data(R, ds, F_, d)
     for x in ("fig_pipeline", "fig_conformal_explainer"):
         for e in ("pdf", "png"): shutil.copy(f"{R}/docs/figures/{x}.{e}", f"{d}/{x}.{e}")
@@ -415,7 +415,7 @@ executed notebook is stored next to its Excel outputs and is listed in Table~\re
     return doc
 
 def build_pdf(R, ds, doc, folder=None):
-    d = folder or f"{R}/papers/{ds}"; os.makedirs(d, exist_ok=True)
+    d = folder or f"{R}/examples/{ds}_uncertainty_analysis/report"; os.makedirs(d, exist_ok=True)
     open(f"{d}/paper.tex", "w").write(doc); shutil.copy(f"{HERE}/references.bib", f"{d}/references.bib")
     r = subprocess.run([shutil.which("tectonic") or "/opt/anaconda3/bin/tectonic", "-X", "compile", "--keep-logs", "paper.tex"], cwd=d, capture_output=True, text=True)
     log = open(f"{d}/paper.log").read() if os.path.exists(f"{d}/paper.log") else ""
@@ -431,7 +431,7 @@ def md_rq(rq, key, fig_lines, how):
 
 def readme(R, ds, F_):
     S = F_["S"]; dd = S["data"]; nm = NAMES[ds]; n = F_["n"]; L = F_["L"]; rq = rq_text(F_); rec = F_["rec"]; DF = F_["data"]; df = F_["df"]
-    fig = f"../../papers/{ds}/figures"; cf = df[df.family.isin(CONF)]; q = F_["qr"]; t = S["tuning"]
+    fig = "report/figures"; cf = df[df.family.isin(CONF)]; q = F_["qr"]; t = S["tuning"]
     nat = [f"{k} {pmd(S['probabilistic'][k]['coverage90_gauss'])}" for k in ("NGBoost", "PGBM") if k in S["probabilistic"]]
     card = [
         "| | |", "|---|---|",
@@ -440,10 +440,10 @@ def readme(R, ds, F_):
         f"({pmd(rec.cov_med)} coverage, {rec.relw_med:.2f} × std(y) wide) |" if rec is not None else f"| **Key result** | Conformal intervals are valid in {int(cf.valid.sum())} of {len(cf)} cases |",
         f"| **Watch out** | Raw quantile regression covers only {pmd(q.coverage.median())} (median); native Gaussian intervals: {', '.join(nat)} |" if len(q) else "",
         f"| **Best point model** | {F_['best']} (5-fold CV RMSE {f(t[F_['best']]['cv_rmse'])}) |",
-        f"| **Full report** | [`papers/{ds}/paper.pdf`](../../papers/{ds}/paper.pdf): methods with maths, all tables, appendix |",
+        f"| **Full report** | [`report/paper.pdf`](report/paper.pdf): methods with maths, all tables, appendix |",
     ]
     lines = [f"# {nm}: how far can the predictions be trusted?", "",
-             f"[← main README](../../README.md) · [all datasets](../../README.md#5-the-nine-datasets) · [report (PDF)](../../papers/{ds}/paper.pdf) · [method guides](../../notebooks/)", ""] + [c for c in card if c] + ["",
+             f"[← main README](../../README.md) · [all datasets](../../README.md#3-results-on-all-nine-datasets) · [report (PDF)](report/paper.pdf) · [method guides](../../notebooks/)", ""] + [c for c in card if c] + ["",
              "## Contents", "", "1. [The data](#1-the-data)", "2. [What was run](#2-what-was-run)", "3. [Results, question by question](#3-results-question-by-question)",
              "4. [All interval methods](#4-all-interval-methods)", "5. [Folder map and Kaggle runs](#5-folder-map-and-kaggle-runs)", "", "---", "",
              "## 1. The data", "",
@@ -460,7 +460,7 @@ def readme(R, ds, F_):
               + (" — the two sets are not identically distributed, which strains methods that assume exchangeability." if abs(DF["shift"]) > 0.2 or abs(math.log(max(DF['sd_ratio'], 1e-9))) > 0.25 else " — the two sets look alike.")
               + f" With {dd['n_train']/len(dd['features']):.0f} training rows per feature, " + ("the problem is data-poor." if dd['n_train']/len(dd['features']) < 15 else "there is enough data per feature for stable tree models."), "",
               "---", "", "## 2. What was run", "",
-              "The same eight notebooks as every other dataset ([pipeline](../../README.md#4-the-pipeline)); every phase folder has its own README with this dataset's numbers.", "",
+              "The same eight notebooks as every other dataset ([pipeline](../../README.md#1-overview-and-pipeline)); every phase folder has its own README with this dataset's numbers.", "",
               "| Phase | What it computes | Results | Kaggle run(s) |", "|---|---|---|---|"]
     rl = runs(R, ds)
     for ph, title, nbdir in PHASES:
@@ -472,7 +472,7 @@ def readme(R, ds, F_):
             (["NexCP Full conformal was switched off for this dataset (`RUN_NEXCP_FULL = False`, FIX B16) for the same reason."] if F_["nexfull_off"] else []))]
     lines += ["", "---", "", "## 3. Results, question by question", "",
               f"Every interval targets **90%**. With {n} test points a correct method can land anywhere above **{A.TARGET-F_['tol']:.3f}** by chance, "
-              "so that is the validity threshold ([why](../../README.md#73-when-is-a-coverage-good-enough)). Relative width = interval width / std of the test target.", ""]
+              "so that is the validity threshold ([why](../../README.md#52-validity-of-a-coverage-value)). Relative width = interval width / std of the test target.", ""]
     lines += md_rq(rq, "RQ1", [f"<p align=\"center\"><img src=\"{fig}/fig_accuracy.png\" width=\"75%\" alt=\"Accuracy\"></p>", ""],
                    "Grey bars: 5-fold CV RMSE on the training set (used to choose the model). Blue bars: RMSE on the untouched test set; dark blue = best CV model.")
     lines += md_rq(rq, "RQ2", [], "Quantile regression fits one model per level; its 90% interval is the 5% and 95% models' predictions. No calibration step is involved.")
@@ -499,7 +499,7 @@ def readme(R, ds, F_):
     lines += ["│   ├── README.md             ← this phase on this dataset", "│   ├── <notebook>.ipynb      ← v2.0 code with this dataset's paths (no outputs)",
               "│   └── results/              ← EXECUTED_*.ipynb (every cell output) + Excel files", "```", "",
               "Every run used for the results is linked in the table of [section 2](#2-what-was-run) and in each `results/README.md`. "
-              f"To reproduce, run the eight notebooks in order ([how](../../README.md#11-reproducing-the-results)). Machine-readable numbers: [`results/benchmark_long.csv`](../../results/benchmark_long.csv) (rows with `dataset = {ds}`)."]
+              f"To reproduce, run the eight notebooks in order ([how](../../README.md#6-reproducing-the-results)). Machine-readable numbers: [`results/benchmark_long.csv`](../../results/benchmark_long.csv) (rows with `dataset = {ds}`)."]
     open(f"{R}/examples/{ds}_uncertainty_analysis/README.md", "w").write("\n".join(lines) + "\n")
 
 # ---------------------------------------------------------------- phase READMEs
@@ -520,7 +520,7 @@ def phase_readmes(R, ds, F_):
         E = f"{R}/examples/{ds}_uncertainty_analysis/{ph}"
         nbs = sorted(os.path.basename(x) for x in glob.glob(f"{E}/*.ipynb")); res = sorted(os.path.basename(x) for x in glob.glob(f"{E}/results/*"))
         rs = [x for x in rl if x[0] == ph]
-        lines = [f"# {nm} · {title}", "", f"[← {nm} README](../README.md) · [method guide](../../../notebooks/{nbdir}/README.md) · [report (PDF)](../../../papers/{ds}/paper.pdf)", "",
+        lines = [f"# {nm} · {title}", "", f"[← {nm} README](../README.md) · [method guide](../../../notebooks/{nbdir}/README.md) · [report (PDF)](../report/paper.pdf)", "",
                  "| | |", "|---|---|", f"| **What** | {what} |", f"| **Notebook** | " + ", ".join(f"[`{x}`](<{x}>)" for x in nbs) + " |",
                  f"| **Kaggle run(s)** | " + (", ".join(f"[{c}]({u})" for _, _, c, _, u in rs) or "–") + " |",
                  f"| **Executed output** | [`results/`](results/) ({len(res)} files: executed notebook(s) and Excel workbooks) |", ""] + big_note(E, ph) + body + \
