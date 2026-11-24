@@ -46,3 +46,4 @@ venv/
 !docs/figures/*.png
 !papers/*/figures/*.png
 !examples/*/report/figures/*.png
+!docs/figures/concrete/*.png
