@@ -41,3 +41,7 @@ Thumbs.db
 Thumbs.db:encryptable
 venv.bak/
 venv/
+
+# v2.0 documentation figures are committed
+!docs/figures/*.png
+!papers/*/figures/*.png
