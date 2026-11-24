@@ -11,11 +11,13 @@
 ![Intervals checked](https://img.shields.io/badge/intervals%20checked-1%2C800-1baf7a)
 ![Compute](https://img.shields.io/badge/compute-Kaggle%20CPU-20BEFF)
 [![Paper](https://img.shields.io/badge/paper-PDF-b31b1b)](papers/benchmark/paper.pdf)
-[![Version](https://img.shields.io/badge/version-2.0-1baf7a)](https://github.com/DaneshSelwal/Regression_Uncertainty_Quantification_Analysis/releases)
+[![Version](https://img.shields.io/badge/version-2.0-1baf7a)](https://github.com/DaneshSelwal/Regression-UQ-Benchmark/releases)
 
 <img src="docs/figures/fig_recommended.png" width="100%" alt="Width of every conformal method, raw quantile regression and the recommended method on each dataset">
 
 </div>
+
+<sub>Repository formerly named <code>Regression_Uncertainty_Quantification_Analysis</code>; old links redirect here.</sub>
 
 > **Abstract.** A regression model always returns a number, even when it should not be trusted. We attach **more than
 > thirty uncertainty-quantification (UQ) methods** to **nine tuned regressors** and check every 90% prediction interval on
@@ -551,7 +553,7 @@ verified methods of this benchmark into a tested, documented library:
                   Uncertainty Quantification Methods on Nine Engineering and
                   Environmental Datasets},
   year         = {2026},
-  howpublished = {\url{https://github.com/DaneshSelwal/Regression_Uncertainty_Quantification_Analysis}},
+  howpublished = {\url{https://github.com/DaneshSelwal/Regression-UQ-Benchmark}},
   note         = {Version 2.0}
 }
 ```

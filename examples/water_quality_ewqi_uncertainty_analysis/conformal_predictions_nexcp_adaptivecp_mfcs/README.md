@@ -9,7 +9,7 @@
 | **Kaggle run(s)** | [REG23_11_2026_01_18](https://www.kaggle.com/code/daneshselwal/reg23-11-2026-01-18) |
 | **Executed output** | [`results/`](results/) (11 files: executed notebook(s) and Excel workbooks) |
 
-> **Large notebooks.** These executed notebooks are mostly training logs (e.g. PGBM prints one line per tree) and may be too large for GitHub's notebook viewer. They are stored unchanged; open them with nbviewer, the Kaggle run, or download them: [`EXECUTED_Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb`](https://nbviewer.org/github/DaneshSelwal/Regression_Uncertainty_Quantification_Analysis/blob/version2.0/examples/water_quality_ewqi_uncertainty_analysis/conformal_predictions_nexcp_adaptivecp_mfcs/results/EXECUTED_Conformal_Predictions%28NEXCP%2C%20Adaptive%20CP%2C%20mfcs%29.ipynb) (61 MB)
+> **Large notebooks.** These executed notebooks are mostly training logs (e.g. PGBM prints one line per tree) and may be too large for GitHub's notebook viewer. They are stored unchanged; open them with nbviewer, the Kaggle run, or download them: [`EXECUTED_Conformal_Predictions(NEXCP, Adaptive CP, mfcs).ipynb`](https://nbviewer.org/github/DaneshSelwal/Regression-UQ-Benchmark/blob/version2.0/examples/water_quality_ewqi_uncertainty_analysis/conformal_predictions_nexcp_adaptivecp_mfcs/results/EXECUTED_Conformal_Predictions%28NEXCP%2C%20Adaptive%20CP%2C%20mfcs%29.ipynb) (61 MB)
 
 ## Coverage / relative width, every method × model
 

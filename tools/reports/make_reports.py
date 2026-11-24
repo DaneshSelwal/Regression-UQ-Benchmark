@@ -18,7 +18,7 @@ PHASES = [("hyperparameter_tuning", "NB1 Hyperparameter tuning (Optuna)", "01_hy
           ("conformal_predictions_nexcp_adaptivecp_mfcs", "NB6 NexCP and online conformal", "06_conformal_nexcp_online"),
           ("conformal_predictions_adaptive_coverage_policies", "NB7 Adaptive coverage policies (ACP)", "07_adaptive_coverage_policies"),
           ("hyperspherical_confidence_mapping_hcm", "NB8 Hyperspherical confidence mapping (HCM)", "08_hyperspherical_confidence_mapping")]
-REPO = "https://github.com/DaneshSelwal/Regression_Uncertainty_Quantification_Analysis"
+REPO = "https://github.com/DaneshSelwal/Regression-UQ-Benchmark"
 CONF = ["Conformal (MAPIE/PUNCC)", "Weighted conformal (NexCP)", "Online conformal", "COP"]
 
 # ---------------------------------------------------------------- formatting
@@ -503,7 +503,7 @@ def readme(R, ds, F_):
     open(f"{R}/examples/{ds}_uncertainty_analysis/README.md", "w").write("\n".join(lines) + "\n")
 
 # ---------------------------------------------------------------- phase READMEs
-NBV = "https://nbviewer.org/github/DaneshSelwal/Regression_Uncertainty_Quantification_Analysis/blob/version2.0"
+NBV = "https://nbviewer.org/github/DaneshSelwal/Regression-UQ-Benchmark/blob/version2.0"
 def big_note(E, ph, limit_mb=10):
     """Executed notebooks too large for GitHub's notebook viewer: link nbviewer instead (files are unchanged)."""
     from urllib.parse import quote

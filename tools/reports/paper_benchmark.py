@@ -201,8 +201,8 @@ exactly this, and they recover coverage on pile settlement (MFCS Full is recomme
 \end{itemize}
 \paragraph{Per-dataset reports.} \texttt{papers/<dataset>/paper.pdf} for """ + ", ".join(tex(ST.NAMES[d]) for d in ST.DS) + r""".
 \paragraph{Reproducibility.} Code, executed notebooks and raw outputs: \url{""" + REPO + r"""} (branch \texttt{version2.0}). Machine-readable results:
-\texttt{results/benchmark\_long.csv} (every interval), \texttt{benchmark\_methods.csv}, \texttt{benchmark\_datasets.csv}. Every Kaggle run is listed in
-\texttt{docs/run\_registry.tsv} and in each dataset's report.
+\url{results/benchmark_long.csv} (every interval), \url{benchmark_methods.csv}, \url{benchmark_datasets.csv}. Every Kaggle run is listed in
+\url{docs/run_registry.tsv} and in each dataset's report.
 \paragraph{Acknowledgements.} Computations were run on Kaggle's free CPU sessions.
 \FloatBarrier
 \bibliographystyle{plainnat}\bibliography{references}
