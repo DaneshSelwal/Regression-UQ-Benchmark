@@ -9,8 +9,6 @@
 | **Reports** | Intervals, coverage, width, conditional coverage by target bins, one workbook per model |
 | **Notebook** | [`Conformal Predictions(MAPIE,PUNCC).ipynb`](<Conformal Predictions(MAPIE,PUNCC).ipynb>) |
 
-<p align="center"><img src="../../docs/figures/fig_conformal_explainer.png" width="100%" alt="Split conformal prediction in three steps"></p>
-
 *__Box 1.__ Split conformal prediction in three steps, on synthetic data.*
 
 ## 1. Split conformal: the foundation

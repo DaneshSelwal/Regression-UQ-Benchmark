@@ -5,8 +5,6 @@
 These are the **generalised v2.0 notebooks** with no outputs, so the code is easy to read. Each folder in
 [`examples/`](../examples/) holds the same notebooks with one dataset's paths, plus the executed copies and results.
 
-<p align="center"><img src="../docs/figures/fig_pipeline.png" width="100%" alt="The eight-notebook pipeline"></p>
-
 | # | Folder | Method guide (theory, maths, settings) | What it computes |
 |---|---|---|---|
 | 1 | [`01_hyperparameter_tuning/`](01_hyperparameter_tuning/) | [guide](01_hyperparameter_tuning/README.md) | Optuna tuning of ten regressors by 5-fold CV on the training set; `best_params.pkl` |
