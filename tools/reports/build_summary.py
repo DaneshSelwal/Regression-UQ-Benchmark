@@ -1,6 +1,8 @@
 """build_summary.py <R> <out_dir>: extract headline numbers of every notebook, per dataset, into <out_dir>/<ds>.json."""
 import json, re, sys, glob, os, warnings
 import pandas as pd, numpy as np
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import analysis as A
 warnings.filterwarnings("ignore")
 R, OUT = sys.argv[1], sys.argv[2]; os.makedirs(OUT, exist_ok=True)
 CANON = [("TabNet","TabNet"),("NGB","NGBoost"),("PGBM","PGBM"),("GPBoost","GPBoost"),("CatBoost","CatBoost"),
@@ -21,7 +23,7 @@ def nb_streams(path):
         yield "".join(c["source"]), "".join("".join(o.get("text", "")) for o in c.get("outputs", []) if o.get("output_type") == "stream")
 
 def summarise(ds):
-    E = f"{R}/examples/{ds}_uncertainty_analysis"; S = {"dataset": ds}
+    E = A.dsdir(R, ds); S = {"dataset": ds}
     tr, te = pd.read_csv(f"{E}/data/train.csv"), pd.read_csv(f"{E}/data/test.csv")
     S["data"] = {"n_train": len(tr), "n_test": len(te), "features": list(tr.columns[:-1]), "target": tr.columns[-1],
                  "target_stats": {k: f(v) for k, v in te.iloc[:, -1].describe().items()}}
@@ -115,7 +117,7 @@ def summarise(ds):
     json.dump(S, open(f"{OUT}/{ds}.json", "w"), indent=1, default=str)
     return S
 
-for ds in sys.argv[3:] or [p.split("/")[-1].replace("_uncertainty_analysis", "") for p in sorted(glob.glob(f"{R}/examples/*_uncertainty_analysis"))]:
+for ds in sys.argv[3:] or A.all_datasets(R):
     try:
         S = summarise(ds)
         print(f"{ds:20s} train {S['data']['n_train']:5d} test {S['data']['n_test']:4d} | tune {len(S['tuning'])} | QR {len(S['quantile_regression'])} | prob {len(S['probabilistic'])} | card {len(S['card'])} | cp {len(S['mapie_puncc'])} | nb6 {len(S['nexcp_online'])} | acp {len(S['acp'])} | hcm {len(S['hcm'])}")

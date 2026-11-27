@@ -2,8 +2,9 @@
 
 [← main README](../README.md)
 
-These are the **generalised v2.0 notebooks** with no outputs, so the code is easy to read. Each folder in
-[`examples/`](../examples/) holds the same notebooks with one dataset's paths, plus the executed copies and results.
+These are the **generalised v2.0 notebooks** with no outputs, so the code is easy to read. The main case study,
+[`concrete_uncertainty_analysis/`](concrete_uncertainty_analysis/), holds the same notebooks with the Concrete dataset's
+paths, plus the executed copies and results. The remaining eight datasets are in [`examples/`](../examples/), organised the same way.
 
 | # | Folder | Method guide (theory, maths, settings) | What it computes |
 |---|---|---|---|

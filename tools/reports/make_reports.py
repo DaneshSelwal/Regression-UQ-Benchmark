@@ -54,7 +54,7 @@ def not_run_models(S):
 
 # ---------------------------------------------------------------- facts
 def data_facts(R, ds):
-    E = f"{R}/examples/{ds}_uncertainty_analysis/data"
+    E = f"{A.dsdir(R, ds)}/data"
     tr, te = pd.read_csv(f"{E}/train.csv"), pd.read_csv(f"{E}/test.csv")
     y0, y1 = tr.iloc[:, -1].astype(float), te.iloc[:, -1].astype(float)
     X = tr.iloc[:, :-1].apply(pd.to_numeric, errors="coerce")
@@ -193,7 +193,7 @@ def fig_data(R, ds, F_, d):
     fig.tight_layout(); F.save(fig, d, "fig_data")
 
 def make_figs(R, ds, F_):
-    d = f"{R}/examples/{ds}_uncertainty_analysis/report/figures"; S = F_["S"]
+    d = f"{A.dsdir(R, ds)}/report/figures"; S = F_["S"]
     F.accuracy(S, d); F.cov_width(F_["df"], S, d); F.league_plot(F_["L"], S, d); F.crps_plot(S, d); fig_data(R, ds, F_, d)
     for x in ("fig_pipeline", "fig_conformal_explainer"):
         for e in ("pdf", "png"): shutil.copy(f"{R}/docs/figures/{x}.{e}", f"{d}/{x}.{e}")
@@ -400,7 +400,7 @@ a large factor between valid methods (Table~\ref{tab:league}); reporting coverag
 """ + "\n".join(f"\\item {md2tex(x)}" for x in findings(F_)) + r"""
 \end{itemize}
 
-\paragraph{Reproducibility.} Code: \url{""" + REPO + r"""} (branch \texttt{version2.0}), folder \url{examples/""" + ds + r"""_uncertainty_analysis}. Every
+\paragraph{Reproducibility.} Code: \url{""" + REPO + r"""} (branch \texttt{version2.0}), folder \url{""" + A.dsrel(R, ds) + r"""}. Every
 executed notebook is stored next to its Excel outputs and is listed in Table~\ref{tab:runs}. Machine-readable results for all datasets:
 \texttt{results/benchmark\_long.csv}.
 """ + T["runs"] + r"""
@@ -415,7 +415,7 @@ executed notebook is stored next to its Excel outputs and is listed in Table~\re
     return doc
 
 def build_pdf(R, ds, doc, folder=None):
-    d = folder or f"{R}/examples/{ds}_uncertainty_analysis/report"; os.makedirs(d, exist_ok=True)
+    d = folder or f"{A.dsdir(R, ds)}/report"; os.makedirs(d, exist_ok=True)
     open(f"{d}/paper.tex", "w").write(doc); shutil.copy(f"{HERE}/references.bib", f"{d}/references.bib")
     r = subprocess.run([shutil.which("tectonic") or "/opt/anaconda3/bin/tectonic", "-X", "compile", "--keep-logs", "paper.tex"], cwd=d, capture_output=True, text=True)
     log = open(f"{d}/paper.log").read() if os.path.exists(f"{d}/paper.log") else ""
@@ -500,7 +500,7 @@ def readme(R, ds, F_):
               "│   └── results/              ← EXECUTED_*.ipynb (every cell output) + Excel files", "```", "",
               "Every run used for the results is linked in the table of [section 2](#2-what-was-run) and in each `results/README.md`. "
               f"To reproduce, run the eight notebooks in order ([how](../../README.md#6-reproducing-the-results)). Machine-readable numbers: [`results/benchmark_long.csv`](../../results/benchmark_long.csv) (rows with `dataset = {ds}`)."]
-    open(f"{R}/examples/{ds}_uncertainty_analysis/README.md", "w").write("\n".join(lines) + "\n")
+    open(f"{A.dsdir(R, ds)}/README.md", "w").write("\n".join(lines) + "\n")
 
 # ---------------------------------------------------------------- phase READMEs
 NBV = "https://nbviewer.org/github/DaneshSelwal/Regression-UQ-Benchmark/blob/version2.0"
@@ -509,15 +509,15 @@ def big_note(E, ph, limit_mb=10):
     from urllib.parse import quote
     big = [(x, os.path.getsize(x) / 1e6) for x in sorted(glob.glob(f"{E}/results/*.ipynb")) if os.path.getsize(x) / 1e6 > limit_mb]
     if not big: return []
-    rel = E.split("/examples/", 1)[1]
+    rel = re.split(r"/(?=(?:notebooks|examples)/[^/]+_uncertainty_analysis/)", E, maxsplit=1)[-1]
     return [f"> **Large notebooks.** These executed notebooks are mostly training logs (e.g. PGBM prints one line per tree) and may be too large for "
             "GitHub's notebook viewer. They are stored unchanged; open them with nbviewer, the Kaggle run, or download them: "
-            + "; ".join(f"[`{os.path.basename(x)}`]({NBV}/examples/{quote(rel)}/results/{quote(os.path.basename(x))}) ({mb:.0f} MB)" for x, mb in big), ""]
+            + "; ".join(f"[`{os.path.basename(x)}`]({NBV}/{quote(rel)}/results/{quote(os.path.basename(x))}) ({mb:.0f} MB)" for x, mb in big), ""]
 
 def phase_readmes(R, ds, F_):
     S = F_["S"]; nm = NAMES[ds]; df = F_["df"]; L = F_["L"]; sd = F_["sd"]; rl = runs(R, ds)
     def mk(ph, title, nbdir, what, body):
-        E = f"{R}/examples/{ds}_uncertainty_analysis/{ph}"
+        E = f"{A.dsdir(R, ds)}/{ph}"
         nbs = sorted(os.path.basename(x) for x in glob.glob(f"{E}/*.ipynb")); res = sorted(os.path.basename(x) for x in glob.glob(f"{E}/results/*"))
         rs = [x for x in rl if x[0] == ph]
         lines = [f"# {nm} · {title}", "", f"[← {nm} README](../README.md) · [method guide](../../../notebooks/{nbdir}/README.md) · [report (PDF)](../report/paper.pdf)", "",

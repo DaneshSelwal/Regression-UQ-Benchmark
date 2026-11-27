@@ -10,7 +10,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 R = sys.argv[1] if len(sys.argv) > 1 else "../.."
-E = f"{R}/examples/concrete_uncertainty_analysis"
+E = f"{R}/notebooks/concrete_uncertainty_analysis"
 OUT = f"{R}/docs/figures/concrete"; os.makedirs(OUT, exist_ok=True)
 
 BLUE, ORANGE, AQUA, GREY, INK, INK2 = "#2a78d6", "#eb6834", "#1baf7a", "#c9c8c2", "#0b0b0b", "#52514e"

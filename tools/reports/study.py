@@ -90,7 +90,7 @@ def fig_pipeline(d):
 def fig_datasets(R, d):
     fig, axs = plt.subplots(3, 3, figsize=(9, 6.6))
     for ax, ds in zip(axs.ravel(), DS):
-        tr = pd.read_csv(f"{R}/examples/{ds}_uncertainty_analysis/data/train.csv"); te = pd.read_csv(f"{R}/examples/{ds}_uncertainty_analysis/data/test.csv")
+        tr = pd.read_csv(f"{A.dsdir(R, ds)}/data/train.csv"); te = pd.read_csv(f"{A.dsdir(R, ds)}/data/test.csv")
         y0, y1 = tr.iloc[:, -1].astype(float), te.iloc[:, -1].astype(float)
         b = np.histogram_bin_edges(np.r_[y0, y1], bins=min(30, max(8, int(np.sqrt(len(y0) + len(y1))))))
         ax.hist(y0, bins=b, color="#5d8aa8", alpha=0.75, label=f"train ({len(y0)})", density=True)

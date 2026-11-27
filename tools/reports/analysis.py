@@ -3,6 +3,20 @@ import math, re, glob, os
 import numpy as np, pandas as pd
 
 TARGET = 0.90
+
+def dsdir(R, ds):
+    """Folder of one dataset study: concrete (main case study) lives in notebooks/, the others in examples/."""
+    for base in ("notebooks", "examples"):
+        d = f"{R}/{base}/{ds}_uncertainty_analysis"
+        if os.path.isdir(d): return d
+    return f"{R}/examples/{ds}_uncertainty_analysis"
+
+def all_datasets(R):
+    return sorted(os.path.basename(p).replace("_uncertainty_analysis", "")
+                  for b in ("notebooks", "examples") for p in glob.glob(f"{R}/{b}/*_uncertainty_analysis"))
+
+def dsrel(R, ds):
+    return os.path.relpath(dsdir(R, ds), R)
 MODEL_ORDER = ["CatBoost", "XGBoost", "LightGBM", "GPBoost", "GradientBoosting", "HistGB", "NGBoost", "PGBM", "TabNet", "RandomForest"]
 FAMILY_ORDER = ["Quantile regression", "Distributional", "CARD", "Conformal (MAPIE/PUNCC)", "Weighted conformal (NexCP)",
                 "Online conformal", "COP"]
@@ -67,7 +81,7 @@ def best_model(S):
 
 def run_names(R, ds):
     """Kaggle run code names per phase, read from the results READMEs."""
-    E = f"{R}/examples/{ds}_uncertainty_analysis"; out = {}
+    E = dsdir(R, ds); out = {}
     for rd in sorted(glob.glob(f"{E}/*/results/README.md")):
         ph = rd.split("/")[-3]; t = open(rd).read()
         codes = list(dict.fromkeys(re.findall(r"REG\d{2}_\d{2}_\d{4}_\d{2}_\d{2}", t)))

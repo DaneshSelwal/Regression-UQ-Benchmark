@@ -46,7 +46,7 @@ def league_plot(L, S, d):
     save(fig, d, "fig_method_league")
 
 def intervals(R, S, d, model, method="MAPIE CV+"):
-    f = glob.glob(f"{R}/examples/{S['dataset']}_uncertainty_analysis/conformal_predictions_mapie_puncc/results/*.xlsx")
+    f = glob.glob(f"{A.dsdir(R, S['dataset'])}/conformal_predictions_mapie_puncc/results/*.xlsx")
     f = [x for x in f if A.canon_file(x) == model]
     if not f: return None
     xl = pd.read_excel(f[0], sheet_name=None); a = next((v for k, v in xl.items() if k.startswith("all_pred_values")), None)
